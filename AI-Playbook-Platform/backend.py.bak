@@ -1,0 +1,222 @@
+import os
+import json
+import logging
+from pathlib import Path
+from typing import List
+from fastapi import FastAPI, HTTPException, Query, status
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from pydantic import BaseModel, Field
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+# Load env variables
+load_dotenv()
+
+app = FastAPI(title="AI Automation Playbook Learning Platform", version="1.0.0")
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("Playbook_Backend")
+
+# Resolve Playbook Base Directory
+PLAYBOOK_DIR = Path(os.getenv("PLAYBOOK_DIR", "../AI-Automation-Playbook")).resolve()
+if not PLAYBOOK_DIR.exists():
+    # Fallback to local sibling path if config is relative
+    PLAYBOOK_DIR = Path("/Users/dieptuhuy/Documents/AI Automation/AI-Automation-Playbook").resolve()
+
+logger.info(f"Playbook Base Directory: {PLAYBOOK_DIR}")
+
+# --- SCHEMAS ---
+class ConfigPayload(BaseModel):
+    gemini_api_key: str
+
+class QuestionSchema(BaseModel):
+    question: str
+    options: List[str] = Field(description="Must contain exactly 4 options.")
+    correct_index: int = Field(description="0-indexed (0 to 3) representing the index of the correct option.")
+    explanation: str
+
+class QuizResponseSchema(BaseModel):
+    questions: List[QuestionSchema]
+
+# --- HELPER FUNCTIONS ---
+def validate_safe_path(requested_path_str: str) -> Path:
+    """Ensure the path is a safe subpath inside the Playbook base directory."""
+    requested_path = Path(requested_path_str).resolve()
+    if not requested_path.is_relative_to(PLAYBOOK_DIR):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Truy cập bị từ chối: Đường dẫn không an toàn!"
+        )
+    if not requested_path.exists():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Tệp tin không tồn tại!"
+        )
+    return requested_path
+
+# --- API ENDPOINTS ---
+
+@app.get("/api/config", response_model=dict)
+async def check_config():
+    """Check if Gemini API Key is configured."""
+    key = os.getenv("GEMINI_API_KEY")
+    return {"key_configured": bool(key)}
+
+@app.post("/api/config", response_model=dict)
+async def update_config(payload: ConfigPayload):
+    """Write Gemini API Key to .env file dynamically."""
+    try:
+        env_path = Path(".env")
+        lines = []
+        key_written = False
+        
+        if env_path.exists():
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    if line.startswith("GEMINI_API_KEY="):
+                        lines.append(f"GEMINI_API_KEY={payload.gemini_api_key}\\n")
+                        key_written = True
+                    else:
+                        lines.append(line)
+        
+        if not key_written:
+            lines.append(f"GEMINI_API_KEY={payload.gemini_api_key}\\n")
+            lines.append(f"PLAYBOOK_DIR={PLAYBOOK_DIR}\\n")
+            
+        with open(env_path, "w", encoding="utf-8") as f:
+            f.writelines(lines)
+            
+        # Refresh current environment variables
+        os.environ["GEMINI_API_KEY"] = payload.gemini_api_key
+        logger.info("Successfully updated GEMINI_API_KEY in .env")
+        return {"status": "success", "message": "API Key updated successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Lỗi ghi cấu hình: {str(e)}")
+
+@app.get("/api/volumes", response_model=List[dict])
+async def list_volumes():
+    """Scan and list all volumes and their markdown files in the Playbook."""
+    if not PLAYBOOK_DIR.exists():
+        raise HTTPException(status_code=500, detail="Không tìm thấy thư mục Playbook!")
+        
+    volumes = []
+    
+    # Scan child directories matching 'Volume-' or 'Projects'
+    for item in sorted(PLAYBOOK_DIR.iterdir()):
+        if item.is_dir() and (item.name.startswith("Volume-") or item.name == "Projects"):
+            # Find all markdown files inside this directory
+            md_files = []
+            
+            # If it's a projects subfolder, search recursively or list direct subfolders
+            if item.name == "Projects":
+                # For Projects, let's treat subfolders as virtual chapters (their READMEs)
+                for sub_item in sorted(item.iterdir()):
+                    if sub_item.is_dir():
+                        readme = sub_item / "README.md"
+                        if readme.exists():
+                            md_files.append(f"{sub_item.name}/README.md")
+                    elif sub_item.name == "README.md":
+                        md_files.append("README.md")
+            else:
+                for sub_file in sorted(item.iterdir()):
+                    if sub_file.is_file() and sub_file.suffix == ".md":
+                        md_files.append(sub_file.name)
+                        
+            volumes.append({
+                "name": item.name,
+                "path": str(item),
+                "files": md_files
+            })
+            
+    return volumes
+
+@app.get("/api/content", response_model=dict)
+async def read_file_content(path: str = Query(..., description="Absolute path of the markdown file")):
+    """Read and return content of a specific file."""
+    safe_path = validate_safe_path(path)
+    try:
+        content = safe_path.read_text(encoding="utf-8")
+        return {"filename": safe_path.name, "content": content}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Lỗi đọc file: {str(e)}")
+
+@app.get("/api/quiz")
+async def generate_quiz_from_file(path: str = Query(..., description="Absolute path of the chapter file")):
+    """Generate 5 multiple choice questions using Gemini API based on chapter content."""
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Vui lòng cấu hình GEMINI_API_KEY trước khi tạo trắc nghiệm!"
+        )
+        
+    safe_path = validate_safe_path(path)
+    
+    try:
+        content = safe_path.read_text(encoding="utf-8")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Lỗi đọc file: {str(e)}")
+        
+    prompt = f"""Dưới đây là nội dung bài giảng của một chương trong tài liệu 'AI Automation Engineer Playbook'.
+Nhiệm vụ của bạn là biên soạn 5 câu hỏi trắc nghiệm tiếng Việt chất lượng cao để kiểm tra mức độ hiểu bài của học sinh dựa trên nội dung này.
+
+Yêu cầu kỹ thuật:
+1. Mỗi câu hỏi phải có chính xác 4 lựa chọn (A, B, C, D).
+2. Phải có 1 chỉ thị correct_index (số nguyên từ 0 đến 3) đại diện cho đáp án đúng.
+3. Phải cung cấp phần 'explanation' (giải thích ngắn gọn vì sao đáp án đó đúng và các đáp án khác sai dựa trên nội dung bài giảng).
+4. Bạn BẮT BUỘC phải trả về dữ liệu đúng cấu trúc JSON định hình sau:
+{{
+  "questions": [
+    {{
+      "question": "Câu hỏi số 1...",
+      "options": ["Lựa chọn A", "Lựa chọn B", "Lựa chọn C", "Lựa chọn D"],
+      "correct_index": 0,
+      "explanation": "Giải thích chi tiết..."
+    }}
+  ]
+}}
+
+Nội dung bài giảng chương:
+{content}
+"""
+
+    try:
+        # Configure Gemini Client
+        genai.configure(api_key=api_key)
+        
+        # Using gemini-1.5-flash for fast and cost-effective structured responses
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        response = model.generate_content(
+            prompt,
+            generation_config={"response_mime_type": "application/json"}
+        )
+        
+        # Parse JSON output from Gemini
+        quiz_data = json.loads(response.text)
+        return quiz_data
+    except Exception as e:
+        logger.error(f"Error calling Gemini API: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Lỗi kết nối hoặc xử lý của Gemini API: {str(e)}"
+        )
+
+# --- STATIC FILES ROUTING ---
+
+# Serves static frontend assets
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+async def serve_home():
+    """Serves the index.html landing page."""
+    html_path = Path("static/index.html")
+    if html_path.exists():
+        return FileResponse(html_path)
+    raise HTTPException(status_code=404, detail="Static index.html not found")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("backend:app", host="127.0.0.1", port=8000, reload=True)

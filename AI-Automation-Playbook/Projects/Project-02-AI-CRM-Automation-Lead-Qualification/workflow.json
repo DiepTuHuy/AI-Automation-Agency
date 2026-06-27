@@ -1,0 +1,133 @@
+{
+  "name": "AI Lead Qualification Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "submit-lead",
+        "options": {}
+      },
+      "id": "webhook-trigger-id",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/api/v1/leads",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "crm_secret_key_123"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $json.body.name }}\",\n  \"email\": \"{{ $json.body.email }}\",\n  \"company\": \"{{ $json.body.company }}\",\n  \"budget\": {{ $json.body.budget }},\n  \"project_description\": \"{{ $json.body.description }}\"\n}",
+        "options": {}
+      },
+      "id": "http-request-fastapi-id",
+      "name": "Call FastAPI Qualify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.is_qualified }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "if-qualified-id",
+      "name": "Is Qualified?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "your_chat_id",
+        "text": "=🚨 *KHÁCH HÀNG TIỀM NĂNG MỚI* 🚨\n- Tên: {{ $('Call FastAPI Qualify').item.json.name }}\n- Điểm số: {{ $json.score }}/100\n- Lý do: {{ $json.reason }}"
+      },
+      "id": "telegram-alert-id",
+      "name": "Alert Telegram Sales",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [700, 200]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "your_google_sheet_id",
+          "mode": "id"
+        },
+        "sheetName": "Sheet1",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Tên": "={{ $('Call FastAPI Qualify').item.json.name }}",
+            "Điểm": "={{ $json.score }}",
+            "Lý do": "={{ $json.reason }}"
+          }
+        }
+      },
+      "id": "google-sheets-id",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [700, 400]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Call FastAPI Qualify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call FastAPI Qualify": {
+      "main": [
+        [
+          {
+            "node": "Is Qualified?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Qualified?": {
+      "main": [
+        [
+          {
+            "node": "Alert Telegram Sales",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

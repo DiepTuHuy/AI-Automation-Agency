@@ -1,0 +1,8 @@
+Huy (CEO): Chào mọi người, hôm nay chúng ta họp nhanh về tiến độ dự án AI CRM cho khách hàng Hoàng Hà. Nam báo cáo tiến độ phần backend thế nào rồi?
+Nam (Backend Developer): Dạ, em đã dựng xong khung API cơ bản bằng FastAPI và kết nối với PostgreSQL. Tuy nhiên phần migration db bằng Alembic đang bị lỗi xung đột schema với nhánh code của An.
+An (Frontend Developer): À, phần schema đó do em thêm cột ảnh đại diện của khách hàng để phục vụ giao diện quản lý. Em quên chưa báo cho Nam chạy lại script migration. Để chiều nay em gửi file sql cập nhật cho Nam nhé.
+Huy (CEO): Ok An, nhớ gửi trước 3h chiều để Nam kịp test và deploy bản alpha. Còn phần kết nối API của AI thì sao Nam?
+Nam (Backend Developer): Em đang chờ Huy duyệt xong file prompt hệ thống để em tích hợp vào module OpenAI Client.
+Huy (CEO): File prompt anh đã review xong và lưu trong thư mục tài liệu chung rồi nhé. Nam lấy tích hợp luôn. Mục tiêu là thứ Sáu này chúng ta phải có bản demo chạy thử gửi cho khách hàng. An chuẩn bị sẵn giao diện để ghép nối nhé.
+An (Frontend Developer): Dạ vâng, giao diện của em đã sẵn sàng, chỉ đợi API của Nam là kết nối thôi ạ.
+Huy (CEO): Rất tốt, chúng ta chốt thế nhé. Chiều An gửi schema cho Nam, thứ Sáu demo. Chúc mọi người tuần mới làm việc hiệu quả.

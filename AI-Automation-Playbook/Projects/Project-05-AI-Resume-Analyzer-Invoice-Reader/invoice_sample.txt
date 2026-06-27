@@ -1,0 +1,23 @@
+HÓA ĐƠN GIÁ TRỊ GIA TĂNG (VAT INVOICE)
+Mẫu số: 01GTKT0/001
+Ký hiệu: AA/26P
+Số hóa đơn: 0004589
+Ngày xuất: 28/06/2026
+
+BÊN BÁN:
+Tên công ty: Công ty TNHH Giải pháp AI Antigravity
+Mã số thuế: 0109876543
+Địa chỉ: Tòa nhà Landmark, Hà Nội
+
+BÊN MUA:
+Tên đơn vị: Công ty Cổ phần Thương mại Hoàng Hà
+Mã số thuế: 0312345678
+Địa chỉ: Quận 1, Thành phố Hồ Chí Minh
+
+NỘI DUNG THANH TOÁN:
+1. Triển khai AI Agent chăm sóc khách hàng: 1 x 30.000.000 VND
+2. Phí duy trì máy chủ tháng 6: 1 x 2.000.000 VND
+
+Thuế suất VAT: 10%
+Tiền thuế VAT: 3.200.000 VND
+Tổng cộng tiền thanh toán: 35.200.000 VND

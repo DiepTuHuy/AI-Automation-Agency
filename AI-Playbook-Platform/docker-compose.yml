@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - CONTENT_SERVICE_URL=http://content-service:8001
+      - QUIZ_SERVICE_URL=http://quiz-service:8002
+    depends_on:
+      - content-service
+      - quiz-service
+
+  content-service:
+    build:
+      context: .
+      dockerfile: content-service/Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - /Users/dieptuhuy/Documents/AI Automation:/Users/dieptuhuy/Documents/AI Automation
+    environment:
+      - PLAYBOOK_DIR=/Users/dieptuhuy/Documents/AI Automation/AI-Automation-Playbook
+
+  quiz-service:
+    build:
+      context: .
+      dockerfile: quiz-service/Dockerfile
+    ports:
+      - "8002:8002"
+    volumes:
+      - /Users/dieptuhuy/Documents/AI Automation:/Users/dieptuhuy/Documents/AI Automation
+      - ./.env:/app/.env
+    environment:
+      - PLAYBOOK_DIR=/Users/dieptuhuy/Documents/AI Automation/AI-Automation-Playbook
