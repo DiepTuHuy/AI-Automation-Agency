@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Automation Academy - Tập đoàn Công nghệ</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <!-- HighlightJS for code block formatting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <!-- Marked Library for rendering Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <!-- Drawer Backdrop Overlay -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+  <div class="app-container">
+    <!-- Sidebar Curriculum -->
+    <aside class="sidebar">
+      <div class="brand-section">
+        <h1 class="brand-title">
+          🎓 AI ACADEMY <span class="brand-badge">ENTERPRISE</span>
+        </h1>
+      </div>
+      
+      <!-- Curriculum Search -->
+      <div class="search-section">
+        <input type="text" id="search-input" class="search-input" placeholder="Tìm kiếm bài giảng...">
+      </div>
+
+      <div class="volumes-list" id="volumes-list">
+        <div class="empty-state" style="text-align: center; color: var(--text-secondary); margin-top: 50px;">
+          Đang tải thư viện bài giảng...
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-content">
+      <!-- Top Navigation Bar -->
+      <header class="top-bar">
+        <div class="path-display" id="path-display">
+          <span>AI Automation</span>
+          <span class="path-separator">/</span>
+          <span class="path-active" id="active-path">Chọn bài giảng</span>
+        </div>
+        
+        <!-- LMS Progress & Action Controls -->
+        <div class="top-bar-actions">
+          <div class="progress-container">
+            <span class="progress-label" id="progress-percentage">Tiến độ: 0%</span>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+          <button class="gemini-config-btn" id="open-config-btn">🔑 Gemini Key</button>
+          <button class="quiz-toggle-btn" id="open-quiz-btn" style="display: none;">📝 Trắc nghiệm chương</button>
+        </div>
+      </header>
+
+      <!-- Content Layout -->
+      <div class="content-body">
+        <!-- Reading Workspace -->
+        <section class="markdown-section-wrapper">
+          <div class="markdown-section-viewport">
+            <div class="markdown-section" id="markdown-section">
+              <h1>Chào mừng đến với AI Automation Academy! 🎓</h1>
+              <p class="subtitle">Nền tảng đào tạo kỹ sư tự động hóa AI nội bộ của tập đoàn.</p>
+              
+              <p>Học viện cung cấp chương trình đào tạo chuẩn hóa, kết hợp lý thuyết nền tảng và các dự án thực tế doanh nghiệp để xây dựng năng lực triển khai tự hành.</p>
+              
+              <div class="intro-cards">
+                <div class="intro-card">
+                  <h3>📖 Lý thuyết gốc (First Principles)</h3>
+                  <p>Học hiểu bản chất hoạt động của LLM, token management, và các kiến trúc đồ thị đa agent phức tạp.</p>
+                </div>
+                <div class="intro-card">
+                  <h3>💻 Phát triển Lab & Demos</h3>
+                  <p>Xây dựng mã nguồn hoàn chỉnh với các framework hiện đại nhất: FastAPI, n8n, ChromaDB, và MCP servers.</p>
+                </div>
+                <div class="intro-card">
+                  <h3>✏️ Đánh giá trắc nghiệm AI</h3>
+                  <p>Gemini API tự động kiểm duyệt và tạo đề kiểm tra chuyên sâu tương ứng với chương bài học đang nghiên cứu.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Complete Mark Button -->
+          <div class="complete-btn-container" id="complete-btn-container" style="display: none;">
+            <div class="complete-btn-wrapper">
+              <button class="mark-complete-btn" id="mark-complete-btn">Đánh dấu hoàn thành chương này</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right Side Collapsible Quiz Drawer -->
+        <aside class="quiz-drawer" id="quiz-drawer">
+          <div class="drawer-header">
+            <h2 class="drawer-title">Trắc nghiệm thông minh</h2>
+            <button class="drawer-close-btn" id="close-quiz-btn">✕ Close</button>
+          </div>
+          <div class="drawer-body">
+            <div id="quiz-area" class="empty-quiz-state">
+              <span>Đang tải thông tin...</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <!-- API Key Config Modal -->
+  <div class="modal" id="config-modal">
+    <div class="modal-content">
+      <h3 class="modal-title">🔑 Cấu hình Gemini API Key</h3>
+      <p class="modal-desc">
+        Nhập Google Gemini API Key của bạn để sử dụng chức năng tự động tạo câu hỏi trắc nghiệm thông minh dựa trên nội dung chương đang học. Key này sẽ được lưu bảo mật trong LocalStorage trình duyệt của bạn để gọi trực tiếp Google API (không lưu ở máy chủ bên ngoài).
+      </p>
+      <div class="form-group">
+        <label class="form-label" for="api-key-input">Gemini API Key</label>
+        <input type="password" class="form-input" id="api-key-input" placeholder="AIzaSy...">
+      </div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="close-config-btn">Hủy</button>
+        <button class="btn-primary" id="save-config-btn">Lưu cấu hình</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="static/app.js"></script>
+</body>
+</html>

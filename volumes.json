@@ -1,0 +1,207 @@
+[
+  {
+    "name": "Projects",
+    "path": "AI-Automation-Playbook/Projects",
+    "files": [
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-00-Orientation",
+    "path": "AI-Automation-Playbook/Volume-00-Orientation",
+    "files": [
+      "01-Introduction-to-AI-Automation.md",
+      "02-Mindset-and-First-Principles.md",
+      "03-Playbook-Usage-and-Learning-Path.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-01-LLM-Fundamentals",
+    "path": "AI-Automation-Playbook/Volume-01-LLM-Fundamentals",
+    "files": [
+      "01-What-is-an-LLM.md",
+      "02-Tokens-and-Pricing.md",
+      "03-Context-Window-and-Attention.md",
+      "04-Parameters-Temperature-TopP.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-02-Prompt-Engineering",
+    "path": "AI-Automation-Playbook/Volume-02-Prompt-Engineering",
+    "files": [
+      "01-Zero-Few-Shot-Learning.md",
+      "02-Chain-of-Thought-and-Reasoning.md",
+      "03-System-Prompting-and-Roles.md",
+      "04-Structured-Outputs.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-03-Python-Automation",
+    "path": "AI-Automation-Playbook/Volume-03-Python-Automation",
+    "files": [
+      "01-Environment-Setup-and-Pathlib.md",
+      "02-APIs-with-Requests.md",
+      "03-JSON-and-Data-Handling.md",
+      "04-Asynchronous-Programming.md",
+      "05-Pandas-for-Data-Pipelines.md",
+      "06-Logging-and-Error-Handling.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-04-API-FastAPI",
+    "path": "AI-Automation-Playbook/Volume-04-API-FastAPI",
+    "files": [
+      "01-REST-API-Principles.md",
+      "02-FastAPI-Fundamentals.md",
+      "03-Request-Validation-and-Pydantic.md",
+      "04-File-Uploads-and-Processing.md",
+      "05-Authentication-and-Security.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-05-Workflow-Automation",
+    "path": "AI-Automation-Playbook/Volume-05-Workflow-Automation",
+    "files": [
+      "01-Introduction-to-n8n.md",
+      "02-Webhooks-and-Triggers.md",
+      "03-HTTP-Request-Node-and-Custom-APIs.md",
+      "04-Data-Transformation-and-JS-Code.md",
+      "05-Error-Handling-and-Retries.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-06-Database",
+    "path": "AI-Automation-Playbook/Volume-06-Database",
+    "files": [
+      "01-Relational-DB-Concepts-and-SQL.md",
+      "02-SQLite-and-PostgreSQL-Setup.md",
+      "03-ORM-with-SQLAlchemy.md",
+      "04-Database-Migrations-with-Alembic.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-07-Embedding-Vector-Database",
+    "path": "AI-Automation-Playbook/Volume-07-Embedding-Vector-Database",
+    "files": [
+      "01-What-are-Embeddings.md",
+      "02-Vector-Space-and-Similarity-Metrics.md",
+      "03-ChromaDB-and-Pinecone.md",
+      "04-Indexing-and-Querying-Vectors.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-08-RAG",
+    "path": "AI-Automation-Playbook/Volume-08-RAG",
+    "files": [
+      "01-RAG-Architecture.md",
+      "02-Document-Chunking-Strategies.md",
+      "03-Retrieval-and-Reranking.md",
+      "04-Evaluation-of-RAG-Systems.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-09-AI-Agents",
+    "path": "AI-Automation-Playbook/Volume-09-AI-Agents",
+    "files": [
+      "01-Agentic-Workflows-vs-Linear-Pipelines.md",
+      "02-Agent-Planning-and-Memory.md",
+      "03-Tool-Use-and-Function-Calling.md",
+      "04-Multi-Agent-Architectures-and-LangGraph.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-10-MCP",
+    "path": "AI-Automation-Playbook/Volume-10-MCP",
+    "files": [
+      "01-What-is-MCP.md",
+      "02-MCP-Server-Architecture.md",
+      "03-Building-Custom-MCP-Servers.md",
+      "04-Integrating-MCP-with-LLM-Clients.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-11-Deployment",
+    "path": "AI-Automation-Playbook/Volume-11-Deployment",
+    "files": [
+      "01-Docker-and-Containerization.md",
+      "02-Linux-Server-Basics-and-VPS.md",
+      "03-Nginx-Reverse-Proxy-and-SSL.md",
+      "04-CI-CD-with-GitHub-Actions.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-12-Production-Engineering",
+    "path": "AI-Automation-Playbook/Volume-12-Production-Engineering",
+    "files": [
+      "01-Monitoring-and-Observability-LangSmith.md",
+      "02-Rate-Limiting-Caching-and-Cost-Optimization.md",
+      "03-Error-Handling-Fallbacks-and-Guardrails.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-13-Portfolio",
+    "path": "AI-Automation-Playbook/Volume-13-Portfolio",
+    "files": [
+      "01-Building-Your-Professional-GitHub.md",
+      "02-Writing-Impactful-READMEs.md",
+      "03-Creating-Architecture-Diagrams.md",
+      "04-Recording-Compelling-Demos.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-14-AI-Automation-Business",
+    "path": "AI-Automation-Playbook/Volume-14-AI-Automation-Business",
+    "files": [
+      "01-Finding-Your-Niche-and-Offers.md",
+      "02-Pricing-Strategies-Retainer-vs-Project.md",
+      "03-Sales-Outreach-and-Client-Acquisition.md",
+      "04-Proposal-Writing-and-Contracts.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-15-Client-Projects",
+    "path": "AI-Automation-Playbook/Volume-15-Client-Projects",
+    "files": [
+      "01-Discovery-and-Scoping-Sessions.md",
+      "02-Agile-Delivery-and-Milestones.md",
+      "03-Handover-and-Client-Training.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-16-Scaling",
+    "path": "AI-Automation-Playbook/Volume-16-Scaling",
+    "files": [
+      "01-Standard-Operating-Procedures-SOPs.md",
+      "02-Automating-Your-Own-Business.md",
+      "03-Hiring-and-Delegating.md",
+      "README.md"
+    ]
+  },
+  {
+    "name": "Volume-17-AI-SaaS",
+    "path": "AI-Automation-Playbook/Volume-17-AI-SaaS",
+    "files": [
+      "01-SaaS-Architecture-and-Multi-Tenancy.md",
+      "02-Payment-Integration-with-Stripe.md",
+      "03-User-Management-and-Auth.md",
+      "04-Launching-and-Marketing.md",
+      "README.md"
+    ]
+  }
+]
