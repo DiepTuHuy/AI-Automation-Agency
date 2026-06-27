@@ -17,64 +17,85 @@ Cơ chế này cho phép mỗi từ trong câu "nhìn" vào tất cả các từ
 
 ---
 
-## 2. Demo: Gọi API LLM bằng Python
+## 2. Demo: Gọi API LLM bằng Python (Sử dụng Gemini)
 
 ### Mục tiêu
-Viết một script Python cơ bản, kết nối với API của OpenAI (hoặc Gemini) để gửi câu hỏi và nhận câu trả lời.
+Viết một script Python cơ bản, kết nối với API của Google Gemini để gửi câu hỏi và nhận câu trả lời.
 
 ### Kiến trúc hoạt động
 ```
-[app.py (Python)] ──(HTTP POST + Bearer Token)──> [OpenAI API Gateway] ──> [LLM Engine]
-      ▲                                                                          │
-      └──────────────────(JSON Response)─────────────────────────────────────────┘
+[app.py (Python)] ──(HTTP POST + API Key)──> [Google Gemini API Gateway] ──> [Gemini 2.5 Flash]
+      ▲                                                                            │
+      └─────────────────────(JSON Response / Text)─────────────────────────────────┘
 ```
 
 ### Source Tree
+Cấu trúc cây thư mục của dự án thực hành demo:
 ```
 llm-demo/
-├── .env
-├── requirements.txt
-└── app.py
+├── .env              # Lưu trữ API Key bảo mật
+├── requirements.txt  # Khai báo các thư viện phụ thuộc
+└── app.py            # Mã nguồn chính của ứng dụng
 ```
 
-### Mã nguồn (`app.py`)
-Trước khi chạy, hãy cài thư viện: `pip install openai python-dotenv`
+### Chi tiết tệp phụ thuộc & cấu hình
+Để bài học chạy ổn định, hãy chuẩn bị các tệp cấu hình sau:
+
+#### 📄 `requirements.txt`
+```text
+google-generativeai
+python-dotenv
+```
+
+#### 📄 `.env`
+```env
+GEMINI_API_KEY=AIzaSy... # Điền API Key của bạn lấy từ Google AI Studio
+```
+
+### Mã nguồn chính (`app.py`)
+Trước khi chạy, hãy tiến hành cài đặt các thư viện trong thư mục dự án demo: `pip install -r requirements.txt`
 
 ```python
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 # Tải biến môi trường từ file .env
 load_dotenv()
 
-# Khởi tạo client OpenAI sử dụng API Key từ biến môi trường
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Lấy API Key từ file .env
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("LỖI: Không tìm thấy GEMINI_API_KEY trong file .env!")
+
+# Cấu hình thư viện Gemini API
+genai.configure(api_key=api_key)
 
 def ask_ai(prompt: str) -> str:
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini", # Sử dụng mô hình rẻ và nhanh cho demo
-            messages=[
-                {"role": "system", "content": "Bạn là một kỹ sư AI thực chiến tối giản và thực tế."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7
+        # Sử dụng mô hình gemini-2.5-flash nhanh và tối ưu chi phí
+        model = genai.GenerativeModel('gemini-2.5-flash')
+        response = model.generate_content(
+            prompt,
+            generation_config={
+                "temperature": 0.7  # Độ sáng tạo từ 0.0 đến 2.0 (0.7 là mức cân bằng tốt)
+            }
         )
-        # Trích xuất nội dung câu trả lời từ cấu trúc JSON phản hồi
-        return response.choices[0].message.content
+        # Trích xuất văn bản trả về trực tiếp từ phản hồi của mô hình
+        return response.text
     except Exception as e:
-        return f"Đã xảy ra lỗi: {str(e)}"
+        return f"Đã xảy ra lỗi kết nối Gemini API: {str(e)}"
 
 if __name__ == "__main__":
     prompt = "Giải thích ngắn gọn cơ chế hoạt động của LLM cho người mới học lập trình."
-    print("Đang gửi yêu cầu tới AI...")
+    print("Đang gửi yêu cầu tới Gemini AI...")
     result = ask_ai(prompt)
-    print("\nKết quả phản hồi:")
+    print("\nKết quả phản hồi từ Gemini:")
     print(result)
 ```
 
 ---
 
 ## 3. Mini Project
-Hãy đăng ký một API key miễn phí từ Google AI Studio (Gemini API) hoặc sử dụng API Key của OpenAI, sau đó sửa đổi mã nguồn Demo trên để gọi mô hình Gemini 1.5 Flash và in ra kết quả. Viết nhận xét về sự khác biệt về tốc độ phản hồi.
+Hãy cài đặt thư mục `llm-demo` địa phương như hướng dẫn, điền API Key vào `.env`, chạy thử script `app.py`. Sau đó, thử thay đổi tham số `temperature` xuống `0.1` (kiểm tra tính nhất quán của câu trả lời) và lên `1.5` (kiểm tra tính sáng tạo). Ghi lại nhận xét của bạn vào tài liệu học tập cá nhân.
+
