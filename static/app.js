@@ -509,7 +509,7 @@ ${markdownContent}
 
     const changeConfigBtn = document.createElement('button');
     changeConfigBtn.className = 'quiz-btn-outline';
-    changeConfigBtn.textContent = '⚙️ Đổi đề';
+    changeConfigBtn.textContent = 'Đổi đề';
     changeConfigBtn.addEventListener('click', () => {
       resetQuizArea();
       setupQuizTrigger();
@@ -518,7 +518,7 @@ ${markdownContent}
     
     const regenBtn = document.createElement('button');
     regenBtn.className = 'quiz-btn-solid';
-    regenBtn.textContent = '🔄 Tạo lại';
+    regenBtn.textContent = 'Tạo lại';
     regenBtn.addEventListener('click', generateQuiz);
     btnGroup.appendChild(regenBtn);
     
