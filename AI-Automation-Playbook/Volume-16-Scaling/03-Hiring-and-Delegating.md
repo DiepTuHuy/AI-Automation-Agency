@@ -37,4 +37,31 @@ Hãy viết một script Python hoàn chỉnh thực hiện các yêu cầu sau:
 ---
 
 ## 3. Mini Project
-Hãy soạn thảo một kịch bản phỏng vấn trực tiếp Zoom dài 30 phút dành cho ứng viên Junior Developer. Kịch bản cần chỉ rõ: 10 phút đầu hỏi về cái gì? 15 phút giữa cho ứng viên live-code hay giải thích giải pháp thế nào? 5 phút cuối giải đáp thắc mắc ra sao?
+
+### Bài tập 1: Soạn tin tuyển dụng Kỹ sư AI Automation thực tập (Mức độ: Trung bình)
+* **Đề bài**: Soạn thảo một bản tin tuyển dụng (Job Description - JD) cho vị trí Thực tập sinh lập trình viên AI Automation (Intern AI Engineer) cho Agency của bạn. JD cần nêu rõ: Mô tả công việc, Yêu cầu kỹ thuật bắt buộc và Quyền lợi.
+* **Tài liệu sườn mẫu (`intern_jd.md`)**:
+```markdown
+# Tuyển dụng: Thực tập sinh AI Automation Engineer (Intern)
+
+### 1. Mô tả công việc
+* Tham gia hỗ trợ thiết kế các chatbot RAG và tích hợp API mô hình lớn (Gemini).
+* Thiết kế và xây dựng các luồng tự động hóa quy trình nghiệp vụ trên nền tảng n8n.
+
+### 2. Yêu cầu kỹ năng
+* Đang học hoặc đã tốt nghiệp chuyên ngành CNTT, Khoa học máy tính hoặc tương đương.
+* Có nền tảng lập trình Python cơ bản tốt. Đã từng gọi thử nghiệm API của OpenAI/Gemini.
+* Biết sử dụng Git cơ bản.
+
+### 3. Quyền lợi
+* Được đào tạo trực tiếp bởi các Senior AI Engineers.
+* Phụ cấp thực tập: $200 - $300/tháng.
+```
+
+### Bài tập 2: Quy trình Đánh giá bài test năng lực lập trình viên đầu vào (Mức độ: Khó)
+* **Đề bài**: Thiết kế một bài test năng lực thực hành (Technical Assessment Task) dài 4 giờ dành cho ứng viên lập trình viên AI ứng tuyển vào công ty của bạn. Bài test phải yêu cầu ứng viên xây dựng một script Python giải quyết một bài toán cụ thể và đánh giá chất lượng viết code của họ.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Đề bài đề xuất: Viết script Python trích xuất thông tin thực thể từ đoạn văn bản thô sử dụng Structured Outputs.
+  - Thiết lập các tiêu chuẩn đánh giá code: Khả năng bắt lỗi (Error Handling), cấu trúc thư mục sạch sẽ, tốc độ xử lý của code và cách viết tài liệu hướng dẫn chạy.
+

@@ -110,4 +110,53 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy vẽ sơ đồ khối kiến trúc của hệ thống Writer & Editor phía trên bằng Mermaid.js (Tìm hiểu cú pháp sơ đồ Mermaid) và chèn đoạn code Mermaid đó vào file Markdown báo cáo.
+
+### Bài tập 1: Mô phỏng hệ thống Multi-Agent biên dịch và sửa bài viết (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python giả lập kiến trúc Multi-Agent đơn giản gồm 2 Agent: Agent 1 (Translator) dịch bài đăng từ tiếng Anh sang tiếng Việt, Agent 2 (Editor) nhận kết quả từ Agent 1 để sửa lỗi chính tả và làm mượt văn phong.
+* **Mã nguồn mẫu (`multi_agent_pipeline.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+class MultiAgentSystem:
+    def __init__(self):
+        self.model = genai.GenerativeModel("gemini-2.5-flash")
+        
+    def agent_translator(self, text: str) -> str:
+        prompt = f"Dịch đoạn văn bản sau sang tiếng Việt sát nghĩa nhất:\n\n{text}"
+        res = self.model.generate_content(prompt)
+        return res.text.strip()
+        
+    def agent_editor(self, translated_text: str) -> str:
+        prompt = f"Hãy sửa lỗi chính tả, ngữ pháp và tối ưu văn phong cho đoạn dịch sau tự nhiên hơn:\n\n{translated_text}"
+        res = self.model.generate_content(prompt)
+        return res.text.strip()
+        
+    def run_pipeline(self, english_text: str) -> str:
+        print("-> Agent 1 (Translator) đang dịch bài...")
+        translated = self.agent_translator(english_text)
+        print("-> Agent 2 (Editor) đang tinh chỉnh bản dịch...")
+        final_output = self.agent_editor(translated)
+        return final_output
+
+if __name__ == "__main__":
+    system = MultiAgentSystem()
+    input_text = "AI agents are transforming how we build software today."
+    output = system.run_pipeline(input_text)
+    print("\nKết quả cuối cùng:")
+    print(output)
+```
+
+### Bài tập 2: Hệ thống phản hồi đa tác nhân có vòng phản hồi (Feedback Loop) (Mức độ: Khó)
+* **Đề bài**: Xây dựng kiến trúc Multi-Agent có vòng kiểm duyệt chéo: Agent 1 viết bài đăng quảng cáo sản phẩm. Agent 2 (Reviewer) đọc bài viết và đưa ra nhận xét sửa đổi. Agent 1 nhận phản hồi từ Agent 2, tự động sửa đổi bài đăng và xuất ra phiên bản hoàn thiện cuối cùng.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Thiết kế vòng lặp giao tiếp giữa Agent 1 và Agent 2.
+  - Thiết lập điều kiện dừng: Nếu Agent 2 đánh giá bài viết đạt từ 8/10 điểm trở lên, kết thúc vòng lặp và in ra kết quả.
+  - Cấu hình `temperature = 0.5` cho Agent viết để tăng tính sáng tạo từ vựng.
+

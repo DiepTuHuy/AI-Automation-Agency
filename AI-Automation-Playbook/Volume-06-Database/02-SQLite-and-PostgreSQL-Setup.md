@@ -68,4 +68,49 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy cài đặt PostgreSQL cục bộ trên máy bạn hoặc sử dụng dịch vụ hosting database PostgreSQL miễn phí (như Supabase hoặc Neon.tech). Hãy chỉnh sửa mã nguồn Python phía trên để kết nối tới database PostgreSQL online bằng cách sử dụng thư viện `psycopg2` và in ra thông tin phiên bản của database PostgreSQL đang chạy.
+
+### Bài tập 1: Kết nối và tương tác với SQLite bằng Python (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python sử dụng thư viện `sqlite3` để tạo một database cục bộ, tạo bảng lưu thông tin người dùng và chèn dữ liệu mẫu vào bảng.
+* **Mã nguồn mẫu (`sqlite_connector.py`)**:
+```python
+import sqlite3
+
+def init_db():
+    # Kết nối đến file database SQLite cục bộ
+    conn = sqlite3.connect("users_database.db")
+    cursor = conn.cursor()
+    
+    # Tạo bảng
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        role TEXT DEFAULT 'user'
+    )
+    """)
+    
+    # Chèn dữ liệu mẫu
+    cursor.execute("INSERT INTO users (username, role) VALUES ('admin_huy', 'admin')")
+    cursor.execute("INSERT INTO users (username, role) VALUES ('student_a', 'user')")
+    conn.commit()
+    
+    # Truy vấn hiển thị dữ liệu
+    cursor.execute("SELECT * FROM users")
+    rows = cursor.fetchall()
+    print("Danh sách user trong SQLite:")
+    for r in rows:
+        print(f"ID: {r[0]}, Username: {r[1]}, Role: {r[2]}")
+        
+    conn.close()
+
+if __name__ == "__main__":
+    init_db()
+```
+
+### Bài tập 2: Quản lý kết nối PostgreSQL bằng Connection Pool (Mức độ: Khó)
+* **Đề bài**: Viết một script Python sử dụng thư viện `psycopg2` để kết nối đến một database PostgreSQL từ xa. Sử dụng `SimpleConnectionPool` để tối ưu quản lý kết nối khi có nhiều truy vấn xảy ra đồng thời.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng thư viện `psycopg2.pool.SimpleConnectionPool` để mở pool kết nối tối thiểu là 1 và tối đa là 10.
+  2. Sử dụng cấu trúc `try-except-finally` để lấy kết nối ra từ pool và trả lại pool sau khi thực thi thành công.
+

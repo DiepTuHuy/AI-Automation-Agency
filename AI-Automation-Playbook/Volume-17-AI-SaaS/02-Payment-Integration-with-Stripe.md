@@ -76,4 +76,54 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python độc lập tạo một Stripe Checkout Session cho sản phẩm thuê bao định kỳ trị giá 29 USD/tháng, cấu hình `client_reference_id` truyền vào là chuỗi `"user_test_999"`, và in ra đường dẫn URL thanh toán Stripe trả về để test trên trình duyệt.
+
+### Bài tập 1: Tích hợp cổng thanh toán Stripe Checkout (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python sử dụng thư viện `stripe` để tạo một phiên thanh toán trực tuyến (Stripe Checkout Session) cho gói dịch vụ Premium của ứng dụng AI SaaS.
+* **Mã nguồn mẫu (`stripe_session.py`)**:
+```python
+import os
+import stripe
+from dotenv import load_dotenv
+
+load_dotenv()
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "sk_test_mock")
+
+def create_checkout_session(customer_email: str):
+    try:
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            customer_email=customer_email,
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': 'Gói AI SaaS Premium (Tháng)',
+                        'description': 'Sử dụng không giới hạn các AI Agents thông minh.',
+                    },
+                    'unit_amount': 2900, # $29.00 USD (đơn vị cent)
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url='https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url='https://example.com/cancel',
+        )
+        return session.url
+    except Exception as e:
+        print(f"Lỗi tạo phiên thanh toán: {e}")
+        return None
+
+if __name__ == "__main__":
+    url = create_checkout_session("customer@example.com")
+    if url:
+        print(f"Đường link thanh toán Stripe Checkout: {url}")
+```
+
+### Bài tập 2: Xây dựng Endpoint nhận Webhook xác nhận thanh toán (Mức độ: Khó)
+* **Đề bài**: Xây dựng một endpoint `/webhook` trong FastAPI sử dụng thư viện `stripe` để tiếp nhận các thông báo đẩy tự động từ Stripe (Stripe Webhooks). Khi nhận sự kiện thanh toán thành công `checkout.session.completed`, tự động cập nhật trạng thái gói cước của Tenant tương ứng trong cơ sở dữ liệu.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng `stripe.Webhook.construct_event` để xác thực chữ ký bảo mật gửi từ Stripe.
+  2. Bắt sự kiện `event['type'] == 'checkout.session.completed'`.
+  3. Đọc thông tin khách hàng từ metadata của session và thực hiện câu lệnh cập nhật DB.
+

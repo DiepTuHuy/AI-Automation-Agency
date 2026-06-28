@@ -70,4 +70,47 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một kịch bản Output Guardrail bằng Python. Hàm nhận đầu vào là câu trả lời của AI. Sử dụng biểu thức chính quy (Regex) hoặc một cuộc gọi AI nhỏ thứ hai để kiểm quét xem câu trả lời có vô tình tiết lộ mã API Key nào không (như chuỗi bắt đầu bằng `sk-proj-`). Nếu phát hiện rò rỉ, chặn đứng không gửi về client và ghi log ERROR khẩn cấp.
+
+### Bài tập 1: Cơ chế xử lý dự phòng (Fallback) sang mô hình nhỏ hơn khi lỗi (Mức độ: Trung bình)
+* **Đề bài**: Viết một script gọi mô hình cao cấp (ví dụ: `gemini-2.5-pro`). Nếu xảy ra lỗi kết nối hoặc hết hạn quota (HTTP 429/500), tự động bắt lỗi và chuyển hướng cuộc gọi (Fallback) sang mô hình miễn phí/nhỏ hơn (`gemini-2.5-flash`) để đảm bảo hệ thống không bị gián đoạn.
+* **Mã nguồn mẫu (`api_fallback.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+def ask_with_fallback(prompt: str) -> str:
+    # Thử gọi model Pro trước
+    try:
+        print("Đang thử kết nối mô hình Gemini 2.5 Pro...")
+        # Giả lập model sai tên để kích hoạt ngoại lệ tự động phục vụ test
+        model = genai.GenerativeModel("gemini-2.5-pro-wrong-name-test")
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        print(f"Lỗi xảy ra với model Pro: {e}")
+        print("-> Tự động kích hoạt cơ chế dự phòng: Chuyển sang Gemini 2.5 Flash...")
+        try:
+            model_flash = genai.GenerativeModel("gemini-2.5-flash")
+            response = model_flash.generate_content(prompt)
+            return response.text
+        except Exception as flash_err:
+            return f"Cả hai mô hình đều thất bại: {flash_err}"
+
+if __name__ == "__main__":
+    result = ask_with_fallback("Viết slogan cho dịch vụ sửa xe lưu động")
+    print(f"\nKết quả cuối cùng: {result}")
+```
+
+### Bài tập 2: Bộ lọc từ ngữ nhạy cảm (Content Guardrails) (Mức độ: Khó)
+* **Đề bài**: Viết một script Python làm nhiệm vụ kiểm duyệt nội dung đầu vào. Trước khi gửi câu hỏi lên LLM, script sẽ quét các từ cấm. Nếu phát hiện từ cấm, lập tức chặn cuộc gọi và báo lỗi. Sau khi nhận kết quả từ LLM, tiếp tục quét xem nội dung đầu ra có vi phạm chính sách an toàn không trước khi trả về cho khách hàng.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Tạo danh sách các từ cấm (Blacklist) trong một file txt hoặc mảng Python.
+  2. Viết hàm kiểm tra đầu vào trước khi thực thi gọi API.
+  3. Cấu hình tham số "safety_settings" của Gemini API để tăng cường bộ lọc phía máy chủ.
+

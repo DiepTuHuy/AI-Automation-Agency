@@ -77,4 +77,27 @@ Cung cấp mẫu tài liệu SOP kỹ thuật hoàn chỉnh hướng dẫn cài 
 ---
 
 ## 3. Mini Project
-Hãy viết một tài liệu SOP hướng dẫn quy trình tạo bản backup cơ sở dữ liệu SQLite và nén file gửi lên Google Drive thủ công (hoặc qua script). Hãy viết thật chi tiết từng câu lệnh sao cho một người thực tập sinh mới vào công ty cũng có thể làm theo chính xác.
+
+### Bài tập 1: Soạn quy trình vận hành chuẩn SOP cho việc bàn giao dự án (Mức độ: Trung bình)
+* **Đề bài**: Hãy thiết lập một tài liệu Quy trình vận hành tiêu chuẩn (SOP - Standard Operating Procedure) cho các kỹ sư trong AI Agency của bạn khi thực hiện bàn giao mã nguồn lên máy chủ VPS của khách hàng.
+* **Tài liệu sườn mẫu (`deployment_sop.md`)**:
+```markdown
+# SOP: Quy trình triển khai sản phẩm lên VPS khách hàng
+
+* **Mã quy trình**: SOP-DEP-01
+* **Mục tiêu**: Đảm bảo toàn bộ ứng dụng được deploy an toàn, không xung đột thư viện.
+* **Các bước thực hiện**:
+  1. Đăng nhập vào VPS qua SSH sử dụng khóa bảo mật.
+  2. Tạo thư mục dự án và thực hiện `git clone` mã nguồn từ nhánh `main`.
+  3. Khởi tạo môi trường ảo Python và chạy cài đặt: `pip install -r requirements.txt`.
+  4. Tạo tệp `.env` cấu hình API Key thực tế của khách hàng.
+  5. Khởi động dịch vụ dưới nền bằng `systemd` hoặc `docker-compose`.
+```
+
+### Bài tập 2: SOP Xử lý Khắc phục sự cố khẩn cấp khi hệ thống AI bị lỗi (Mức độ: Khó)
+* **Đề bài**: Thiết lập tài liệu SOP hướng dẫn xử lý sự cố khẩn cấp (Incident Response SOP) khi khách hàng báo lỗi hệ thống AI ngừng phản hồi. SOP phải bao gồm các bước kiểm tra log nhanh, khởi động lại dịch vụ và liên hệ hỗ trợ khẩn cấp.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Phân chia nhiệm vụ rõ ràng: Ai là người tiếp nhận thông tin lỗi, ai thực hiện debug kỹ thuật.
+  - Viết chi tiết các câu lệnh kiểm tra log hệ thống nhanh (ví dụ: `docker logs web_service` hoặc `journalctl -u api_service`).
+

@@ -62,4 +62,35 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy bổ sung thêm một công cụ (Tool) thứ hai vào file `server.py` phía trên mang tên `write_log_entry(filename, message)`. Công cụ này cho phép AI Agent tự động ghi một dòng log mới (kèm thời gian hiện tại) vào file log được chỉ định. Nhớ kiểm tra bảo mật thư mục an toàn.
+
+### Bài tập 1: Xây dựng Custom MCP Server tính toán tài chính (Mức độ: Trung bình)
+* **Đề bài**: Viết một MCP Server bằng Python sử dụng thư viện `mcp` SDK để cung cấp một công cụ tính thuế thu nhập cá nhân đơn giản.
+* **Mã nguồn mẫu (`custom_finance_mcp.py`)**:
+```python
+from mcp.server.fastmcp import FastMCP
+
+# Khởi tạo FastMCP Server
+mcp = FastMCP("FinanceAssistant")
+
+# Định nghĩa Tool tính thuế
+@mcp.tool()
+def calculate_income_tax(income_usd: float) -> str:
+    """Tính toán thuế thu nhập cá nhân ước tính (10% cho thu nhập dưới 50k, 20% cho trên 50k)."""
+    if income_usd < 50000:
+        tax = income_usd * 0.1
+    else:
+        tax = (50000 * 0.1) + ((income_usd - 50000) * 0.2)
+    return f"Thuế thu nhập cá nhân ước tính cho mức ${income_usd:,.2f} là: ${tax:,.2f}"
+
+if __name__ == "__main__":
+    mcp.run()
+```
+
+### Bài tập 2: Custom MCP Server truy vấn dữ liệu từ SQLite (Mức độ: Khó)
+* **Đề bài**: Viết một Custom MCP Server bằng Python kết nối với cơ sở dữ liệu SQLite của công ty. Server cung cấp một công cụ `search_inventory` cho phép mô hình ngôn ngữ lớn có thể truy vấn số lượng tồn kho của sản phẩm bằng cách truyền tên sản phẩm.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Import thư viện `sqlite3` trong file custom MCP server.
+  2. Viết hàm Python kết nối tới file `.db` và thực hiện câu lệnh `SELECT` để tìm sản phẩm.
+  3. Đăng ký hàm đó bằng decorator `@mcp.tool()` để AI Client có thể gọi trực tiếp.
+

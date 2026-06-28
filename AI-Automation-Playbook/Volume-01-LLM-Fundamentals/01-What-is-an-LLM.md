@@ -97,5 +97,34 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy cài đặt thư mục `llm-demo` địa phương như hướng dẫn, điền API Key vào `.env`, chạy thử script `app.py`. Sau đó, thử thay đổi tham số `temperature` xuống `0.1` (kiểm tra tính nhất quán của câu trả lời) và lên `1.5` (kiểm tra tính sáng tạo). Ghi lại nhận xét của bạn vào tài liệu học tập cá nhân.
+
+### Bài tập 1: Viết script Python gọi Gemini API đầu tiên (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python đơn giản sử dụng SDK `google-generativeai` để gửi câu hỏi "AI Automation là gì?" lên mô hình `gemini-2.5-flash` và in câu trả lời ra màn hình terminal.
+* **Mã nguồn mẫu (`hello_gemini.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+def ask_gemini():
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content("AI Automation là gì? Giải thích ngắn gọn trong 2 câu.")
+    print("AI trả lời:")
+    print(response.text)
+
+if __name__ == "__main__":
+    ask_gemini()
+```
+
+### Bài tập 2: Script chatbot đa tương tác trong Terminal (Mức độ: Khó)
+* **Đề bài**: Nâng cấp script ở Bài tập 1 thành một chương trình Chatbot tương tác liên tục trong Terminal. Người dùng có thể nhập câu hỏi liên tục và AI sẽ trả lời dựa trên ngữ cảnh lịch sử hội thoại trước đó (sử dụng tính năng Chat Session của Gemini). Nhập 'exit' để thoát chương trình.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng `model.start_chat(history=[])` để khởi tạo phiên chat có nhớ ngữ cảnh.
+  2. Sử dụng vòng lặp `while True` để nhận câu hỏi từ hàm `input()`.
+  3. Gửi tin nhắn qua `chat.send_message(user_input)` để bảo toàn lịch sử trò chuyện.
 

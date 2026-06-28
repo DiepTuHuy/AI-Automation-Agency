@@ -69,4 +69,41 @@ graph TD
 ---
 
 ## 3. Mini Project
-Hãy áp dụng cấu trúc mẫu phía trên để soạn thảo một file README.md hoàn chỉnh và chuyên nghiệp cho **Project 03 (AI Chat PDF)** của bạn. Lưu file này vào thư mục của Project 03.
+
+### Bài tập 1: Viết README.md cho dự án AI Agent của bạn (Mức độ: Trung bình)
+* **Đề bài**: Hãy viết một tệp tài liệu `README.md` chuyên nghiệp giới thiệu dự án "AI Customer Support Agent". Tệp README cần thể hiện rõ: Giới thiệu dự án, Hướng dẫn cài đặt chi tiết từng bước, và Cách chạy thử nghiệm.
+* **Tài liệu sườn mẫu (`README_template.md`)**:
+```markdown
+# 🤖 AI Customer Support Agent
+
+Dự án trợ lý ảo hỗ trợ khách hàng tự động tích hợp cơ chế gọi hàm (Function Calling) và cơ sở dữ liệu tri thức RAG.
+
+## 🛠️ Hướng dẫn cài đặt
+
+1. Clone kho lưu trữ:
+   ```bash
+   git clone https://github.com/yourusername/ai-customer-agent.git
+   cd ai-customer-agent
+   ```
+2. Cài đặt các thư viện:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Cấu hình khóa bảo mật trong `.env`:
+   ```env
+   GEMINI_API_KEY=your_key_here
+   ```
+
+## 🚀 Hướng dẫn chạy thử nghiệm
+```bash
+python main.py
+```
+```
+
+### Bài tập 2: Thiết kế tài liệu hướng dẫn vận hành API hoàn chỉnh (Mức độ: Khó)
+* **Đề bài**: Bổ dung vào tệp README của bạn phần hướng dẫn gọi API (API Documentation) chi tiết, mô tả cấu trúc JSON request và response cho endpoint `/api/v1/chat`, kèm theo mã lỗi thường gặp (như 401, 400) để lập trình viên khác dễ dàng tích hợp.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng các khối code có định dạng syntax highlighting của markdown (ví dụ: ` ```json `).
+  - Mô tả rõ ý nghĩa của từng trường thông tin trong payload đầu vào và đầu ra.
+

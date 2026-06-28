@@ -67,4 +67,32 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python đọc một file nội dung điều khoản sử dụng dài, áp dụng `RecursiveCharacterTextSplitter` với chunk size = 800 và overlap = 150. Ghi kết quả các chunk tìm được ra một thư mục `chunks/` dưới dạng các file nhỏ `chunk_1.txt`, `chunk_2.txt`... để kiểm tra trực quan sản phẩm.
+
+### Bài tập 1: Cắt nhỏ văn bản theo độ dài ký tự cố định (Mức độ: Trung bình)
+* **Đề bài**: Viết một hàm Python thực hiện chia nhỏ một đoạn văn bản dài thành các đoạn nhỏ (chunks) có độ dài ký tự cố định (ví dụ: 100 ký tự) và có khoảng chồng lấn (overlap) là 20 ký tự để bảo toàn ngữ cảnh ở biên.
+* **Mã nguồn mẫu (`character_chunker.py`)**:
+```python
+def chunk_text(text: str, chunk_size: int = 100, overlap: int = 20) -> list:
+    chunks = []
+    start = 0
+    while start < len(text):
+        end = start + chunk_size
+        chunk = text[start:end]
+        chunks.append(chunk)
+        start += (chunk_size - overlap)
+    return chunks
+
+if __name__ == "__main__":
+    sample_text = "Học viện AI Automation đào tạo kỹ sư chất lượng cao. Khóa học thực chiến cung cấp đầy đủ lý thuyết và dự án thực tế doanh nghiệp."
+    results = chunk_text(sample_text, chunk_size=50, overlap=10)
+    for i, c in enumerate(results):
+        print(f"Đoạn {i+1}: '{c}' (Độ dài: {len(c)} ký tự)")
+```
+
+### Bài tập 2: Bộ cắt văn bản thông minh theo đoạn văn (Recursive Text Splitter) (Mức độ: Khó)
+* **Đề bài**: Viết một script Python chia nhỏ văn bản dài một cách thông minh: Thay vì cắt ở giữa từ gây mất nghĩa, script sẽ ưu tiên cắt tại các dấu kết thúc câu (dấu chấm `.`, dấu xuống dòng `\n`) để đảm bảo tính toàn vẹn ngữ nghĩa của mỗi đoạn.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng phương thức `text.split(". ")` để lấy danh sách các câu hoàn chỉnh.
+  2. Duyệt qua các câu, gộp chúng lại vào một chunk cho đến khi tổng số ký tự đạt ngưỡng giới hạn, sau đó mới tạo chunk mới.
+

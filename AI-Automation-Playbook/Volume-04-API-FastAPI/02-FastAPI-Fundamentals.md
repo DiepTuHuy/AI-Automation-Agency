@@ -60,4 +60,46 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy bổ sung thêm một route POST `/api/v1/echo` vào ứng dụng trên. Route này nhận vào một payload JSON tự do và trả lại chính xác những gì người dùng gửi lên kèm theo thông tin thời gian hiện tại trên server. Kiểm thử endpoint này bằng giao diện Swagger UI `/docs`.
+
+### Bài tập 1: Xây dựng REST API tính toán chỉ số sức khỏe bằng FastAPI (Mức độ: Trung bình)
+* **Đề bài**: Viết một ứng dụng FastAPI cung cấp một endpoint nhận chiều cao và cân nặng thông qua query parameters, sau đó tính toán chỉ số khối cơ thể (BMI) và trả về kết quả kèm phân loại sức khỏe dạng JSON.
+* **Mã nguồn mẫu (`bmi_api.py`)**:
+```python
+from fastapi import FastAPI
+
+app = FastAPI(title="Health Calculator API")
+
+@app.get("/api/v1/bmi")
+def calculate_bmi(weight_kg: float, height_m: float):
+    if height_m <= 0:
+        return {"error": "Chiều cao phải lớn hơn 0"}
+    
+    bmi = weight_kg / (height_m ** 2)
+    category = ""
+    if bmi < 18.5:
+        category = "Gầy"
+    elif bmi < 24.9:
+        category = "Bình thường"
+    else:
+        category = "Thừa cân"
+        
+    return {
+        "weight": weight_kg,
+        "height": height_m,
+        "bmi": round(bmi, 2),
+        "category": category
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+```
+
+### Bài tập 2: API Quản lý danh sách lời khuyên sức khỏe hàng ngày (Mức độ: Khó)
+* **Đề bài**: Xây dựng một ứng dụng FastAPI quản lý danh sách lời khuyên sức khỏe (Tips) trong bộ nhớ (Memory List). API cần hỗ trợ: Lấy ngẫu nhiên 1 lời khuyên (`GET`), và Thêm một lời khuyên mới vào danh sách (`POST`).
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Khai báo danh sách danh ngôn sức khỏe mẫu làm cơ sở dữ liệu trong bộ nhớ.
+  2. Sử dụng thư viện `random` để lấy phần tử ngẫu nhiên khi người dùng gửi request `GET`.
+  3. Sử dụng mô hình Pydantic đơn giản để nhận dữ liệu đầu vào cho yêu cầu `POST`.
+

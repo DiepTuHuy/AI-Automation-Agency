@@ -43,4 +43,28 @@ Cấu hình thành công Claude Desktop để sử dụng máy chủ MCP đọc 
 ---
 
 ## 3. Mini Project
-Hãy thực hiện cấu hình tương tự máy chủ MCP của bạn vào Cursor IDE (Vào phần Settings -> Features -> MCP trong giao diện Cursor). Chụp ảnh màn hình giao diện Cursor đã kết nối thành công MCP Server và hiển thị danh sách các Tools khả dụng để lưu vào báo cáo.
+
+### Bài tập 1: Kết nối Custom MCP Server vào Claude Desktop (Mức độ: Trung bình)
+* **Đề bài**: Hãy cấu hình tích hợp Custom MCP Server tính toán tài chính (`custom_finance_mcp.py` ở chương trước) vào Claude Desktop của bạn để kiểm thử công cụ trực tiếp bằng giao diện trò chuyện.
+* **Tài liệu hướng dẫn & Sườn mẫu cấu hình**:
+```json
+// Cấu hình tại ~/Library/Application Support/Claude/claude_desktop_config.json
+{
+  "mcpServers": {
+    "finance-assistant": {
+      "command": "python3",
+      "args": [
+        "/Users/dieptuhuy/Documents/AI Automation/scratch/custom_finance_mcp.py"
+      ]
+    }
+  }
+}
+```
+
+### Bài tập 2: Tự động chạy Custom MCP Server qua môi trường ảo Pipenv (Mức độ: Khó)
+* **Đề bài**: Cấu hình tích hợp Custom MCP Server vào Claude Desktop sao cho server được chạy trong môi trường ảo độc lập (sử dụng `pipenv` hoặc `poetry` hoặc `venv`) nhằm quản lý các thư viện phụ thuộc một cách an toàn mà không ảnh hưởng tới Python hệ thống.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Cấu hình trường `command` trong file config thành đường dẫn trực tiếp tới thư mục chạy của môi trường ảo (ví dụ: `/path/to/venv/bin/python`).
+  - Đảm bảo môi trường ảo đó đã được cài đặt đầy đủ gói `mcp` SDK.
+

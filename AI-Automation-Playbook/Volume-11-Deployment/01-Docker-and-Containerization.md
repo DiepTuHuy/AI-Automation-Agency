@@ -84,4 +84,40 @@ volumes:
 ---
 
 ## 3. Mini Project
-Hãy tạo một thư mục dự án Python FastAPI đơn giản, copy Dockerfile và docker-compose.yml phía trên vào. Chạy lệnh: `docker-compose up --build` trong Terminal và kiểm chứng xem cả ứng dụng web và database có khởi chạy đồng thời thành công không. Ghi lại log khởi động.
+
+### Bài tập 1: Viết Dockerfile container hóa ứng dụng FastAPI (Mức độ: Trung bình)
+* **Đề bài**: Hãy viết một `Dockerfile` và tệp `docker-compose.yml` để container hóa một ứng dụng API FastAPI đơn giản.
+* **Mã nguồn mẫu (`Dockerfile` & `docker-compose.yml`)**:
+```dockerfile
+# Dockerfile
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=test_key
+```
+
+### Bài tập 2: Container hóa ứng dụng FastAPI kết nối Database Postgres (Mức độ: Khó)
+* **Đề bài**: Hãy viết file `docker-compose.yml` hoàn chỉnh để khởi chạy đồng thời hai dịch vụ: Ứng dụng FastAPI (`web`) và Cơ sở dữ liệu PostgreSQL (`db`). Yêu cầu dịch vụ `web` chỉ khởi động sau khi dịch vụ `db` đã sẵn sàng hoạt động.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng image `postgres:15` cho dịch vụ `db`.
+  - Sử dụng cơ chế `depends_on` với điều kiện `service_healthy` trong docker-compose để đồng bộ thứ tự khởi chạy.
+

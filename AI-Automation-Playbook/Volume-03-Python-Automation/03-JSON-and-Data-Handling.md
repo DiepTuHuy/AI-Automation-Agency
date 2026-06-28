@@ -68,4 +68,48 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python đọc một file JSON chứa thông tin lịch sử giao dịch khách hàng (bao gồm ID khách hàng, Danh sách mặt hàng, Tổng tiền). Hãy tính tổng chi tiêu của từng khách hàng, lọc ra các khách hàng Vip chi tiêu trên 10 triệu đồng, và xuất kết quả ra một file JSON mới mang tên `vip_customers.json`.
+
+### Bài tập 1: Đọc và tính toán báo cáo doanh thu từ JSON (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python đọc một file JSON chứa danh sách các giao dịch bán hàng, tính tổng doanh thu và in danh sách các sản phẩm bán chạy nhất.
+* **Mã nguồn mẫu (`sales_report.py`)**:
+```python
+import json
+
+json_data = '''
+[
+    {"transaction_id": "T01", "product": "Bàn phím cơ", "price": 80.0, "quantity": 3},
+    {"transaction_id": "T02", "product": "Chuột không dây", "price": 45.0, "quantity": 5},
+    {"transaction_id": "T03", "product": "Bàn phím cơ", "price": 80.0, "quantity": 1},
+    {"transaction_id": "T04", "product": "Tai nghe", "price": 120.0, "quantity": 2}
+]
+'''
+
+def generate_report(data_str: str):
+    transactions = json.loads(data_str)
+    total_revenue = 0
+    product_sales = {}
+    
+    for t in transactions:
+        revenue = t["price"] * t["quantity"]
+        total_revenue += revenue
+        
+        prod = t["product"]
+        product_sales[prod] = product_sales.get(prod, 0) + t["quantity"]
+        
+    print(f"Tổng doanh thu: ${total_revenue:.2f}")
+    print("Số lượng bán ra của từng sản phẩm:")
+    for prod, qty in product_sales.items():
+        print(f"- {prod}: {qty} chiếc")
+
+if __name__ == "__main__":
+    generate_report(json_data)
+```
+
+### Bài tập 2: Cập nhật tồn kho tự động trong file JSON lớn (Mức độ: Khó)
+* **Đề bài**: Viết một script đọc tệp cấu hình tồn kho dạng JSON. Nếu số lượng một mặt hàng giảm xuống dưới 10, tự động cập nhật trạng thái `restock_needed: true` và ghi đè dữ liệu mới cập nhật lại vào tệp JSON ban đầu.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng `json.load()` để đọc tệp từ đĩa cứng.
+  2. Duyệt qua mảng sản phẩm bằng vòng lặp và cập nhật điều kiện.
+  3. Ghi lại dữ liệu bằng `json.dump(data, f, indent=4)` để lưu đè thay đổi.
+

@@ -66,4 +66,51 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy đăng nhập vào dashboard LangSmith của bạn sau khi chạy code Demo phía trên. Tìm đến dự án `CRM_Agent_Monitoring`, chụp ảnh màn hình giao diện chi tiết của trace vừa được tạo (Hiển thị rõ prompt đầu vào, câu trả lời đầu ra, thời gian chạy và số lượng token) để lưu vào tài liệu thực hành.
+
+### Bài tập 1: Thiết lập ghi Log giám sát cuộc gọi API (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python bọc cuộc gọi tới Gemini API và ghi nhận chi tiết thông số cuộc gọi: Thời gian phản hồi (Latency), Số lượng token sử dụng, Trạng thái thành công hay thất bại vào file log cục bộ.
+* **Mã nguồn mẫu (`api_monitor.py`)**:
+```python
+import os
+import time
+import logging
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+logging.basicConfig(filename="api_metrics.log", level=logging.INFO, format="%(asctime)s - %(message)s")
+
+def monitored_call(prompt: str):
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    start_time = time.time()
+    
+    try:
+        response = model.generate_content(prompt)
+        latency = time.time() - start_time
+        
+        # Ghi log metrics
+        logging.info(
+            f"Prompt: '{prompt[:20]}...' | Status: SUCCESS | "
+            f"Latency: {latency:.2f}s | Response length: {len(response.text)} chars"
+        )
+        return response.text
+    except Exception as e:
+        latency = time.time() - start_time
+        logging.error(f"Prompt: '{prompt[:20]}...' | Status: FAILED | Latency: {latency:.2f}s | Error: {e}")
+        return None
+
+if __name__ == "__main__":
+    monitored_call("Giải thích về tính năng giám sát hệ thống AI.")
+```
+
+### Bài tập 2: Tự động thống kê hiệu năng vận hành API hàng tuần (Mức độ: Khó)
+* **Đề bài**: Viết một script Python đọc file `api_metrics.log`. Phân tích toàn bộ dữ liệu log thu thập được để tính toán các chỉ số: Tỷ lệ thành công (Success Rate), Thời gian phản hồi trung bình (Average Latency) và in báo cáo tổng quan.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng thư viện `pandas` hoặc đọc file dòng-bằng-dòng để phân tích log.
+  2. Trích xuất thời gian chạy (Latency) từ chuỗi log bằng Regular Expression (Regex).
+  3. Tính toán các chỉ số trung bình và in báo cáo dạng bảng trực quan.
+

@@ -57,4 +57,29 @@ Biên bản được lập thành hai (02) bản có giá trị pháp lý tươn
 ---
 
 ## 3. Mini Project
-Hãy soạn thảo một cuốn tài liệu Hướng dẫn sử dụng dài 1 trang Markdown dành riêng cho nhân viên kế toán hướng dẫn cách sử dụng ứng dụng **Project 02 (AI CRM Lead Qualification)**. Hãy viết thật dễ hiểu, sử dụng các ký tự Markdown đẹp đẽ để làm nổi bật các bước thao tác.
+
+### Bài tập 1: Soạn tài liệu Hướng dẫn Vận hành cho Khách hàng (User Guide) (Mức độ: Trung bình)
+* **Đề bài**: Hãy viết một bản hướng dẫn sử dụng (User Guide) ngắn gọn dành cho nhân viên văn phòng của khách hàng để họ biết cách cấu hình và đổi API Key cho hệ thống AI Agent mới bàn giao.
+* **Tài liệu sườn mẫu (`handover_guide.md`)**:
+```markdown
+# Hướng dẫn cấu hình hệ thống AI Agent cho vận hành viên
+
+### Bước 1: Truy cập tệp cấu hình môi trường
+* Mở thư mục gốc của ứng dụng trên máy chủ hoặc máy tính của bạn.
+* Tìm tệp tin mang tên `.env`.
+
+### Bước 2: Cập nhật Google Gemini API Key mới
+* Mở tệp `.env` bằng phần mềm Notepad hoặc bất kỳ trình soạn thảo văn bản nào.
+* Tìm dòng: `GEMINI_API_KEY=cũ_của_bên_phát_triển`
+* Thay thế bằng khóa bảo mật mới của công ty bạn: `GEMINI_API_KEY=AIzaSyNewKey...`
+* Lưu tệp tin lại và khởi động lại dịch vụ.
+```
+
+### Bài tập 2: Xây dựng Biên bản nghiệm thu và bàn giao dự án (Sign-off Document) (Mức độ: Khó)
+* **Đề bài**: Soạn thảo một biên bản nghiệm thu và bàn giao dự án (Project Sign-off & Handover Document) chính thức. Biên bản cần bao gồm: Danh sách các hạng mục đã hoàn thành, Ý kiến đánh giá của khách hàng, và Chữ ký xác nhận nghiệm thu của cả hai bên để chính thức kết thúc dự án và kích hoạt điều khoản bảo hành.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Nêu rõ tên dự án, ngày thực hiện ký kết biên bản nghiệm thu.
+  - Liệt kê đầy đủ các kết quả bàn giao (mã nguồn GitHub, tài liệu hướng dẫn, VPS hosting).
+  - Định nghĩa rõ các điều khoản hỗ trợ kỹ thuật miễn phí sau bàn giao (ví dụ: hỗ trợ sửa lỗi phát sinh trong vòng 30 ngày).
+

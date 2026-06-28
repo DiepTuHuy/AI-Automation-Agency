@@ -83,4 +83,42 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python bất đồng bộ kết nối với API Telegram đã học ở Chương 2, gửi đồng thời 10 tin nhắn chào mừng khác nhau đến nhóm của bạn và kiểm tra xem các tin nhắn có hiển thị gần như cùng một lúc hay không.
+
+### Bài tập 1: Quét trạng thái nhiều website đồng thời bằng Asyncio (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python sử dụng thư viện `asyncio` và `httpx` để kiểm tra mã trạng thái HTTP (status code) của 3 trang web cùng một lúc.
+* **Mã nguồn mẫu (`async_status_checker.py`)**:
+```python
+import asyncio
+import httpx
+
+urls = [
+    "https://httpbin.org/status/200",
+    "https://httpbin.org/status/404",
+    "https://httpbin.org/status/500"
+]
+
+async def check_url(client: httpx.AsyncClient, url: str):
+    try:
+        response = await client.get(url)
+        print(f"URL: {url} -> Status: {response.status_code}")
+    except Exception as e:
+        print(f"URL: {url} -> Lỗi kết nối: {e}")
+
+async def main():
+    async with httpx.AsyncClient() as client:
+        # Tạo danh sách các task chạy song song
+        tasks = [check_url(client, url) for url in urls]
+        await asyncio.gather(*tasks)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### Bài tập 2: Hệ thống quét giá sản phẩm thời gian thực (Mức độ: Khó)
+* **Đề bài**: Xây dựng một script bất đồng bộ tải thông tin giá của 5 mã cổ phiếu hoặc 5 mặt hàng từ API giả lập. Giới hạn thời gian tối đa cho mỗi request là 3 giây (timeout). Nếu quá thời gian, hủy tác vụ đó và chuyển sang xử lý kết quả của các tác vụ hoàn thành khác để tránh treo hệ thống.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng `asyncio.wait_for()` để thiết lập timeout cho từng task bất đồng bộ.
+  2. Bọc khối lệnh trong `try-except asyncio.TimeoutError`.
+  3. Thu thập và in báo cáo thống kê các tác vụ thành công.
+

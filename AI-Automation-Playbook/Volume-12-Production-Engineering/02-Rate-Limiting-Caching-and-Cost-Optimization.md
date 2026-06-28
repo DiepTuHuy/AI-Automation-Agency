@@ -98,4 +98,58 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một endpoint FastAPI nhận câu hỏi, tích hợp class `SimpleSemanticCache` phía trên vào. Nếu khớp cache thì trả về JSON kết quả kèm thuộc tính `"source": "cache"`; nếu không khớp thì gọi OpenAI, trả về kết quả kèm thuộc tính `"source": "openai_api"`.
+
+### Bài tập 1: Tối ưu chi phí bằng bộ nhớ đệm SQLite Cache đơn giản (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python lưu trữ kết quả phản hồi của API vào một bảng cache trong SQLite. Khi người dùng gửi câu hỏi trùng với câu hỏi cũ đã có trong cache, trả kết quả trực tiếp từ SQLite thay vì gọi API để tiết kiệm chi phí và tăng tốc phản hồi.
+* **Mã nguồn mẫu (`sqlite_cache.py`)**:
+```python
+import os
+import sqlite3
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+conn = sqlite3.connect("api_cache.db")
+cursor = conn.cursor()
+cursor.execute("CREATE TABLE IF NOT EXISTS cache (query TEXT PRIMARY KEY, response TEXT)")
+conn.commit()
+
+def ask_with_cache(query: str) -> str:
+    # 1. Kiểm tra trong cache trước
+    cursor.execute("SELECT response FROM cache WHERE query = ?", (query,))
+    cached = cursor.fetchone()
+    if cached:
+        print("-> Trả về kết quả từ Cache (Miễn phí API!)")
+        return cached[0]
+        
+    # 2. Gọi API thực tế nếu chưa có
+    print("-> Gọi Gemini API thực tế...")
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content(query)
+    ans = response.text.strip()
+    
+    # 3. Lưu vào cache
+    cursor.execute("INSERT OR REPLACE INTO cache (query, response) VALUES (?, ?)", (query, ans))
+    conn.commit()
+    return ans
+
+if __name__ == "__main__":
+    q = "Slogan ngắn cho quán cafe sạch"
+    print("Lần 1:")
+    print(ask_with_cache(q))
+    print("\nLần 2:")
+    print(ask_with_cache(q))
+    conn.close()
+```
+
+### Bài tập 2: Bộ kiểm soát tần suất truy cập API (Rate Limiter) (Mức độ: Khó)
+* **Đề bài**: Viết một decorator Python `@rate_limit(max_calls=3, period=60)` để bọc quanh hàm gọi API. Nếu người dùng gọi hàm quá 3 lần trong vòng 60 giây, decorator sẽ ném ra ngoại lệ và bắt người dùng phải đợi đến khi chu kỳ mới bắt đầu.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng thư viện `time` để lưu vết thời gian của các lượt gọi gần nhất trong một danh sách.
+  2. Trước mỗi cuộc gọi, lọc bỏ các mốc thời gian đã quá thời hạn `period`.
+  3. Kiểm tra độ dài danh sách còn lại để quyết định cho phép gọi tiếp hay chặn đứng.
+

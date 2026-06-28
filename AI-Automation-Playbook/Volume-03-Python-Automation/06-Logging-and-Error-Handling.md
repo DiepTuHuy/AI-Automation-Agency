@@ -78,4 +78,43 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy xây dựng một module Python thực hiện đọc ghi tệp cấu hình JSON từ Chương 3. Bổ sung hệ thống bắt lỗi (try-except) khi file JSON bị hỏng cấu trúc cú pháp, ghi log chi tiết lỗi định dạng vào file log, và gửi cảnh báo trực tiếp về kênh Telegram của bạn khi phát hiện lỗi nghiêm trọng.
+
+### Bài tập 1: Xây dựng hệ thống ghi Log đa kênh (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python thực thi phép tính chia hai số đầu vào do người dùng nhập. Cấu hình hệ thống logging ghi nhận cả thông tin bình thường (INFO) vào file `app.log` và ghi nhận chi tiết lỗi (ERROR) khi xảy ra lỗi chia cho 0.
+* **Mã nguồn mẫu (`safe_calculator.py`)**:
+```python
+import logging
+
+# Cấu hình logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("app.log", encoding="utf-8"),
+        logging.StreamHandler() # Ghi ra console
+    ]
+)
+
+def divide_numbers(a, b):
+    logging.info(f"Bắt đầu thực hiện phép chia: {a} / {b}")
+    try:
+        result = a / b
+        logging.info(f"Phép chia thành công. Kết quả: {result}")
+        return result
+    except ZeroDivisionError as e:
+        logging.error(f"Lỗi chia cho 0 xảy ra: {e}", exc_info=True)
+        return None
+
+if __name__ == "__main__":
+    divide_numbers(10, 2)
+    divide_numbers(10, 0)
+```
+
+### Bài tập 2: Hệ thống giám sát thư mục tự động có ghi Log cảnh báo (Mức độ: Khó)
+* **Đề bài**: Viết một script giám sát một thư mục cụ thể. Khi có bất kỳ tệp tin mới nào được thêm vào thư mục đó, ghi log lại tên file mới. Nếu gặp lỗi phân quyền truy cập thư mục, bắt lỗi chi tiết và ghi log ở mức `CRITICAL`.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng thư viện `watchdog` hoặc vòng lặp `while True` quét danh sách tệp qua `pathlib`.
+  2. Đóng gói mã quét thư mục trong khối `try-except PermissionError`.
+  3. Sử dụng `logger.critical()` để ghi lại lỗi hệ thống nghiêm trọng.
+

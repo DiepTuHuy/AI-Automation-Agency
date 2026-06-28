@@ -31,4 +31,28 @@ Cung cấp kịch bản chi tiết (Storyboard) từng giây giúp bạn tự ti
 ---
 
 ## 3. Mini Project
-Hãy viết một kịch bản thuyết minh (Storyboard) chi tiết dài 1 trang giấy cho dự án **Project 03 (AI Chat PDF)** của bạn dựa trên cấu trúc 2 phút vàng ngọc phía trên.
+
+### Bài tập 1: Lập kịch bản quay Video Demo sản phẩm AI (Mức độ: Trung bình)
+* **Đề bài**: Hãy soạn thảo một kịch bản chi tiết dài 2 phút để quay video giới thiệu (Demo Video) cho ứng dụng AI Agent của bạn. Kịch bản phải nêu rõ: Phần mở đầu (giới thiệu nỗi đau khách hàng), Phần trọng tâm (trình diễn tính năng cốt lõi của AI), và Phần kêu gọi hành động (CTA).
+* **Tài liệu sườn mẫu (`demo_script.md`)**:
+```markdown
+# Kịch bản Video Demo: AI Invoice Processor (Thời lượng: 120 giây)
+
+* **0 - 20s: Khởi động (The Pain)**: 
+  - Quay cảnh màn hình đống hóa đơn PDF ngập tràn.
+  - Lời thoại: "Bạn mệt mỏi vì phải nhập liệu hóa đơn thủ công hàng giờ liền?"
+* **20 - 90s: Demo Tính năng (The Solution)**:
+  - Thao tác kéo thả file hóa đơn vào ứng dụng.
+  - Cho người xem thấy AI tự động điền dữ liệu vào bảng Excel chính xác 100% trong 2 giây.
+* **90 - 120s: Kêu gọi (CTA)**:
+  - Hiển thị link GitHub dự án.
+  - Lời thoại: "Hãy trải nghiệm ngay tại link bên dưới!"
+```
+
+### Bài tập 2: Thiết kế ảnh động GIF tương tác sản phẩm cho README (Mức độ: Khó)
+* **Đề bài**: Hãy thực hiện quay lại màn hình thao tác sử dụng công cụ AI của bạn (dưới 15 giây), sau đó chuyển đổi video đó sang định dạng ảnh động `.gif` chất lượng cao, tối ưu dung lượng dưới 5MB để nhúng thẳng vào đầu trang README dự án.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng các phần mềm quay màn hình miễn phí như OBS Studio, Loom hoặc GIPHY Capture.
+  - Sử dụng công cụ chuyển đổi hoặc trang web Ezgif để tối ưu hóa màu sắc, giảm tốc độ khung hình (FPS xuống 10-12) nhằm nén dung lượng ảnh động.
+

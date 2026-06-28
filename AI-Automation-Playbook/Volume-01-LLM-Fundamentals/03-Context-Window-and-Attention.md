@@ -65,4 +65,48 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy tích hợp `ChatMemoryManager` phía trên vào script gọi API của bạn ở Chương 01 để tạo ra một ứng dụng chat CLI liên tục tương tác với AI nhưng không bao giờ lo bị tràn bộ nhớ API.
+
+### Bài tập 1: Tóm tắt bài báo dài bằng kỹ thuật phân đoạn (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python nhận một tệp văn bản dài vượt quá giới hạn ngữ cảnh test (giả định là 4,000 tokens). Tiến hành chia nhỏ văn bản thành 2 đoạn, gửi đi tóm tắt từng đoạn rồi ghép lại thành một bản tóm tắt tổng thể hoàn chỉnh.
+* **Mã nguồn mẫu (`chunk_summarizer.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+long_text = "Văn bản mẫu dài..." * 500  # Giả lập văn bản dài
+
+def summarize_chunks(text: str, chunk_size: int = 3000) -> str:
+    # 1. Phân đoạn văn bản thô theo số ký tự
+    chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    chunk_summaries = []
+    
+    # 2. Tóm tắt từng đoạn
+    for idx, chunk in enumerate(chunks):
+        print(f"Đang tóm tắt đoạn {idx+1}/{len(chunks)}...")
+        res = model.generate_content(f"Tóm tắt đoạn văn sau ngắn gọn trong 1 câu: \n\n{chunk}")
+        chunk_summaries.append(res.text.strip())
+        
+    # 3. Tổng hợp các bản tóm tắt
+    combined_prompt = "Hãy tổng hợp các ý chính sau thành một bản tóm tắt hoàn chỉnh:\n\n" + "\n".join(chunk_summaries)
+    final_res = model.generate_content(combined_prompt)
+    return final_res.text
+
+if __name__ == "__main__":
+    summary = summarize_chunks(long_text)
+    print("\nBản tóm tắt cuối cùng:")
+    print(summary)
+```
+
+### Bài tập 2: Hệ thống hỏi đáp tài liệu dài tích hợp phân đoạn thông minh (Mức độ: Khó)
+* **Đề bài**: Viết một script nhận một file tài liệu tài chính dài. Thay vì tóm tắt đơn thuần, hãy viết code phân đoạn tài liệu, sau đó sử dụng prompt yêu cầu AI trích xuất tất cả các số liệu về doanh thu xuất hiện trong từng phân đoạn. Cuối cùng, tổng hợp danh sách số liệu này thành một bảng JSON chuẩn.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng vòng lặp phân đoạn văn bản và gọi prompt trích xuất số liệu: "Liệt kê các số liệu doanh thu trong đoạn dưới đây dưới dạng: Năm - Số tiền".
+  2. Gộp tất cả các kết quả trích xuất trung gian thành một prompt tổng hợp cấu trúc JSON đầu ra sử dụng `response_mime_type="application/json"`.
+

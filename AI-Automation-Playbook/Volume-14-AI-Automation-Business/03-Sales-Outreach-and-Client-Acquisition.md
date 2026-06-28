@@ -52,4 +52,29 @@ Sáng lập Antigravity AI
 ---
 
 ## 3. Mini Project
-Hãy tìm kiếm trên LinkedIn hoặc Google 3 doanh nghiệp cụ thể trong khu vực của bạn. Thu thập tên người quyết định, email của họ và viết 3 bản email tiếp cận được cá nhân hóa sâu sắc dựa trên hoạt động kinh doanh thực tế của họ.
+
+### Bài tập 1: Soạn thư điện tử Outreach lạnh tiếp cận Khách hàng (Mức độ: Trung bình)
+* **Đề bài**: Hãy viết một bức thư điện tử tiếp cận lạnh (Cold Email) gửi tới Giám đốc vận hành của một chuỗi spa làm đẹp để chào bán dịch vụ AI Chatbot tự động chốt lịch hẹn.
+* **Tài liệu sườn mẫu (`cold_email.md`)**:
+```markdown
+# Chủ đề: Giải pháp giảm 30% tỷ lệ sót lịch hẹn cho [Tên Spa]
+
+Chào anh/chị [Tên Khách Hàng],
+
+Tôi theo dõi hoạt động của [Tên Spa] và thấy dịch vụ chăm sóc da của anh/chị rất được yêu thích. Tuy nhiên, tôi nhận thấy vào khung giờ tối muộn hoặc ngày nghỉ, spa có thể đang bỏ lỡ các yêu cầu đặt lịch hẹn của khách hàng do nhân viên không trực chat kịp thời.
+
+Chúng tôi chuyên xây dựng các trợ lý AI tự động chốt lịch hẹn 24/7 trực tiếp trên Fanpage/Zalo, giúp tăng tỷ lệ chuyển đổi đặt lịch lên 25% mà không cần tuyển thêm nhân viên.
+
+Tôi có thể gửi anh/chị xem bản demo nhanh 1 phút hoạt động thực tế của AI trong ngành spa vào tuần này không?
+
+Trân trọng,
+[Tên của bạn]
+```
+
+### Bài tập 2: Thiết kế kịch bản cuộc gọi tư vấn (Cold Calling Script) (Mức độ: Khó)
+* **Đề bài**: Hãy soạn thảo kịch bản cuộc gọi tư vấn (Cold Call Script) dài 3 phút để tiếp cận các chủ doanh nghiệp sản xuất. Kịch bản phải thiết kế các phương án xử lý lời từ chối thường gặp (ví dụ: "Anh không có thời gian", "Bên anh không cần AI").
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Thiết kế cấu trúc cuộc gọi gồm: 15 giây đầu thu hút chú ý -> Đưa ra dẫn chứng thực tế -> Hỏi câu hỏi khơi gợi nhu cầu -> Chốt cuộc hẹn tư vấn sâu hơn.
+  - Chuẩn bị sẵn 3 câu trả lời thông minh để hóa giải các lời từ chối phổ biến.
+

@@ -53,4 +53,30 @@ server {
 ---
 
 ## 3. Mini Project
-Hãy viết sơ đồ kiến trúc dòng lưu lượng dữ liệu (Traffic Flow Diagram) chi tiết mô tả đường đi của một request gửi đi từ trình duyệt web của người dùng tại Việt Nam, đi qua phân giải DNS, chạm vào Nginx của VPS tại Singapore, đi vào Docker container FastAPI, và phản hồi ngược lại.
+
+### Bài tập 1: Cấu hình Nginx làm Reverse Proxy cho FastAPI (Mức độ: Trung bình)
+* **Đề bài**: Hãy viết một tệp cấu hình Nginx Server Block để làm Reverse Proxy chuyển tiếp các request từ cổng `80` của tên miền công cộng vào ứng dụng FastAPI đang chạy ở cổng `8000`.
+* **Mã nguồn mẫu (`nginx.conf`)**:
+```nginx
+server {
+    listen 80;
+    server_name example.com; # Thay thế bằng tên miền của bạn
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+### Bài tập 2: Cấu hình tự động cài đặt chứng chỉ SSL Let's Encrypt (Mức độ: Khó)
+* **Đề bài**: Hãy viết hướng dẫn các bước sử dụng công cụ `certbot` để xin chứng chỉ bảo mật SSL Let's Encrypt miễn phí và cấu hình tự động gia hạn chứng chỉ cho máy chủ Nginx.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Cài đặt Certbot thông qua câu lệnh: `sudo apt install certbot python3-certbot-nginx -y`.
+  - Xin chứng chỉ SSL bằng lệnh: `sudo certbot --nginx -d example.com`.
+  - Kiểm tra tính năng tự động gia hạn (Dry-run) qua: `sudo certbot renew --dry-run`.
+

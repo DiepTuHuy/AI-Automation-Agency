@@ -119,4 +119,55 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python mô phỏng cuộc tấn công Brute-force đăng nhập thử nghiệm: tạo vòng lặp gửi 20 request đăng nhập với mật khẩu sai liên tiếp tới endpoint `/api/v1/auth/login` trên, đồng thời ghi nhận xem server có xử lý chính xác và trả về lỗi 401 không.
+
+### Bài tập 1: Xây dựng API Đăng nhập và tạo JWT Token (Mức độ: Trung bình)
+* **Đề bài**: Viết một ứng dụng FastAPI đơn giản hỗ trợ xác thực tài khoản và trả về mã khóa JWT (JSON Web Token) cho người dùng đăng nhập thành công.
+* **Mã nguồn mẫu (`jwt_auth_api.py`)**:
+```python
+from datetime import datetime, timedelta
+from fastapi import FastAPI, HTTPException, status
+from jose import jwt
+from pydantic import BaseModel
+
+app = FastAPI()
+SECRET_KEY = "super_secret_jwt_key_here"
+ALGORITHM = "HS256"
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+def create_access_token(data: dict, expires_delta: timedelta):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + expires_delta
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+@app.post("/api/v1/login")
+def login(payload: LoginRequest):
+    # Xác thực tài khoản giả lập đơn giản phục vụ test
+    if payload.username == "admin" and payload.password == "password123":
+        access_token = create_access_token(
+            data={"sub": payload.username, "role": "admin"},
+            expires_delta=timedelta(minutes=30)
+        )
+        return {"access_token": access_token, "token_type": "bearer"}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Tên đăng nhập hoặc mật khẩu không đúng."
+        )
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+```
+
+### Bài tập 2: Middleware kiểm tra hạn sử dụng Token trên mọi Request (Mức độ: Khó)
+* **Đề bài**: Viết một hàm bảo mật dependency trong FastAPI giải mã token gửi lên từ client. Nếu token hết hạn hoặc chữ ký bị sai lệch, ngay lập tức ném ra lỗi `401 Unauthorized`. Nếu hợp lệ, trả về thông tin user đã đăng nhập.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng thư viện `FastAPI` Depend `OAuth2PasswordBearer(tokenUrl="login")`.
+  2. Giải mã token bằng `jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])`.
+  3. Bắt lỗi `jwt.ExpiredSignatureError` and `jwt.JWTError`.
+

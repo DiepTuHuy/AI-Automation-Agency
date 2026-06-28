@@ -90,4 +90,51 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một bản thiết kế bằng văn bản mô tả cách lưu trữ trí nhớ dài hạn (Long-term memory) cho một chatbot chăm sóc sức khỏe. Bản thiết kế cần trả lời được: Thông tin nào của bệnh nhân cần lưu vĩnh viễn? Lưu vào bảng DB nào? Khi nào Agent cần truy vấn các thông tin này lên để cá nhân hóa cuộc hội thoại?
+
+### Bài tập 1: Xây dựng Chatbot có bộ nhớ đệm lịch sử (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python xây dựng một Chatbot ghi nhớ tối đa 3 lượt hội thoại gần nhất (Short-term Memory) để tránh làm quá tải context window của LLM khi trò chuyện dài.
+* **Mã nguồn mẫu (`memory_chatbot.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+class ChatWithMemory:
+    def __init__(self, max_memory: int = 3):
+        self.max_memory = max_memory
+        self.history = []
+        self.model = genai.GenerativeModel("gemini-2.5-flash")
+        
+    def chat(self, user_message: str) -> str:
+        # 1. Ghép lịch sử hội thoại giới hạn vào prompt
+        prompt = ""
+        for turn in self.history[-self.max_memory:]:
+            prompt += f"User: {turn['user']}\nAI: {turn['ai']}\n"
+        prompt += f"User: {user_message}\nAI:"
+        
+        res = self.model.generate_content(prompt)
+        ai_reply = res.text.strip()
+        
+        # 2. Lưu vào lịch sử bộ nhớ
+        self.history.append({"user": user_message, "ai": ai_reply})
+        return ai_reply
+
+if __name__ == "__main__":
+    bot = ChatWithMemory(max_memory=2)
+    print("Bot:", bot.chat("Chào bạn, tôi tên là Huy."))
+    print("Bot:", bot.chat("Tôi làm việc trong ngành AI Automation."))
+    print("Bot:", bot.chat("Tên tôi là gì và tôi làm ngành gì?"))
+```
+
+### Bài tập 2: Thiết kế hệ thống bộ nhớ dài hạn lưu trữ SQLite (Mức độ: Khó)
+* **Đề bài**: Nâng cấp Chatbot ở Bài tập 1 thành hệ thống có bộ nhớ dài hạn (Long-term Memory). Mỗi khi kết thúc phiên trò chuyện, AI tự động trích xuất các sự kiện quan trọng về người dùng (ví dụ: tên, sở thích, dự án) và lưu trữ trực tiếp vào cơ sở dữ liệu SQLite để nạp lại ở phiên chat tiếp theo.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Tạo bảng `user_memories` trong SQLite gồm các trường: `key`, `value`.
+  2. Viết prompt yêu cầu AI phân tích đoạn chat để trích xuất thông tin quan trọng dưới dạng cặp key-value.
+  3. Tự động chèn/cập nhật thông tin vào DB và nạp lên làm System Instruction ở đầu phiên chat mới.
+

@@ -50,4 +50,46 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python nạp 10 tin tức công nghệ vào ChromaDB, mỗi tin có metadata lưu trữ: `author` (tên tác giả), và `view_count` (số lượt xem). Hãy viết câu lệnh truy vấn tìm tin tức ngữ nghĩa tương tự với chủ đề "AI di động" nhưng bắt buộc chỉ lấy các tin của tác giả "Admin" và có số lượt xem lớn hơn 1000 lượt (Tìm hiểu cú pháp lọc toán tử so sánh `$gt` của ChromaDB).
+
+### Bài tập 1: Đánh chỉ mục và Truy vấn thông tin sản phẩm trong ChromaDB (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python sử dụng ChromaDB để tạo một collection, thêm 3 tài liệu mô tả sản phẩm kèm theo ID và truy vấn tìm kiếm sản phẩm liên quan đến từ khóa "không dây".
+* **Mã nguồn mẫu (`chroma_search.py`)**:
+```python
+import chromadb
+
+def run_db_search():
+    # Khởi tạo ChromaDB client trong bộ nhớ phục vụ test
+    client = chromadb.EphemeralClient()
+    collection = client.create_collection(name="products_store")
+    
+    # Thêm tài liệu (ChromaDB sẽ tự động sử dụng mô hình nhúng mặc định nếu không khai báo)
+    collection.add(
+        documents=[
+            "Chuột máy tính không dây Logitech bền bỉ.",
+            "Bàn phím cơ có dây Keychron lực nhấn tốt.",
+            "Tai nghe chụp tai Bluetooth khử tiếng ồn chủ động."
+        ],
+        ids=["p1", "p2", "p3"]
+    )
+    
+    # Truy vấn
+    results = collection.query(
+        query_texts=["thiết bị không dây"],
+        n_results=1
+    )
+    print("Kết quả tìm kiếm phù hợp nhất:")
+    print(f"- ID: {results['ids'][0][0]}")
+    print(f"- Văn bản: {results['documents'][0][0]}")
+
+if __name__ == "__main__":
+    run_db_search()
+```
+
+### Bài tập 2: Quản lý vòng đời bộ sưu tập dữ liệu chỉ mục (Mức độ: Khó)
+* **Đề bài**: Viết một script Python thực thi đầy đủ vòng đời (CRUD) của dữ liệu trong Vector DB: Tạo collection, nạp dữ liệu, thực hiện cập nhật nội dung của một tài liệu đã có qua ID, thực hiện xóa một tài liệu và kiểm thử lại kết quả truy vấn sau khi xóa.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng hàm `collection.update(ids=["..."], documents=["Nội dung mới"])` để cập nhật dữ liệu.
+  2. Sử dụng `collection.delete(ids=["..."])` để xóa bản ghi.
+  3. Thực hiện câu lệnh query để đảm bảo tài liệu đã xóa không còn xuất hiện trong kết quả trả về.
+

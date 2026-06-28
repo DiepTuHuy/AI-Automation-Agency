@@ -49,4 +49,30 @@ Các tính năng sau KHÔNG nằm trong hợp đồng này (sẽ tính phí bổ
 ---
 
 ## 3. Mini Project
-Hãy tự viết một bản hợp đồng dịch vụ AI Automation tối giản dài khoảng 1-2 trang giấy, bao gồm các điều khoản cơ bản: Thông tin hai bên, Phạm vi dịch vụ, Chi phí và điều khoản thanh toán, Bảo mật thông tin, và Giới hạn trách nhiệm pháp lý. Lưu file này dưới dạng file Markdown để làm mẫu sử dụng sau này.
+
+### Bài tập 1: Soạn thảo Bản đề xuất dự án tự động hóa AI (Mức độ: Trung bình)
+* **Đề bài**: Hãy viết một bản đề xuất dự án (Project Proposal) gửi cho khách hàng là một công ty môi giới bất động sản yêu cầu xây dựng AI Agent phân loại khách hàng tiềm năng từ website.
+* **Tài liệu sườn mẫu (`project_proposal.md`)**:
+```markdown
+# Đề xuất dự án: Hệ thống phân loại khách hàng tự động AI RealEstate
+
+### 1. Mục tiêu dự án
+* Tự động thu thập thông tin khách hàng từ Form liên hệ trên website.
+* Sử dụng AI phân tích tài chính và nhu cầu mua nhà của khách hàng để xếp hạng tiềm năng (VIP, Ấm, Lạnh).
+
+### 2. Kế hoạch triển khai
+* Tuần 1: Thiết kế sơ đồ luồng dữ liệu & Đặc tả API.
+* Tuần 2: Tích hợp Gemini API phân loại dữ liệu đầu vào.
+* Tuần 3: Kết nối CRM và bàn giao hệ thống.
+
+### 3. Ngân sách dự kiến
+* Chi phí trọn gói: $3,500 USD.
+```
+
+### Bài tập 2: Thiết kế điều khoản bảo mật dữ liệu trong hợp đồng (NDA Clause) (Mức độ: Khó)
+* **Đề bài**: Soạn thảo điều khoản bảo mật thông tin và sở hữu trí tuệ (Data Privacy & IP Ownership Clause) để đưa vào hợp đồng dịch vụ AI. Điều khoản cần nêu rõ: Toàn bộ dữ liệu huấn luyện của khách hàng là bảo mật tuyệt đối, AI Agent sau khi bàn giao sẽ thuộc quyền sở hữu của bên mua.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng ngôn ngữ pháp lý rõ ràng, mạch lạc của hợp đồng thương mại.
+  - Quy định rõ trách nhiệm bồi thường thiệt hại nếu một trong hai bên làm rò rỉ mã nguồn hoặc dữ liệu khách hàng lên các nền tảng AI công cộng.
+

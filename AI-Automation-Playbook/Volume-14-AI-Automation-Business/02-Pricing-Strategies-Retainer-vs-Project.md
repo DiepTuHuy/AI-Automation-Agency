@@ -56,4 +56,28 @@ Xây dựng một file Markdown phân tích chi tiết hiệu quả kinh tế gi
 ---
 
 ## 3. Mini Project
-Hãy thiết lập một công thức tính toán tài chính tương tự cho một phòng khám nha khoa có 3 nhân viên lễ tân trực chat Fanpage đặt lịch. Viết báo cáo phân tích hiệu quả kinh tế và đề xuất mức giá triển khai hợp lý của bạn.
+
+### Bài tập 1: Lập Báo giá Dự án triển khai AI (Mức độ: Trung bình)
+* **Đề bài**: Hãy soạn thảo bảng báo giá chi tiết (Price Proposal) cho một dự án tích hợp hệ thống RAG tra cứu tài liệu nội bộ cho một công ty Luật theo mô hình giá cố định (Fixed-price).
+* **Tài liệu sườn mẫu (`project_pricing.md`)**:
+```markdown
+# Bảng báo giá dịch vụ: AI Legal Assistant
+
+### 1. Chi phí triển khai (Trọn gói):
+* **Giai đoạn 1: Discovery & Scoping**: $500 (Phân tích dữ liệu nguồn).
+* **Giai đoạn 2: Phát triển Core RAG & Vector DB**: $2,000 (Tích hợp dữ liệu luật).
+* **Giai đoạn 3: Tích hợp giao diện Chat**: $1,500 (Giao diện web nội bộ).
+* **Tổng cộng**: $4,000 USD.
+
+### 2. Tiến độ thanh toán:
+* 50% tạm ứng ngay khi ký hợp đồng.
+* 50% sau khi hoàn tất bàn giao nghiệm thu.
+```
+
+### Bài tập 2: Thiết kế gói bảo trì định kỳ (Retainer Agreement) (Mức độ: Khó)
+* **Đề bài**: Thiết kế một gói dịch vụ bảo trì định kỳ hàng tháng (Monthly Retainer) cho dự án ở Bài tập 1. Gói bảo trì phải nêu rõ: Số giờ hỗ trợ kỹ thuật tối đa trong tháng, phí duy trì hạ tầng API, và dịch vụ cập nhật dữ liệu tri thức mới hàng tuần cho AI.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Thiết lập mức phí bảo trì định kỳ hợp lý (thường từ 10% - 20% giá trị dự án gốc mỗi tháng).
+  - Định nghĩa rõ điều khoản SLA (thời gian phản hồi khi gặp sự cố, ví dụ: trong vòng 4 giờ làm việc).
+

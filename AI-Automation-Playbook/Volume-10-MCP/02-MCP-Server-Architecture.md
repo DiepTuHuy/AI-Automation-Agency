@@ -45,4 +45,48 @@ dependencies = [
 ---
 
 ## 3. Mini Project
-Hãy tạo thư mục dự án theo cấu trúc trên trên máy tính của bạn. Tạo môi trường ảo `.venv`, cài đặt thư viện `mcp` và kiểm tra xem thư viện đã được cài đặt thành công không bằng lệnh: `pip show mcp`. Ghi lại thông tin phiên bản thư viện nhận được.
+
+### Bài tập 1: Mô tả sơ đồ truyền nhận bản tin trong MCP Protocol (Mức độ: Trung bình)
+* **Đề bài**: Hãy vẽ sơ đồ hoặc viết đặc tả mô phỏng quy trình trao đổi dữ liệu JSON-RPC giữa Client (Claude Desktop) và Host MCP Server khi thực hiện gọi một Tool.
+* **Tài liệu sườn mẫu**:
+```markdown
+# Bản tin JSON-RPC gọi Tool trong MCP
+
+### 1. Request từ Client gửi lên Server:
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "get_current_time",
+    "arguments": {}
+  },
+  "id": 1
+}
+```
+
+### 2. Response từ Server trả về:
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Thời gian hiện tại: 15:30"
+      }
+    ]
+  },
+  "id": 1
+}
+```
+```
+
+### Bài tập 2: Thiết kế đặc tả gói tin cho một MCP Server quản lý nhắc nhở (Mức độ: Khó)
+* **Đề bài**: Thiết kế bản tin JSON-RPC chuẩn MCP cho một kịch bản: Client yêu cầu Server tạo một lời nhắc công việc mới với các tham số: `task_name`, `due_date`, và `priority`. Hãy viết chi tiết cấu trúc Request và Response tương ứng.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Định nghĩa trường `method` là `tools/call`.
+  - Đóng gói các tham số yêu cầu bên trong `params.arguments`.
+  - Phản hồi chứa thông tin trạng thái thành công kèm theo ID của reminder vừa tạo.
+

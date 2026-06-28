@@ -61,4 +61,55 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python kết hợp: Truy vấn 5 tài liệu từ ChromaDB (đã dựng ở Volume 7) dựa trên câu hỏi của bạn, sau đó sử dụng Cross-Encoder phía trên để xếp hạng lại 5 tài liệu này và in ra màn hình tài liệu có điểm số rerank cao nhất.
+
+### Bài tập 1: Sắp xếp lại kết quả tìm kiếm bằng điểm tương đồng (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python nhận câu hỏi của người dùng và danh sách 3 tài liệu thô được trả về từ cơ sở dữ liệu. Sử dụng mô hình Gemini tính điểm độ tương đồng của từng tài liệu với câu hỏi để sắp xếp lại (Rerank) thứ tự tài liệu tối ưu nhất trước khi đưa vào context.
+* **Mã nguồn mẫu (`simple_reranker.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+documents = [
+    "Quy định nghỉ lễ: Công ty nghỉ làm việc vào các ngày lễ Tết quốc gia theo luật lao động.",
+    "Hỗ trợ gửi xe: Công ty hỗ trợ tiền gửi xe máy 200k/tháng cho nhân viên chính thức.",
+    "Lịch nghỉ hè: Công ty tổ chức du lịch hè cho toàn thể nhân viên vào tháng 7 hàng năm."
+]
+
+def rerank_documents(query: str, docs: list) -> list:
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    scored_docs = []
+    
+    for doc in docs:
+        prompt = f"Đánh giá độ liên quan của Tài liệu dưới đây với Câu hỏi. Trả về một con số từ 0.0 (hoàn toàn không liên quan) đến 1.0 (hoàn toàn liên quan). Chỉ trả về số.\n\nCâu hỏi: {query}\nTài liệu: {doc}"
+        res = model.generate_content(prompt)
+        try:
+            score = float(res.text.strip())
+        except ValueError:
+            score = 0.0
+        scored_docs.append((score, doc))
+        
+    # Sắp xếp giảm dần theo điểm số
+    scored_docs.sort(key=lambda x: x[0], reverse=True)
+    return scored_docs
+
+if __name__ == "__main__":
+    question = "Khi nào công ty đi du lịch hè?"
+    ranked = rerank_documents(question, documents)
+    print(f"Câu hỏi: {question}\nKết quả xếp hạng lại:")
+    for score, doc in ranked:
+        print(f"[{score:.2f}] - {doc}")
+```
+
+### Bài tập 2: Hệ thống RAG hai giai đoạn (Retrieve & Rerank) (Mức độ: Khó)
+* **Đề bài**: Xây dựng hệ thống RAG đầy đủ: Giai đoạn 1 truy xuất ra top 5 tài liệu tương đồng nhất từ ChromaDB. Giai đoạn 2 sử dụng mô hình LLM làm Reranker để chọn ra đúng 2 tài liệu có điểm số cao nhất làm ngữ cảnh đưa vào câu trả lời cuối cùng.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng kết quả truy vấn của ChromaDB để lấy danh sách tài liệu thô.
+  2. Chạy hàm đánh giá điểm số tương đồng qua LLM cho top 5.
+  3. Lọc lấy 2 tài liệu điểm cao nhất, ghép vào prompt RAG để sinh câu trả lời.
+

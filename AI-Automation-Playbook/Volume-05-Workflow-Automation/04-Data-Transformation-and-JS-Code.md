@@ -63,4 +63,34 @@ return processedItems;
 ---
 
 ## 3. Mini Project
-Hãy viết một script trong node Code nhận vào danh sách các giao dịch (mỗi giao dịch có: tên sản phẩm, số tiền). Hãy viết logic tính tổng số tiền của toàn bộ các giao dịch, và xuất ra một kết quả duy nhất chứa trường `total_revenue` và mảng danh sách tên các sản phẩm đã mua.
+
+### Bài tập 1: Viết JS Code chuẩn hóa định dạng số điện thoại trong n8n (Mức độ: Trung bình)
+* **Đề bài**: Viết một đoạn code JavaScript trong n8n Node (Code Node) để chuẩn hóa danh sách số điện thoại của khách hàng về định dạng chuẩn quốc tế `+84...`.
+* **Mã nguồn mẫu (`n8n_code_standardizer.js`)**:
+```javascript
+// JS code chạy trong Code Node của n8n
+for (const item of $input.all()) {
+  let phone = item.json.phone_number;
+  if (phone) {
+    // Loại bỏ ký tự đặc biệt
+    phone = phone.replace(/[\s-.()]/g, '');
+    // Chuyển 0 đầu thành +84
+    if (phone.startsWith('0')) {
+      phone = '+84' + phone.substring(1);
+    }
+    item.json.phone_normalized = phone;
+  } else {
+    item.json.phone_normalized = 'N/A';
+  }
+}
+return $input.all();
+```
+
+### Bài tập 2: Tính tổng doanh thu và chia sẻ hoa hồng tự động (Mức độ: Khó)
+* **Đề bài**: Viết một đoạn code JS trong Code Node để xử lý danh sách 10 giao dịch của đại lý. Tính tổng doanh thu và tự động phân chia 10% hoa hồng cho từng đại lý tương ứng dưới dạng danh sách đối tượng mới.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng vòng lặp `for...of` duyệt qua danh sách các items của `$input.all()`.
+  - Tính toán trường dữ liệu mới: `item.json.commission = item.json.amount * 0.1`.
+  - Return lại mảng kết quả hoàn chỉnh để chuyển tiếp cho các node tiếp theo.
+

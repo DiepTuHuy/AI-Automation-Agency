@@ -54,4 +54,30 @@ Cấu hình và sử dụng Alembic để thêm cột mới `phone` vào bảng 
 ---
 
 ## 3. Mini Project
-Hãy viết một file script migration Alembic tiếp theo để thêm một bảng mới mang tên `logs_activity` (bao gồm: id, user_id liên kết khóa ngoại với users, action_name, created_at) vào database của bạn và thực thi lệnh áp dụng upgrade thành công. Ghi lại các lệnh terminal đã sử dụng vào file báo cáo.
+
+### Bài tập 1: Khởi tạo và chạy Migration đầu tiên bằng Alembic (Mức độ: Trung bình)
+* **Đề bài**: Cấu hình Alembic cho một dự án cơ sở dữ liệu SQLAlchemy. Tạo migration file đầu tiên để tạo bảng `users` và thực thi migration đó lên cơ sở dữ liệu SQLite.
+* **Tài liệu hướng dẫn & Sườn mẫu lệnh**:
+```markdown
+# Hướng dẫn khởi tạo Alembic Migration
+
+### 1. Các lệnh cài đặt và cấu hình:
+* Cài đặt: `pip install alembic`
+* Khởi tạo: `alembic init alembic`
+* Cấu hình URL database: Sửa dòng `sqlalchemy.url` trong file `alembic.ini` thành:
+  `sqlalchemy.url = sqlite:///app_database.db`
+
+### 2. Tạo bản Migration tự động:
+* Sửa file `alembic/env.py` để liên kết `target_metadata = Base.metadata`.
+* Tạo tệp migration: `alembic revision --autogenerate -m "create users table"`
+* Thực thi lên database: `alembic upgrade head`
+```
+
+### Bài tập 2: Thực hiện Rollback khi phát hiện lỗi thiết kế (Mức độ: Khó)
+* **Đề bài**: Thực hiện sửa đổi cấu trúc bảng `users` (thêm cột `phone`). Chạy migration để áp dụng lên DB. Sau đó giả lập phát hiện lỗi và thực hiện rollback phiên bản database quay trở lại trạng thái trước khi thêm cột `phone` một cách an toàn mà không làm mất dữ liệu cũ.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Tạo thêm 1 migration mới bằng lệnh: `alembic revision --autogenerate -m "add phone column"`.
+  - Thực thi nâng cấp: `alembic upgrade head`.
+  - Để rollback (hạ cấp) về phiên bản ngay trước đó, sử dụng câu lệnh: `alembic downgrade -1`.
+

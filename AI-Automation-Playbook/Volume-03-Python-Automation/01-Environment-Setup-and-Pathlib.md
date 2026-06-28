@@ -77,4 +77,51 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script quét qua một thư mục dự án Python, tìm kiếm tất cả các tệp tin có đuôi `.log` có dung lượng lớn hơn 1MB, tiến hành nén hoặc di chuyển chúng vào một thư mục lưu trữ (`archive/`), đồng thời in ra màn hình báo cáo tổng dung lượng ổ cứng đã được giải phóng.
+
+### Bài tập 1: Tự động sắp xếp và dọn dẹp thư mục Downloads (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python sử dụng thư viện `pathlib` để tự động quét thư mục `Downloads` của máy tính. Tiến hành phân loại các tệp tin theo phần mở rộng: di chuyển `.pdf`, `.docx` vào thư mục `Documents`; `.png`, `.jpg` vào thư mục `Images`; và các tệp khác vào thư mục `Others`.
+* **Mã nguồn mẫu (`clean_downloads.py`)**:
+```python
+from pathlib import Path
+import shutil
+
+def organize_folder(target_dir: str):
+    target_path = Path(target_dir)
+    if not target_path.exists():
+        print(f"Thư mục {target_dir} không tồn tại.")
+        return
+
+    # Tạo các thư mục con nếu chưa có
+    dirs = {
+        "Documents": target_path / "Documents",
+        "Images": target_path / "Images",
+        "Others": target_path / "Others"
+    }
+    for folder in dirs.values():
+        folder.mkdir(exist_ok=True)
+
+    # Duyệt qua các tệp tin và di chuyển
+    for file in target_path.iterdir():
+        if file.is_file():
+            suffix = file.suffix.lower()
+            if suffix in ['.pdf', '.docx', '.txt']:
+                shutil.move(str(file), str(dirs["Documents"] / file.name))
+            elif suffix in ['.png', '.jpg', '.jpeg', '.gif']:
+                shutil.move(str(file), str(dirs["Images"] / file.name))
+            else:
+                shutil.move(str(file), str(dirs["Others"] / file.name))
+            print(f"Đã di chuyển: {file.name}")
+
+if __name__ == "__main__":
+    # Thay đổi đường dẫn đến thư mục cần dọn dẹp của bạn
+    organize_folder("./test_downloads")
+```
+
+### Bài tập 2: Quét và lưu trữ log cũ theo thời gian (Mức độ: Khó)
+* **Đề bài**: Viết một script Python tự động tìm kiếm tất cả các tệp có đuôi `.log` trong một thư mục dự án. Kiểm tra ngày sửa đổi cuối cùng của tệp, nếu tệp đã được sửa đổi cách đây hơn 7 ngày, hãy nén tệp đó thành định dạng `.zip` và lưu vào thư mục `archive_logs`, sau đó xóa tệp `.log` gốc để tiết kiệm bộ nhớ.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng `Path.stat().st_mtime` để lấy thời gian sửa đổi cuối cùng của tệp.
+  2. Sử dụng thư viện `zipfile` của Python để thực hiện nén tệp tin.
+  3. Sử dụng `Path.unlink()` để xóa tệp gốc một cách an toàn.
+

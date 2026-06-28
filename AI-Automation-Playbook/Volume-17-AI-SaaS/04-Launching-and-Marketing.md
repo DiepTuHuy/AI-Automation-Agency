@@ -48,4 +48,28 @@ Chúc các bạn một ngày tuyệt vời!
 ---
 
 ## 3. Mini Project
-Hãy viết một bản kế hoạch marketing ra mắt sản phẩm AI SaaS của riêng bạn bao gồm: Tên sản phẩm, Ngành ngách hướng tới, Mức giá của 3 gói cước (Free, Pro, Enterprise) và soạn thảo 3 bài viết giới thiệu sản phẩm ngắn (Dưới 280 ký tự) để đăng lên mạng xã hội Twitter/X và LinkedIn.
+
+### Bài tập 1: Lập Kế hoạch Ra mắt sản phẩm trên Product Hunt (Mức độ: Trung bình)
+* **Đề bài**: Hãy thiết kế một bản kế hoạch chi tiết cho ngày ra mắt (Launch Day Plan) ứng dụng AI SaaS của bạn trên nền tảng Product Hunt. Bản kế hoạch cần nêu rõ: Cách chuẩn bị ảnh chụp giao diện, nội dung bài đăng giới thiệu ngắn và danh sách 5 cộng đồng công nghệ hỗ trợ upvote.
+* **Tài liệu sườn mẫu (`product_hunt_launch.md`)**:
+```markdown
+# Kế hoạch ra mắt sản phẩm: AI Copywriter SaaS
+
+### 1. Thông tin Product Hunt:
+* **Product Name**: AI Copywriter
+* **Tagline**: Tự động viết bài đăng chuẩn SEO chỉ trong 10 giây sử dụng Gemini.
+* **Description**: Giải pháp SaaS đột phá giúp tối ưu hóa viết bài tự động cho marketers.
+
+### 2. Kế hoạch Launch Day (Thứ Ba):
+* **0:01 PST**: Thực hiện đăng tải dự án lên Product Hunt.
+* **0:15 PST**: Gửi email thông báo cho danh sách khách hàng đã chờ đợi trước đó.
+* **0:30 PST**: Đăng bài lên các nhóm Reddit, Facebook Dev và J2Team để kêu gọi upvote.
+```
+
+### Bài tập 2: Thiết kế ảnh động GIF tương tác sản phẩm cho README (Mức độ: Khó)
+* **Đề bài**: Hãy thực hiện quay lại màn hình thao tác sử dụng công cụ AI của bạn (dưới 15 giây), sau đó chuyển đổi video đó sang định dạng ảnh động `.gif` chất lượng cao, tối ưu dung lượng dưới 5MB để nhúng thẳng vào đầu trang README dự án.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng các phần mềm quay màn hình miễn phí như OBS Studio, Loom hoặc GIPHY Capture.
+  - Sử dụng công cụ chuyển đổi hoặc trang web Ezgif để tối ưu hóa màu sắc, giảm tốc độ khung hình (FPS xuống 10-12) nhằm nén dung lượng ảnh động.
+

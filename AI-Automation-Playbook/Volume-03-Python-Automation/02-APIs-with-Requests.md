@@ -69,4 +69,40 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python kết nối với một API thời tiết công cộng miễn phí (ví dụ: OpenWeatherMap hoặc WeatherAPI), trích xuất thông tin nhiệt độ và độ ẩm hiện tại của Hà Nội, sau đó định dạng thành một tin nhắn Markdown đẹp đẽ và gửi tự động tới Telegram của bạn.
+
+### Bài tập 1: Lấy tỷ giá hối đoái tự động bằng Requests (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python sử dụng thư viện `requests` để gọi API tỷ giá hối đoái công cộng và in ra tỷ giá của đồng USD so với VND.
+* **Mã nguồn mẫu (`exchange_rate.py`)**:
+```python
+import requests
+
+def get_usd_to_vnd():
+    url = "https://open.er-api.com/v6/latest/USD"
+    try:
+        response = requests.get(url)
+        response.raise_for_status() # Báo lỗi nếu HTTP status không phải 200
+        
+        data = response.json()
+        rates = data.get("rates", {})
+        vnd_rate = rates.get("VND")
+        
+        if vnd_rate:
+            print(f"1 USD = {vnd_rate:,.2f} VND")
+            print(f"Cập nhật lúc: {data.get('time_last_update_utc')}")
+        else:
+            print("Không tìm thấy thông tin tỷ giá VND.")
+    except requests.exceptions.RequestException as e:
+        print(f"Lỗi khi kết nối API: {e}")
+
+if __name__ == "__main__":
+    get_usd_to_vnd()
+```
+
+### Bài tập 2: Tự động gửi thông tin thời tiết qua Discord/Telegram Webhook (Mức độ: Khó)
+* **Đề bài**: Viết một script Python tích hợp: Đầu tiên gọi API thời tiết công cộng để lấy nhiệt độ hiện tại của Hà Nội, sau đó gửi một tin nhắn được định dạng đẹp mắt (Markdown) thông báo thời tiết đó đến một kênh Discord hoặc Telegram thông qua cơ chế Webhook.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng URL API thời tiết mở: `https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&current_weather=true`.
+  2. Tạo một webhook URL trên server Discord của bạn.
+  3. Gửi request dạng `POST` bằng `requests.post()` chứa payload JSON `{"content": "Thông điệp thời tiết..."}` lên webhook đó.
+

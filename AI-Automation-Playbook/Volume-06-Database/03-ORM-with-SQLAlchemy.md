@@ -84,4 +84,49 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một endpoint FastAPI nhận dữ liệu đăng ký khách hàng tiềm năng qua route POST, sử dụng SQLAlchemy để lưu thông tin khách hàng đó trực tiếp vào cơ sở dữ liệu SQLite, sau đó trả về thông tin ID vừa được tạo tự động từ cơ sở dữ liệu cho client.
+
+### Bài tập 1: Tương tác với cơ sở dữ liệu qua SQLAlchemy ORM (Mức độ: Trung bình)
+* **Đề bài**: Sử dụng SQLAlchemy để thiết kế model `Product` (id, name, price, stock) và viết script chèn một sản phẩm mới, sau đó cập nhật số lượng tồn kho của sản phẩm đó.
+* **Mã nguồn mẫu (`sqlalchemy_orm.py`)**:
+```python
+from sqlalchemy import create_engine, Column, Integer, String, Float
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+Base = declarative_base()
+
+# 1. Định nghĩa model ORM
+class Product(Base):
+    __tablename__ = 'products'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=False)
+    price = Column(Float, nullable=False)
+    stock = Column(Integer, default=0)
+
+if __name__ == "__main__":
+    # Kết nối SQLite trong bộ nhớ phục vụ test nhanh
+    engine = create_engine('sqlite:///:memory:', echo=False)
+    Base.metadata.create_all(engine)
+    
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    
+    # 2. Thêm sản phẩm mới
+    new_prod = Product(name="Bàn phím Leopold", price=150.0, stock=20)
+    session.add(new_prod)
+    session.commit()
+    print(f"Đã thêm sản phẩm: {new_prod.name} (ID: {new_prod.id})")
+    
+    # 3. Cập nhật số lượng tồn kho
+    prod_to_update = session.query(Product).filter_by(name="Bàn phím Leopold").first()
+    prod_to_update.stock = 15
+    session.commit()
+    print(f"Đã cập nhật tồn kho mới: {prod_to_update.stock} chiếc.")
+```
+
+### Bài tập 2: Truy vấn sản phẩm bán chạy với quan hệ một-nhiều (Mức độ: Khó)
+* **Đề bài**: Thiết kế thêm model `Order` liên kết với `Product` qua khóa ngoại. Viết truy vấn sử dụng SQLAlchemy ORM để tìm tất cả các đơn hàng chứa sản phẩm có đơn giá lớn hơn 100 USD.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Thêm khóa ngoại `product_id = Column(Integer, ForeignKey('products.id'))` trong class `Order`.
+  2. Sử dụng SQLAlchemy `session.query(Order).join(Product).filter(Product.price > 100).all()` để lọc dữ liệu.
+

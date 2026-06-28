@@ -53,4 +53,24 @@ Xây dựng hệ thống n8n kết nối FastAPI OCR:
 ---
 
 ## 3. Mini Project
-Hãy giả lập một buổi khảo sát với một người quen đang làm công việc kinh doanh online hoặc quản lý văn phòng. Hãy đặt câu hỏi, thu thập thông tin và viết một bản Discovery Document tương tự mẫu trên để trình bày giải pháp tự động hóa bằng AI của bạn.
+
+### Bài tập 1: Lập bộ câu hỏi phỏng vấn khảo sát khách hàng (Discovery Questionnaire) (Mức độ: Trung bình)
+* **Đề bài**: Hãy soạn thảo bộ 5 câu hỏi trọng tâm dùng để phỏng vấn Giám đốc Vận hành của một công ty Logistics nhằm tìm ra các điểm nghẽn (Pain points) có thể giải quyết bằng tự động hóa AI.
+* **Tài liệu sườn mẫu (`discovery_questions.md`)**:
+```markdown
+# Bộ câu hỏi khảo sát: Ngành Logistics & Vận tải
+
+1. Hiện tại quy trình tiếp nhận thông tin từ vận đơn (Bill of Lading) của công ty đang được thực hiện như thế nào? Có mất nhiều thời gian nhập liệu thủ công không?
+2. Bộ phận chăm sóc khách hàng đang tốn bao nhiêu thời gian mỗi ngày để trả lời các câu hỏi về trạng thái hành trình đơn hàng?
+3. Công ty đang sử dụng các phần mềm quản lý (ERP, CRM, Excel) nào? Các phần mềm này đã có API kết nối chưa?
+4. Đâu là lỗi vận hành xảy ra thường xuyên nhất gây thiệt hại chi phí cho công ty trong 3 tháng qua?
+5. Mức ngân sách dự kiến của công ty cho việc nâng cấp tự động hóa hệ thống là bao nhiêu?
+```
+
+### Bài tập 2: Lập tài liệu mô tả yêu cầu nghiệp vụ (PRD - Product Requirement Document) (Mức độ: Khó)
+* **Đề bài**: Dựa trên câu trả lời giả định của khách hàng Logistics ở Bài tập 1, hãy lập tài liệu mô tả yêu cầu hệ thống (PRD) chi tiết giới thiệu dự án "AI Vận Đơn". PRD cần nêu rõ: Yêu cầu chức năng (Functional Requirements) và Yêu cầu phi chức năng (Non-functional Requirements).
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Yêu cầu chức năng: AI tự động đọc file PDF vận đơn, trích xuất dữ liệu ra bảng Excel.
+  - Yêu cầu phi chức năng: Thời gian xử lý của mô hình dưới 5 giây/hóa đơn, tỷ lệ chính xác trích xuất tối thiểu đạt 98%.
+

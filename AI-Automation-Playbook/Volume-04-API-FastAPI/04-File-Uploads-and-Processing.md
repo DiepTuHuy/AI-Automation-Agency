@@ -63,4 +63,46 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy kết hợp module này với API OpenAI ở Volume 01. Viết một endpoint nhận file văn bản `.txt` tải lên, đọc nội dung văn bản đó, gửi sang OpenAI nhờ tóm tắt ngắn gọn và trả kết quả tóm tắt trực tiếp về cho client.
+
+### Bài tập 1: Xây dựng API tải lên hình ảnh đại diện (Mức độ: Trung bình)
+* **Đề bài**: Viết một API FastAPI cho phép người dùng tải lên một tệp tin hình ảnh đại diện (avatar). Kiểm tra xem tệp tải lên có định dạng ảnh hợp lệ không (`.png`, `.jpg`, `.jpeg`) và lưu tệp vào thư mục `static/uploads/`.
+* **Mã nguồn mẫu (`avatar_uploader.py`)**:
+```python
+import os
+from fastapi import FastAPI, File, UploadFile, HTTPException
+from pathlib import Path
+
+app = FastAPI()
+UPLOAD_DIR = Path("static/uploads")
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+@app.post("/upload/avatar")
+async def upload_avatar(file: UploadFile = File(...)):
+    suffix = Path(file.filename).suffix.lower()
+    if suffix not in [".png", ".jpg", ".jpeg"]:
+        raise HTTPException(status_code=400, detail="Chỉ chấp nhận file ảnh định dạng PNG hoặc JPG.")
+        
+    file_path = UPLOAD_DIR / file.filename
+    with open(file_path, "wb") as buffer:
+        content = await file.read()
+        buffer.write(content)
+        
+    return {
+        "filename": file.filename,
+        "saved_path": str(file_path),
+        "size_bytes": len(content)
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+```
+
+### Bài tập 2: API phân tích cấu trúc file CSV được tải lên (Mức độ: Khó)
+* **Đề bài**: Xây dựng API tiếp nhận tải lên một file CSV chứa bảng lương nhân viên. Script xử lý bất đồng bộ file CSV vừa tải lên, sử dụng thư viện `pandas` để tính tổng lương thực lĩnh của toàn bộ nhân viên và trả về kết quả phân tích thống kê dạng JSON.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Đọc nội dung file CSV trực tiếp bằng `io.StringIO` từ tệp UploadFile mà không cần lưu xuống đĩa.
+  2. Sử dụng `pd.read_csv()` để nạp dữ liệu vào DataFrame.
+  3. Tính tổng cột lương và trả kết quả tổng quan về cho khách hàng.
+

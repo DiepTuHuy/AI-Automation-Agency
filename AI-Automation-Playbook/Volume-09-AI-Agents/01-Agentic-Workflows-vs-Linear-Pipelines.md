@@ -104,4 +104,23 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy chuyển đổi sơ đồ logic Agentic tự sửa lỗi phía trên thành một sơ đồ vẽ bằng ASCII hoặc vẽ trên công cụ sơ đồ để lưu vào tài liệu thiết kế của bạn.
+
+### Bài tập 1: Thiết kế sơ đồ kiến trúc luồng Agent phản hồi khách hàng (Mức độ: Trung bình)
+* **Đề bài**: Hãy vẽ hoặc soạn thảo sơ đồ luồng hoạt động (Workflow Diagram) bằng định dạng Mermaid cho một AI Agent tiếp nhận và xử lý khiếu nại khách hàng. Quy trình cần thể hiện rõ bước kiểm tra điều kiện rẽ nhánh (Decision Making) của Agent dựa trên nội dung email của khách.
+* **Tài liệu sườn mẫu (`agent_flow.md`)**:
+```mermaid
+graph TD
+    A[Nhận Email khiếu nại] --> B{AI Phân tích Cảm xúc}
+    B -- Tiêu cực/Khẩn cấp --> C[Chuyển tiếp cho Mentor hỗ trợ gấp]
+    B -- Trung lập/Tích cực --> D[AI tự động soạn thư cảm ơn]
+    D --> E[Lưu lịch sử vào CRM]
+    C --> E
+```
+
+### Bài tập 2: Thiết kế sơ đồ Agentic kiểm duyệt hóa đơn tự động (Mức độ: Khó)
+* **Đề bài**: Thiết kế sơ đồ Mermaid mô phỏng quy trình xử lý của một AI Agent kiểm duyệt hóa đơn thanh toán. Agent cần thực hiện: Trích xuất thông tin hóa đơn -> Gọi API kiểm tra xem hóa đơn có bị trùng lặp ID không -> Nếu trùng lặp, chuyển trạng thái Cảnh báo; nếu không trùng lặp, tự động phê duyệt thanh toán.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng cú pháp sơ đồ Mermaid dạng `flowchart TD` hoặc `sequenceDiagram`.
+  - Phân tách rõ các bước thực thi công cụ (Tool Execution) và các bước ra quyết định của mô hình LLM.
+

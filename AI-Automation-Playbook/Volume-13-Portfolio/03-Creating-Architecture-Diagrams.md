@@ -52,4 +52,25 @@ sequenceDiagram
 ---
 
 ## 3. Mini Project
-Hãy mở công cụ vẽ sơ đồ online [mermaid.live](https://mermaid.live). Thiết kế một sơ đồ luồng hoạt động (Flowchart) của **Project 04 (AI Agent with MCP)** thể hiện rõ luồng giao tiếp giữa Client và MCP Server qua STDIO. Copy đoạn mã nguồn Mermaid đó chèn vào file báo cáo.
+
+### Bài tập 1: Vẽ sơ đồ kiến trúc hệ thống RAG bằng Mermaid (Mức độ: Trung bình)
+* **Đề bài**: Hãy soạn thảo sơ đồ kiến trúc luồng đi của hệ thống RAG (Retrieval-Augmented Generation) bằng cú pháp Mermaid để nhúng trực tiếp vào file tài liệu giới thiệu dự án.
+* **Tài liệu sườn mẫu (`architecture.md`)**:
+```mermaid
+graph LR
+    User[Người dùng] -->|Gửi câu hỏi| Orchestrator[AI Orchestrator]
+    Orchestrator -->|Tìm kiếm tương đồng| VectorDB[(Chroma Vector DB)]
+    VectorDB -->|Trả về tài liệu liên quan| Orchestrator
+    Orchestrator -->|Gửi Context + Prompt| Gemini[Gemini API]
+    Gemini -->|Trả về câu trả lời| Orchestrator
+    Orchestrator -->|Phản hồi kết quả| User
+```
+
+### Bài tập 2: Thiết kế sơ đồ kiến trúc hệ thống Multi-Agent phức tạp (Mức độ: Khó)
+* **Đề bài**: Vẽ sơ đồ kiến trúc dạng Sequence Diagram bằng Mermaid mô tả luồng giao tiếp tương tác giữa 3 thực thể: Client App, Gateway API, và 2 Sub-Agents chạy nền (Agent Viết nội dung và Agent Phê duyệt). Thể hiện rõ các mốc thời gian gọi công cụ ngoài.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng từ khóa `sequenceDiagram` trong Mermaid.
+  - Sử dụng cấu trúc `participant` để định nghĩa rõ các thực thể trong hệ thống.
+  - Vẽ mũi tên có hướng `Actor->>Target: Thông điệp` thể hiện đúng trình tự tương tác từ trên xuống dưới.
+

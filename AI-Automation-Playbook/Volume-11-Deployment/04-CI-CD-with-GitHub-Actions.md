@@ -58,4 +58,45 @@ jobs:
 ---
 
 ## 3. Mini Project
-Hãy viết một file cấu hình GitHub Actions cơ bản thực hiện công việc kiểm tra chất lượng code Python (chạy lệnh kiểm lỗi cú pháp `flake8` hoặc chạy `black` format code) mỗi khi có lập trình viên gửi một Pull Request mới vào nhánh `main` của dự án.
+
+### Bài tập 1: Viết file cấu hình GitHub Actions Linting tự động (Mức độ: Trung bình)
+* **Đề bài**: Hãy viết một tệp cấu hình Workflow cho GitHub Actions (`.github/workflows/lint.yml`) để tự động chạy kiểm thử cú pháp Python (Black hoặc Flake8) bất kỳ khi nào có lập trình viên push code lên nhánh `main`.
+* **Mã nguồn mẫu (`lint.yml`)**:
+```yaml
+name: Python Code Linting
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install black flake8
+
+    - name: Run Black formatter check
+      run: black --check .
+```
+
+### Bài tập 2: Cấu hình tự động build và push Docker Image lên Docker Hub (Mức độ: Khó)
+* **Đề bài**: Viết một tệp cấu hình CI/CD hoàn chỉnh trong GitHub Actions. Mỗi khi có thẻ phiên bản mới (`tag` dạng `v*`) được tạo, tự động thực hiện build Docker Image từ mã nguồn và đẩy trực tiếp lên Docker Hub sử dụng biến bí mật Secrets.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Cấu hình điều kiện trigger: `on.push.tags = ["v*"]`.
+  - Sử dụng các Action có sẵn: `docker/login-action` và `docker/build-push-action`.
+  - Đăng ký và sử dụng tài khoản mật khẩu Docker Hub qua `secrets.DOCKER_HUB_USERNAME` và `secrets.DOCKER_HUB_TOKEN`.
+

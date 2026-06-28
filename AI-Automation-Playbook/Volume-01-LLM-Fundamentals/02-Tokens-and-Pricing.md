@@ -63,4 +63,33 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python đọc nội dung của một file văn bản dài bất kỳ trên máy bạn, tính toán số token của file đó khi chạy trên 3 mô hình: `gpt-4`, `gpt-3.5-turbo` và `gpt-4o`, sau đó xuất ra một bảng so sánh chi phí API đầu vào.
+
+### Bài tập 1: Tính toán chi phí gọi API giả lập (Mức độ: Trung bình)
+* **Đề bài**: Hãy viết một script Python ước tính số lượng token và chi phí sử dụng API của mô hình `gemini-2.5-flash` dựa trên bảng giá chuẩn cho một đoạn văn bản đầu vào dài 2,000 từ.
+* **Mã nguồn mẫu (`token_cost_estimator.py`)**:
+```python
+def estimate_cost(word_count: int):
+    # Quy đổi ước lượng: 1 từ tiếng Việt ~ 1.5 đến 2.0 tokens
+    estimated_tokens = int(word_count * 1.8)
+    
+    # Bảng giá gemini-2.5-flash: $0.075 / 1 triệu input tokens
+    input_price_per_million = 0.075
+    estimated_cost_usd = (estimated_tokens / 1_000_000) * input_price_per_million
+    
+    print(f"Số từ đầu vào: {word_count} từ")
+    print(f"Ước lượng số tokens: {estimated_tokens:,} tokens")
+    print(f"Chi phí ước tính: ${estimated_cost_usd:.6f} USD")
+    print(f"Quy đổi VND: {estimated_cost_usd * 25400:.2f} VND")
+
+if __name__ == "__main__":
+    estimate_cost(2000)
+```
+
+### Bài tập 2: Bộ đếm và tính toán chi phí token thời gian thực (Mức độ: Khó)
+* **Đề bài**: Viết một script Python nhận văn bản đầu vào từ file `document.txt`. Sử dụng thư viện gọi API Gemini để đếm chính xác số lượng token của tệp tin này bằng hàm `count_tokens()` của SDK, sau đó tự động tính toán chi phí gọi API thực tế của cả luồng Input và Output.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Đọc nội dung file văn bản bằng `Path("document.txt").read_text()`.
+  2. Gọi `model.count_tokens(text)` để nhận số lượng token chính xác từ server Google.
+  3. Áp dụng đơn giá thực tế của Gemini 2.5 Flash để in ra bảng chi phí chi tiết.
+

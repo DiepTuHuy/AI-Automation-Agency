@@ -71,4 +71,29 @@ Hiểu rõ cấu trúc tin nhắn JSON-RPC 2.0 truyền qua lại giữa Client 
 ---
 
 ## 3. Mini Project
-Hãy viết một sơ đồ khối (Sử dụng sơ đồ ASCII hoặc công cụ thiết kế) mô tả chi tiết 5 bước truyền nhận tin nhắn giữa: Người dùng -> Claude Desktop (Client) -> MCP Server -> Dịch vụ database cục bộ -> Trả kết quả ngược lại.
+
+### Bài tập 1: Cấu hình tích hợp MCP Server công cộng vào Claude Desktop (Mức độ: Trung bình)
+* **Đề bài**: Hãy cấu hình tích hợp công cụ MCP Server lấy thông tin thời tiết công cộng vào phần mềm Claude Desktop để AI có thể tự động trả lời thời tiết của thành phố bất kỳ.
+* **Tài liệu hướng dẫn & Sườn mẫu cấu hình**:
+```json
+// Sườn cấu hình lưu tại ~/Library/Application Support/Claude/claude_desktop_config.json
+{
+  "mcpServers": {
+    "weather": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everyday-weather"
+      ]
+    }
+  }
+}
+```
+
+### Bài tập 2: Tích hợp MCP Server đọc ghi dữ liệu từ tệp tin cục bộ (Mức độ: Khó)
+* **Đề bài**: Cấu hình thêm MCP Server filesystem cho phép Claude Desktop có thể trực tiếp đọc, viết và sửa đổi các tệp tin trong một thư mục cụ thể trên máy tính của bạn thông qua câu lệnh chat tự nhiên.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Cài đặt server `@modelcontextprotocol/server-filesystem` vào cấu hình server của Claude Desktop.
+  - Chỉ định thư mục làm việc an toàn thông qua đối số truyền vào (ví dụ: `/Users/username/safe_folder`).
+

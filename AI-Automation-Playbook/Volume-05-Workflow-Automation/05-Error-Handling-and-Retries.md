@@ -41,6 +41,26 @@ Xây dựng một workflow lắng nghe mọi lỗi phát sinh trong hệ thống
 ---
 
 ## 3. Mini Project
-Hãy xây dựng một workflow n8n thực hiện gọi API LLM. Thiết lập cơ chế:
-1. Gặp lỗi gọi API -> Thử lại 2 lần, mỗi lần cách nhau 5 giây.
-2. Nếu vẫn lỗi -> Rẽ hướng chạy sang node dự phòng (Fallback) sử dụng API của mô hình khác (Ví dụ: OpenAI lỗi thì chuyển sang gọi Gemini).
+
+### Bài tập 1: Cấu hình Retry khi gọi API thất bại (Mức độ: Trung bình)
+* **Đề bài**: Hãy thiết kế một workflow n8n gọi một API giả lập có tỷ lệ lỗi cao. Cấu hình Node HTTP Request để tự động thử lại (Retry) 3 lần, mỗi lần cách nhau 5 giây trước khi thực sự báo lỗi.
+* **Tài liệu hướng dẫn & Sườn mẫu Workflow**:
+```markdown
+# Cấu hình Error Handling trên Node n8n
+
+### 1. Các bước cấu hình Settings:
+1. Mở cài đặt chi tiết của Node HTTP Request.
+2. Chọn tab **Settings**.
+3. Bật tùy chọn **On Fail** -> Chọn `Retry`.
+4. Cấu hình:
+   * **Number of Retries**: 3
+   * **Delay Between Retries (ms)**: 5000
+```
+
+### Bài tập 2: Tự động gửi cảnh báo Slack khi lỗi sập hệ thống (Mức độ: Khó)
+* **Đề bài**: Thiết kế một workflow tổng đài xử lý lỗi. Khi bất kỳ node nào trong workflow chính bị lỗi, tự động chuyển hướng luồng xử lý sang một Sub-workflow riêng chuyên gửi cảnh báo lỗi chi tiết (gồm tên Node lỗi, mã lỗi) sang Telegram hoặc Email.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng tính năng **Error Trigger** Node để bắt mọi lỗi xảy ra trong Workflows của hệ thống n8n.
+  - Đọc thông tin lỗi từ payload của Error Trigger Node để tạo nội dung cảnh báo chi tiết.
+

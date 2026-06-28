@@ -63,4 +63,38 @@ INNER JOIN customers ON orders.customer_id = customers.id;
 ---
 
 ## 3. Mini Project
-Hãy viết một kịch bản SQL thiết lập cơ sở dữ liệu lưu lịch sử chat của AI Chatbot. Bao gồm bảng `conversations` (Lưu thông tin phiên chat: ID, Tên người dùng) và bảng `messages` (Lưu các tin nhắn trong phiên chat đó: ID, ID phiên chat, Người gửi là User/Assistant, Nội dung tin nhắn, Thời gian gửi). Viết câu lệnh truy vấn lấy toàn bộ lịch sử tin nhắn của một phiên chat cụ thể dựa trên ID.
+
+### Bài tập 1: Thiết kế cơ sở dữ liệu và truy vấn SQL cơ bản (Mức độ: Trung bình)
+* **Đề bài**: Thiết kế hai bảng: `customers` (id, name, email) và `orders` (id, customer_id, order_date, total_amount). Viết câu lệnh SQL truy vấn tổng số tiền mua hàng của từng khách hàng (sử dụng JOIN và GROUP BY).
+* **Mã nguồn mẫu SQL (`queries.sql`)**:
+```sql
+-- 1. Tạo bảng khách hàng
+CREATE TABLE customers (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE
+);
+
+-- 2. Tạo bảng đơn hàng
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY,
+    customer_id INTEGER,
+    order_date DATE,
+    total_amount REAL,
+    FOREIGN KEY(customer_id) REFERENCES customers(id)
+);
+
+-- 3. Truy vấn SQL tính tổng doanh thu theo từng khách hàng
+SELECT c.name, SUM(o.total_amount) as total_spent
+FROM customers c
+LEFT JOIN orders o ON c.id = o.customer_id
+GROUP BY c.id;
+```
+
+### Bài tập 2: Truy vấn phân tích khách hàng mua nhiều nhất (Mức độ: Khó)
+* **Đề bài**: Viết câu lệnh SQL nâng cao để lấy ra danh sách các khách hàng có tổng số tiền mua sắm vượt quá 10,000,000 VND và sắp xếp kết quả theo thứ tự chi tiêu giảm dần.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng cấu trúc `GROUP BY` kết hợp với mệnh đề `HAVING` để lọc dữ liệu sau khi nhóm (Ví dụ: `HAVING SUM(o.total_amount) > 10000000`).
+  - Sử dụng `ORDER BY total_spent DESC` để sắp xếp dữ liệu chi tiêu lớn nhất lên đầu.
+

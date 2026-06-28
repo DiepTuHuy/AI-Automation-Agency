@@ -35,7 +35,27 @@ Thiết lập n8n HTTP Request node để gọi endpoint FastAPI cục bộ (đa
 ---
 
 ## 3. Mini Project
-Hãy xây dựng một workflow n8n hoàn chỉnh kết nối 3 bước:
-1. Nhận thông tin qua Webhook.
-2. Gọi API FastAPI phân loại.
-3. Gửi tin nhắn thông báo kết quả phân loại từ FastAPI trực tiếp lên bot Telegram của bạn sử dụng node HTTP Request thứ hai.
+
+### Bài tập 1: Gọi API thời tiết và lưu trữ lịch sử bằng n8n (Mức độ: Trung bình)
+* **Đề bài**: Thiết kế workflow n8n sử dụng HTTP Request Node để gọi API thời tiết mở, trích xuất nhiệt độ và ghi vào file CSV cục bộ để theo dõi.
+* **Tài liệu hướng dẫn & Sườn mẫu Workflow**:
+```markdown
+# Cấu hình HTTP Request gọi API ngoài
+
+### 1. HTTP Request Node:
+* **Method**: `GET`
+* **URL**: `https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&current_weather=true`
+* **Authentication**: None (API công cộng).
+
+### 2. Trích xuất dữ liệu:
+* Dữ liệu trả về sẽ nằm trong biến: `{{ $json.current_weather.temperature }}`.
+```
+
+### Bài tập 2: Quét thông tin tỷ giá ngoại tệ và cảnh báo biến động (Mức độ: Khó)
+* **Đề bài**: Thiết kế workflow tự động chạy mỗi sáng (cron trigger). Gọi API tỷ giá USD/VND, nếu tỷ giá vượt ngưỡng 25,400 VND, tự động gửi email thông báo khẩn cấp tới phòng kế toán.
+* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  - Sử dụng Node `Schedule Trigger` đặt thời gian chạy định kỳ.
+  - Sử dụng Node `HTTP Request` lấy tỷ giá từ API hối đoái.
+  - Sử dụng Node `IF` để so sánh tỷ giá với con số `25400`.
+
