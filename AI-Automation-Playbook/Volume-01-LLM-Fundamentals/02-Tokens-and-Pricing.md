@@ -7,11 +7,11 @@ LLM không đọc chữ cái, nó đọc **Tokens**. Thuật toán Tokenizer (th
 - *Quy tắc chung đối với tiếng Anh*: 1 token tương đương khoảng 4 ký tự hoặc 0.75 từ.
 - *Bài toán tiếng Việt*: Tiếng Việt sử dụng các ký tự có dấu phức tạp (như: á, ớ, ề, ự). Nhiều tokenizer của các mô hình thế hệ cũ không được tối ưu cho tiếng Việt, dẫn đến việc một từ tiếng Việt có dấu bị phân tách thành 2-4 tokens (so với tiếng Anh chỉ là 1 token). điều này làm chi phí API tăng lên gấp nhiều lần và giảm tốc độ sinh chữ của mô hình.
 
-### Cách tính giá API thực tế
-Các nhà cung cấp tính tiền dựa trên đơn vị $1.000.000$ tokens (M tokens) cho Input (đầu vào) và Output (đầu ra).
-Ví dụ bảng giá GPT-4o:
-- Input: $5.00 / M tokens
-- Output: $15.00 / M tokens
+### Công thức tính chi phí sử dụng API
+
+Chi phí sử dụng mô hình ngôn ngữ lớn được tính toán dựa trên số lượng token thực tế tiêu thụ theo công thức sau:
+
+$$\text{Chi phí (USD)} = \frac{\text{Số lượng Token}}{1.000.000} \times \text{Đơn giá mỗi triệu (M) tokens}$$
 
 ---
 

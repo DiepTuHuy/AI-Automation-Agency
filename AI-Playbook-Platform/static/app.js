@@ -273,6 +273,19 @@ document.addEventListener('DOMContentLoaded', () => {
           hljs.highlightElement(block);
         });
 
+        // Render LaTeX math formulas
+        if (typeof renderMathInElement === 'function') {
+          renderMathInElement(markdownSection, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+            ],
+            throwOnError: false
+          });
+        }
+
         // Setup Complete Button State
         const completed = getCompletedChapters();
         if (completed.includes(fullPath)) {
