@@ -614,6 +614,7 @@ body.quiz-open .drawer-backdrop {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  text-align: left !important;
 }
 
 .quiz-card {
@@ -622,20 +623,23 @@ body.quiz-open .drawer-backdrop {
   border-radius: 8px;
   padding: 20px;
   box-shadow: var(--shadow-sm);
+  text-align: left !important;
 }
 
 .question-text {
   font-size: 14px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 14px;
   color: var(--text-primary);
+  text-align: left !important;
 }
 
 .options-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  text-align: left !important;
 }
 
 .option-item {
@@ -643,12 +647,13 @@ body.quiz-open .drawer-backdrop {
   border: 1px solid var(--border-color);
   padding: 12px 14px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 13.5px;
   cursor: pointer;
   transition: var(--transition-smooth);
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start; /* Align to the top of text block */
+  gap: 8px;
+  text-align: left !important;
 }
 
 .option-item:hover {
@@ -676,24 +681,25 @@ body.quiz-open .drawer-backdrop {
 .option-letter {
   font-weight: 700;
   color: var(--color-accent);
-  background: rgba(95, 122, 104, 0.08);
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
+  background: none !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  display: inline-block !important;
+  font-size: 13px;
+  line-height: 1.6;
+  flex-shrink: 0;
+  margin-right: 2px;
 }
 
 .option-item.correct .option-letter {
-  background: rgba(127, 166, 133, 0.15);
-  color: var(--color-success);
+  background: none !important;
+  color: var(--color-success) !important;
 }
 
 .option-item.incorrect .option-letter {
-  background: rgba(201, 123, 123, 0.15);
-  color: var(--color-error);
+  background: none !important;
+  color: var(--color-error) !important;
 }
 
 .explanation-panel {

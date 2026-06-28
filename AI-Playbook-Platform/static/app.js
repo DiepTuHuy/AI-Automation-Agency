@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
       q.options.forEach((opt, optIndex) => {
         const optionItem = document.createElement('div');
         optionItem.className = 'option-item';
-        optionItem.innerHTML = `<span class="option-letter">${optionLetters[optIndex]}</span> <span>${opt}</span>`;
+        optionItem.innerHTML = `<span class="option-letter">${optionLetters[optIndex]}.</span> <span>${opt}</span>`;
         
         optionItem.addEventListener('click', () => {
           if (answered) return;

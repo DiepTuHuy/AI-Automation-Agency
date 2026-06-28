@@ -412,7 +412,10 @@ Yêu cầu kỹ thuật:
 1. Mỗi câu hỏi phải có chính xác 4 lựa chọn (A, B, C, D).
 2. Phải có 1 chỉ thị correct_index (số nguyên từ 0 đến 3) đại diện cho đáp án đúng.
 3. Phải cung cấp phần 'explanation' (giải thích ngắn gọn vì sao đáp án đó đúng và các đáp án khác sai dựa trên nội dung bài giảng).
-4. Bạn BẮT BUỘC phải trả về dữ liệu đúng cấu trúc JSON định hình sau:
+4. Quy định nghiêm ngặt về cấu trúc đáp án để đảm bảo tính phân loại và đòi hỏi tư duy cao:
+   - Cả 4 lựa chọn (A, B, C, D) phải có độ dài tương đồng nhau, viết cùng một cấu trúc ngữ pháp và mức độ chi tiết như nhau. Tuyệt đối KHÔNG được để đáp án đúng dài hơn hoặc chi tiết hơn hẳn các đáp án sai.
+   - Các đáp án sai (phương án nhiễu) phải cực kỳ tương đồng về mặt từ ngữ, thuật ngữ và cấu trúc với đáp án đúng, chỉ khác biệt rất ít ở các chi tiết kỹ thuật cốt lõi (ví dụ: đổi tên hàm, thay đổi logic tham số, hoặc đảo ngược nguyên lý hoạt động). Học sinh phải đọc kỹ và phân tích sâu sắc mới phân biệt được.
+5. Bạn BẮT BUỘC phải trả về dữ liệu đúng cấu trúc JSON định hình sau:
 {
   "questions": [
     {
@@ -543,7 +546,7 @@ ${markdownContent}
       q.options.forEach((opt, optIndex) => {
         const optionItem = document.createElement('div');
         optionItem.className = 'option-item';
-        optionItem.innerHTML = `<span class="option-letter">${optionLetters[optIndex]}</span> <span>${opt}</span>`;
+        optionItem.innerHTML = `<span class="option-letter">${optionLetters[optIndex]}.</span> <span>${opt}</span>`;
         
         optionItem.addEventListener('click', () => {
           if (answered) return;
