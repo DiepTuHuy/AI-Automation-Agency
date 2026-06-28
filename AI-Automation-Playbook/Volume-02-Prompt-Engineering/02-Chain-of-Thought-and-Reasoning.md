@@ -68,4 +68,54 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python giải quyết bài toán tính tổng tiền phạt chậm nợ gốc của ngân hàng với công thức lũy tiến. Yêu cầu mô hình phải giải thích rõ ràng cách tính của từng tháng (CoT) trước khi hiển thị con số tổng tiền phạt cuối cùng.
+
+### Bài tập 1: Tính toán tiền phạt nợ gốc ngân hàng có giải trình (CoT) (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python giải quyết bài toán tính tổng tiền phạt chậm nợ gốc của ngân hàng với công thức lũy tiến. Yêu cầu mô hình phải giải thích rõ ràng cách tính của từng tháng (CoT) trước khi hiển thị con số tổng tiền phạt cuối cùng.
+* **Mã nguồn mẫu (`cot_calculator.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+def calculate_debt_penalty(principal: float, delay_months: int) -> str:
+    # prompt hướng dẫn chuỗi suy luận CoT để giải toán tài chính phức tạp
+    prompt = f"""Bạn là trợ lý ảo kiểm toán ngân hàng. Hãy tính toán tiền phạt chậm trả nợ gốc lũy tiến theo quy tắc sau:
+- Tháng thứ 1: phạt 2% trên nợ gốc.
+- Tháng thứ 2: phạt 5% trên nợ gốc.
+- Từ tháng thứ 3 trở đi: phạt 10% trên nợ gốc mỗi tháng.
+
+Nợ gốc ban đầu: {principal} USD.
+Số tháng trễ hạn: {delay_months} tháng.
+
+Yêu cầu:
+1. Hãy suy nghĩ và giải thích chi tiết cách tính tiền phạt của từng tháng.
+2. In ra tổng số tiền phạt cuối cùng sau cùng.
+"""
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content(
+        prompt,
+        generation_config={"temperature": 0.0}
+    )
+    return response.text
+
+if __name__ == "__main__":
+    principal_amount = 10000.0  # 10k USD nợ gốc
+    months = 4  # Trễ 4 tháng
+    
+    print("Đang tính toán tiền phạt...")
+    result_log = calculate_debt_penalty(principal_amount, months)
+    print("\nKết quả tính toán chi tiết từ AI:")
+    print(result_log)
+```
+
+### Bài tập 2: Lập lịch phân công công việc thông minh (CoT) (Mức độ: Khó)
+* **Đề bài**: Viết một script Python giải quyết bài toán phân chia công việc cho một dự án phát triển phần mềm gồm 3 dự án nhỏ cho 4 lập trình viên dựa trên thời gian rảnh và kỹ năng chuyên môn của họ. Yêu cầu mô hình bắt buộc phải phân tích khả năng của từng người và thời hạn (CoT) trước khi đưa ra kết quả phân bổ cuối cùng để tránh bị quá tải nhân lực.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Thiết lập bài toán với thông tin chi tiết của 4 lập trình viên (Kỹ năng, số giờ rảnh) và 3 dự án (Thời gian hoàn thành cần thiết, công nghệ sử dụng).
+  2. Prompt yêu cầu mô hình phân tích: Bước 1 (Liệt kê tổng cung giờ rảnh theo ngôn ngữ), Bước 2 (Phân phối dự án ưu tiên cao nhất), Bước 3 (Kiểm tra xem có ai bị quá tải không).
+  3. Cấu hình `temperature = 0.0` để có kết quả phân chia ổn định và đúng logic nhất.

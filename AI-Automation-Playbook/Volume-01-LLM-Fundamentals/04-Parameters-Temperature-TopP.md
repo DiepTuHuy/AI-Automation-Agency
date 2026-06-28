@@ -65,4 +65,43 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python tự động thực thi các tác vụ: nhận một email phản hồi của khách hàng rác, tiến hành phân loại cảm xúc (Tích cực/Tiêu cực/Trung lập) bằng cách cấu hình tham số thích hợp nhất để đảm bảo kết quả trả về luôn ổn định và không đổi định dạng.
+
+### Bài tập 1: Phân loại cảm xúc email khách hàng (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python nhận phản hồi của khách hàng, tiến hành phân loại cảm xúc (Tích cực/Tiêu cực/Trung lập). Sử dụng cấu hình tham số thích hợp để kết quả trả về luôn ổn định, nhất quán qua các lượt chạy.
+* **Mã nguồn mẫu (`classify_email.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+def classify_feedback(text: str) -> str:
+    # Sử dụng temperature = 0.0 để kết quả luôn chính xác và không thay đổi
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    prompt = f"Phân loại cảm xúc của phản hồi sau vào 1 trong các nhóm [Tích cực], [Tiêu cực], [Trung lập]. Chỉ trả về tên nhóm.\n\nPhản hồi: {text}"
+    
+    response = model.generate_content(
+        prompt,
+        generation_config={
+            "temperature": 0.0
+        }
+    )
+    return response.text.strip()
+
+if __name__ == "__main__":
+    email_sample = "Sản phẩm đóng gói cẩn thận nhưng giao hàng hơi chậm, nhân viên nhiệt tình."
+    result = classify_feedback(email_sample)
+    print(f"Phản hồi: {email_sample}")
+    print(f"Phân loại cảm xúc: {result}")
+```
+
+### Bài tập 2: Sinh biến thể quảng cáo sáng tạo (Mức độ: Khó)
+* **Đề bài**: Viết một script Python tự động tạo ra 3 biến thể slogan quảng cáo cho sản phẩm "Giày chạy bộ thông minh". Để đảm bảo các slogan có tính sáng tạo cao và không bị lặp lại, hãy cấu hình tham số `temperature` và `top_p` phù hợp.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng `temperature = 1.0` (hoặc cao hơn) để khuyến khích mô hình tư duy sáng tạo từ vựng mới.
+  2. Cấu hình `top_p = 0.9` (Nucleus Sampling) để giới hạn mô hình chỉ chọn các từ trong nhóm 90% từ có độ phổ biến cao, tránh sinh ra các từ vô nghĩa.
+  3. Sử dụng vòng lặp trong Python hoặc viết prompt yêu cầu mô hình sinh 3 slogan độc lập trong một lượt gọi.

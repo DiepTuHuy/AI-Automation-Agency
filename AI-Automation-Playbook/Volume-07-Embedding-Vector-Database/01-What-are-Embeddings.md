@@ -57,4 +57,59 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một script Python sinh vector embedding cho một danh sách gồm 5 câu khác nhau (trong đó có 3 câu cùng chủ đề công nghệ và 2 câu chủ đề ẩm thực). In ra màn hình để kiểm tra xem kiểu định dạng dữ liệu có đồng nhất không và lưu các vector này vào file JSON để phục vụ chương tiếp theo.
+
+### Bài tập 1: Tạo và lưu trữ Vector Embeddings hàng loạt (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python sinh vector embedding cho một danh sách gồm 5 câu khác nhau (trong đó có 3 câu cùng chủ đề công nghệ và 2 câu chủ đề ẩm thực) bằng Gemini API. In ra màn hình kiểm tra số chiều của vector và lưu toàn bộ kết quả vào một file JSON cục bộ (`embeddings.json`).
+* **Mã nguồn mẫu (`generate_batch_embeddings.py`)**:
+```python
+import os
+import json
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+sentences = [
+    "Hệ thống AI Agent tự động hóa quy trình nghiệp vụ doanh nghiệp.",
+    "Lập trình Python giúp xây dựng API nhanh chóng với FastAPI.",
+    "Mô hình ngôn ngữ lớn hoạt động dựa trên cơ chế Attention.",
+    "Phở bò Hà Nội là món ăn truyền thống nổi tiếng thế giới.",
+    "Bánh mì kẹp thịt Việt Nam ngon và tiện lợi cho bữa sáng."
+]
+
+def save_embeddings_to_json(text_list: list, output_filepath: str):
+    data_to_save = []
+    
+    for text in text_list:
+        # Gọi Gemini embedding model
+        response = genai.embed_content(
+            model="models/text-embedding-004",
+            contents=[text],
+            task_type="retrieval_document"
+        )
+        vector = response['embedding'][0]
+        data_to_save.append({
+            "text": text,
+            "embedding": vector
+        })
+        print(f"Đã nhúng câu: '{text[:20]}...' -> Vector {len(vector)} chiều.")
+        
+    with open(output_filepath, "w", encoding="utf-8") as f:
+        json.dump(data_to_save, f, ensure_ascii=False, indent=4)
+    print(f"-> Đã lưu file: {output_filepath}")
+
+if __name__ == "__main__":
+    output_file = "embeddings.json"
+    save_embeddings_to_json(sentences, output_file)
+```
+
+### Bài tập 2: Tính toán độ tương đồng Cosine (Cosine Similarity) (Mức độ: Khó)
+* **Đề bài**: Viết một script Python đọc file `embeddings.json` đã lưu từ Bài tập 1. Nhận một câu truy vấn thô từ người dùng (ví dụ: "Tôi thích ăn bánh mì kẹp"), tiến hành sinh vector embedding cho câu truy vấn đó, và tính toán điểm Cosine Similarity với 5 câu có sẵn trong file JSON để tìm ra câu có nghĩa tương đồng nhất.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Sử dụng thư viện `numpy` (hoặc viết hàm thuần Python) để tính Cosine Similarity:
+     $$\text{Cosine Similarity} = \frac{A \cdot B}{\|A\| \|B\|}$$
+  2. Đọc file `embeddings.json` lên thành danh sách đối tượng chứa text và vector tương ứng.
+  3. Duyệt danh sách, tính điểm tương đồng với câu truy vấn và sắp xếp giảm dần để in ra kết quả khớp nhất.

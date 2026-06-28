@@ -63,4 +63,56 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy bổ sung thêm một công cụ thứ hai mang tên `send_email_notification(email_address, subject, content)` (chỉ cần in ra màn hình terminal để giả lập việc gửi). Sửa đổi script trên để khi người dùng hỏi: "Hãy tính thuế cho thu nhập 80k USD của tôi và gửi kết quả về email huy@example.com", AI sẽ tự động kích hoạt tuần tự cả hai công cụ.
+
+### Bài tập 1: Tích hợp công cụ tra cứu thời tiết bằng Function Calling (Mức độ: Trung bình)
+* **Đề bài**: Viết một script Python định nghĩa một tool đơn giản lấy thông tin thời tiết (`get_weather`) theo địa điểm và tích hợp nó vào Gemini Agent bằng cơ chế Function Calling tự động.
+* **Mã nguồn mẫu (`weather_agent.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+# 1. Định nghĩa hàm Python làm công cụ cho AI
+def get_weather(city: str) -> str:
+    """Tra cứu thời tiết hiện tại của một thành phố cụ thể.
+    
+    Args:
+        city: Tên thành phố cần tra cứu (ví dụ: 'Hanoi', 'Saigon').
+    """
+    city_lower = city.lower()
+    if "hanoi" in city_lower or "hà nội" in city_lower:
+        return "Nhiệt độ 28°C, trời nhiều mây, có mưa rào nhẹ."
+    elif "saigon" in city_lower or "hồ chí minh" in city_lower:
+        return "Nhiệt độ 33°C, trời nắng nóng, độ ẩm cao."
+    else:
+        return "Không có dữ liệu thời tiết tại khu vực này."
+
+if __name__ == "__main__":
+    # 2. Đăng ký hàm làm công cụ thông qua tham số tools
+    # Bật enable_automatic_function_calling=True để SDK tự động gọi hàm khi model yêu cầu
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        tools=[get_weather]
+    )
+    
+    chat = model.start_chat(enable_automatic_function_calling=True)
+    
+    query = "Thời tiết ở Hà Nội hôm nay thế nào em?"
+    print(f"Câu hỏi: {query}")
+    res = chat.send_message(query)
+    
+    print("\nKết quả gọi tool và trả lời của AI:")
+    print(res.text)
+```
+
+### Bài tập 2: Trợ lý giao dịch ví cá nhân an toàn (Mức độ: Khó)
+* **Đề bài**: Định nghĩa 2 công cụ Python mô phỏng: `get_wallet_balance(user_id: str) -> float` và `send_money(user_id: str, recipient: str, amount: float) -> str`. Xây dựng một Gemini Agent hỗ trợ chuyển tiền. Yêu cầu AI trước khi chuyển tiền bắt buộc phải gọi tool `get_wallet_balance` kiểm tra số dư. Nếu số dư đủ mới thực hiện chuyển tiền qua `send_money`, ngược lại báo lỗi từ chối giao dịch.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Định nghĩa rõ docstring cho 2 hàm để Gemini hiểu tham số đầu vào.
+  2. Bật tính năng gọi hàm tự động trong cuộc hội thoại chat của Gemini SDK.
+  3. Thử nghiệm kịch bản: chuyển số tiền nhỏ (thành công) và chuyển số tiền lớn hơn số dư (AI báo lỗi không đủ tiền mà không thực hiện chuyển khoản).

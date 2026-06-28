@@ -96,4 +96,65 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy chạy thử nghiệm script trên với một câu hỏi hoàn toàn ngoài phạm vi tài liệu (ví dụ: "Thủ đô của nước Pháp là gì?"). Kiểm tra xem AI có nghiêm túc tuân thủ quy tắc từ chối trả lời không. Chụp màn hình console kết quả chạy của bạn.
+
+### Bài tập 1: Kiểm thử an toàn thông tin RAG (Mức độ: Trung bình)
+* **Đề bài**: Sử dụng mã nguồn đơn giản của RAG đã học ở chương này để chạy kiểm thử với câu hỏi nằm ngoài phạm vi tài liệu (Ví dụ: "Thủ đô của nước Pháp là gì?"). Hãy đảm bảo AI tuân thủ nghiêm ngặt quy tắc từ chối trả lời thay vì ảo tưởng (hallucination).
+* **Mã nguồn mẫu (`rag_safety_test.py`)**:
+```python
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+kb_documents = {
+    "doc_01": "Chính sách gửi xe: Nhân viên được công ty hỗ trợ 100% chi phí gửi xe máy tại hầm tòa nhà Landmark.",
+    "doc_02": "Quy chế giờ giấc: Giờ làm việc bắt đầu từ 8:30 sáng và kết thúc lúc 5:30 chiều, từ thứ Hai đến thứ Sáu."
+}
+
+def mock_retrieval(query: str) -> str:
+    # Trả về chuỗi rỗng nếu không tìm thấy từ khóa liên quan
+    query_lower = query.lower()
+    for content in kb_documents.values():
+        if "gửi xe" in query_lower or "giờ làm" in query_lower:
+            return content
+    return ""
+
+def ask_rag_system(query: str) -> str:
+    context = mock_retrieval(query)
+    
+    system_prompt = f"""Bạn là trợ lý giải đáp thắc mắc nội bộ của công ty.
+Hãy trả lời câu hỏi của người dùng một cách chính xác dựa trên phần Ngữ cảnh được cung cấp dưới đây.
+Quy tắc bắt buộc:
+1. Nếu câu hỏi không thể trả lời dựa trên Ngữ cảnh, hãy trả lời 'Tôi không tìm thấy thông tin này trong tài liệu hướng dẫn nội bộ.'
+2. Tuyệt đối không tự ý bịa đặt hoặc dùng kiến thức bên ngoài.
+
+Ngữ cảnh:
+{context}
+"""
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction=system_prompt
+    )
+    response = model.generate_content(
+        query,
+        generation_config={"temperature": 0.0}
+    )
+    return response.text
+
+if __name__ == "__main__":
+    out_of_scope_query = "Thủ đô của nước Pháp là gì?"
+    print(f"Câu hỏi: {out_of_scope_query}")
+    answer = ask_rag_system(out_of_scope_query)
+    print(f"AI phản hồi: {answer}")
+```
+
+### Bài tập 2: Hệ thống RAG chẩn đoán triệu chứng thiết bị (Mức độ: Khó)
+* **Đề bài**: Xây dựng hệ thống RAG chẩn đoán lỗi phần cứng máy tính. Cơ sở dữ liệu chứa 3 chỉ dẫn chẩn đoán lỗi (ví dụ: máy kêu tít tít, máy màn hình xanh chữ trắng, máy không nhận ổ cứng). Khi người dùng nhập mô tả lỗi, hệ thống truy xuất chỉ dẫn đúng và hiển thị cách sửa. Nếu người dùng nhập lỗi lạ không có trong database, AI phải báo không chẩn đoán được và đề xuất đem máy ra trung tâm bảo hành gần nhất.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Tạo dictionary chứa 3 lỗi và cách khắc phục tương ứng.
+  2. Viết hàm chẩn đoán nhận câu hỏi, thực hiện tìm kiếm từ khóa chẩn đoán thô (hoặc dùng ChromaDB nếu đã học ở chương trước).
+  3. Viết system prompt ra lệnh ép AI từ chối suy đoán bừa các lỗi không được cấp thông tin chẩn đoán.

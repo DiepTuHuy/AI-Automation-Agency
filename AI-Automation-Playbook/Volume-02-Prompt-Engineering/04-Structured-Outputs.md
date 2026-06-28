@@ -73,4 +73,74 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy viết một chương trình Python nhận đầu vào là một chuỗi HTML thô chứa danh sách sản phẩm trên trang thương mại điện tử (bao gồm tên sản phẩm, giá tiền, đánh giá sao, và tình trạng còn hàng), sử dụng Pydantic để trích xuất danh sách này thành một mảng đối tượng JSON sạch sẽ, chuẩn kiểu dữ liệu để lưu vào cơ sở dữ liệu.
+
+### Bài tập 1: Trích xuất danh sách sản phẩm từ HTML bằng Pydantic (Mức độ: Trung bình)
+* **Đề bài**: Viết một chương trình Python nhận đầu vào là một chuỗi HTML thô chứa danh sách sản phẩm trên trang thương mại điện tử. Sử dụng Pydantic và Gemini API với tính năng Structured Outputs để trích xuất dữ liệu thành một đối tượng JSON có kiểu dữ liệu chuẩn chỉnh.
+* **Mã nguồn mẫu (`ecommerce_extractor.py`)**:
+```python
+import os
+from typing import List
+from pydantic import BaseModel, Field
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+# 1. Định nghĩa schema dữ liệu từng sản phẩm
+class Product(BaseModel):
+    name: str = Field(description="Tên sản phẩm đầy đủ.")
+    price_usd: float = Field(description="Giá sản phẩm quy đổi ra USD (số thực).")
+    rating_stars: float = Field(description="Số sao đánh giá (ví dụ: 4.5).")
+    in_stock: bool = Field(description="Trình trạng còn hàng (True nếu còn, False nếu hết).")
+
+# 2. Định nghĩa schema cho danh sách sản phẩm
+class ProductList(BaseModel):
+    products: List[Product]
+
+html_content = """
+<div class="product-card">
+    <h2 class="title">Bàn phím cơ Keychron K2</h2>
+    <span class="price">$79.99</span>
+    <span class="rating">Đánh giá: 4.8/5 sao</span>
+    <span class="status">Còn hàng</span>
+</div>
+<div class="product-card">
+    <h2 class="title">Chuột không dây Logitech MX Master 3S</h2>
+    <span class="price">$99.00</span>
+    <span class="rating">Đánh giá: 4.9/5 sao</span>
+    <span class="status">Hết hàng</span>
+</div>
+"""
+
+def extract_products(html: str) -> ProductList:
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction="Bạn là trợ lý AI chuyên trích xuất dữ liệu có cấu trúc từ mã nguồn HTML."
+    )
+    
+    response = model.generate_content(
+        f"Hãy trích xuất thông tin tất cả các sản phẩm có trong đoạn HTML sau:\n\n{html}",
+        generation_config={
+            "response_mime_type": "application/json",
+            "response_schema": ProductList
+        }
+    )
+    return ProductList.model_validate_json(response.text)
+
+if __name__ == "__main__":
+    print("Đang trích xuất dữ liệu...")
+    extracted_data = extract_products(html_content)
+    
+    print("\nKết quả trích xuất JSON:")
+    print(extracted_data.model_dump_json(indent=2))
+```
+
+### Bài tập 2: Trích xuất hóa đơn thanh toán lồng nhau (Mức độ: Khó)
+* **Đề bài**: Viết một script Python nhận đoạn văn bản hóa đơn phức tạp. Sử dụng Pydantic để định nghĩa cấu trúc dữ liệu lồng nhau (Nested JSON) bao gồm: Thông tin hóa đơn (Số hóa đơn, Ngày), Thông tin bên bán, và Danh sách các mặt hàng mua (tên mặt hàng, đơn giá, số lượng, thuế suất VAT). Yêu cầu mô hình trích xuất chính xác cấu trúc dữ liệu này.
+* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Gợi ý triển khai (Workflow Hints)**:
+  1. Khai báo hai Pydantic model: `InvoiceItem` đại diện cho từng dòng hàng và `InvoiceDetail` đại diện cho toàn bộ hóa đơn (chứa trường `items: List[InvoiceItem]`).
+  2. Truyền `InvoiceDetail` vào thuộc tính `response_schema` của cấu hình generation.
+  3. Thử nghiệm trích xuất với một văn bản hóa đơn tiếng Việt thực tế để kiểm tra khả năng bắt lỗi dữ liệu.
