@@ -545,11 +545,13 @@ body {
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.28s;
 }
 
 body.quiz-open .quiz-drawer {
   transform: translateX(0);
+  visibility: visible;
 }
 
 .drawer-header {
@@ -954,12 +956,14 @@ body.quiz-open .drawer-backdrop {
     width: 280px;
     height: 100vh;
     z-index: 102;
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05);
+    visibility: hidden;
   }
 
   body.sidebar-open .sidebar {
     left: 0;
+    visibility: visible;
   }
 
   /* When sidebar is open, show the backdrop */
@@ -967,6 +971,13 @@ body.quiz-open .drawer-backdrop {
     display: block;
     opacity: 1;
     z-index: 101; /* Behind sidebar, but in front of main content */
+  }
+
+  /* Force main content to span 100% of viewport width */
+  .main-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 !important;
   }
 
   .top-bar {
@@ -996,13 +1007,21 @@ body.quiz-open .drawer-backdrop {
 
   .content-body {
     padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .markdown-section-viewport {
     padding: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
   }
 
   .markdown-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     padding: 24px 20px 80px 20px !important;
     font-size: 14px !important;
     line-height: 1.65 !important;
