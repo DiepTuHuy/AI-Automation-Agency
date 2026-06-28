@@ -92,4 +92,3 @@ if __name__ == "__main__":
   1. Sử dụng hàm `collection.update(ids=["..."], documents=["Nội dung mới"])` để cập nhật dữ liệu.
   2. Sử dụng `collection.delete(ids=["..."])` để xóa bản ghi.
   3. Thực hiện câu lệnh query để đảm bảo tài liệu đã xóa không còn xuất hiện trong kết quả trả về.
-

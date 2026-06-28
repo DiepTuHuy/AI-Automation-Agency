@@ -93,4 +93,3 @@ return $input.all();
   - Sử dụng vòng lặp `for...of` duyệt qua danh sách các items của `$input.all()`.
   - Tính toán trường dữ liệu mới: `item.json.commission = item.json.amount * 0.1`.
   - Return lại mảng kết quả hoàn chỉnh để chuyển tiếp cho các node tiếp theo.
-

@@ -124,4 +124,3 @@ if __name__ == "__main__":
   1. Sử dụng `Path.stat().st_mtime` để lấy thời gian sửa đổi cuối cùng của tệp.
   2. Sử dụng thư viện `zipfile` của Python để thực hiện nén tệp tin.
   3. Sử dụng `Path.unlink()` để xóa tệp gốc một cách an toàn.
-

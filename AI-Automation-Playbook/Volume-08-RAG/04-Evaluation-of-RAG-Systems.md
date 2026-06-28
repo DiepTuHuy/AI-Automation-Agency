@@ -119,4 +119,3 @@ if __name__ == "__main__":
   1. Tạo danh sách các test cases gồm câu hỏi và context chuẩn.
   2. Viết vòng lặp gửi request kiểm tra và gọi hàm đánh giá `evaluate_faithfulness`.
   3. Tính toán tỷ lệ phần trăm: \text{Pass Rate} = \frac{\text{Số câu PASSED}}{\text{Tổng số câu}} \times 100\%.
-

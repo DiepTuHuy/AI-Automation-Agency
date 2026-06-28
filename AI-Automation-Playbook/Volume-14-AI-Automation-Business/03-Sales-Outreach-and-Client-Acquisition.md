@@ -77,4 +77,3 @@ Trân trọng,
 * **Gợi ý triển khai (Workflow Hints)**:
   - Thiết kế cấu trúc cuộc gọi gồm: 15 giây đầu thu hút chú ý -> Đưa ra dẫn chứng thực tế -> Hỏi câu hỏi khơi gợi nhu cầu -> Chốt cuộc hẹn tư vấn sâu hơn.
   - Chuẩn bị sẵn 3 câu trả lời thông minh để hóa giải các lời từ chối phổ biến.
-

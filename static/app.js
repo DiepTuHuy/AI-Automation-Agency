@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     markChapterComplete(currentFilePath);
     
-    markCompleteBtn.textContent = '✓ Đã hoàn thành chương';
+    markCompleteBtn.textContent = 'Đã hoàn thành chương';
     markCompleteBtn.classList.add('completed');
   });
 
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const header = document.createElement('div');
           header.className = 'volume-header';
           const cleanVolName = vol.name.replace(/-/g, ' ');
-          header.innerHTML = `<span>📂 ${cleanVolName}</span> <span>▼</span>`;
+          header.innerHTML = `<span>${cleanVolName}</span> <span>▼</span>`;
           
           const chaptersEl = document.createElement('div');
           chaptersEl.className = 'volume-chapters';
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             chapEl.setAttribute('data-path', fileFullPath);
 
             const cleanFileName = file.replace(/^\d+-/, '').replace(/-/g, ' ').replace('.md', '');
-            chapEl.textContent = cleanFileName === 'README' ? '★ Giới thiệu Volume' : `• ${cleanFileName}`;
+            chapEl.textContent = cleanFileName === 'README' ? 'Giới thiệu Volume' : ` ${cleanFileName}`;
             
             chapEl.addEventListener('click', (e) => {
               e.stopPropagation();
@@ -327,10 +327,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Setup Complete Button State
         const completed = getCompletedChapters();
         if (completed.includes(fullPath)) {
-          markCompleteBtn.textContent = '✓ Đã hoàn thành chương';
+          markCompleteBtn.textContent = 'Đã hoàn thành chương';
           markCompleteBtn.classList.add('completed');
         } else {
-          markCompleteBtn.textContent = '✓ Đánh dấu đã học xong chương này';
+          markCompleteBtn.textContent = 'Đánh dấu đã học xong chương này';
           markCompleteBtn.classList.remove('completed');
         }
         completeBtnContainer.style.display = 'flex';
@@ -619,7 +619,7 @@ ${markdownContent}
       
       const expPanel = document.createElement('div');
       expPanel.className = 'explanation-panel';
-      expPanel.innerHTML = `<strong>💡 Giải thích:</strong> ${q.explanation}`;
+      expPanel.innerHTML = `<strong> Giải thích:</strong> ${q.explanation}`;
       card.appendChild(expPanel);
 
       quizContainer.appendChild(card);

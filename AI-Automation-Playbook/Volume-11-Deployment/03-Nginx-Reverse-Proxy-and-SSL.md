@@ -79,4 +79,3 @@ server {
   - Cài đặt Certbot thông qua câu lệnh: `sudo apt install certbot python3-certbot-nginx -y`.
   - Xin chứng chỉ SSL bằng lệnh: `sudo certbot --nginx -d example.com`.
   - Kiểm tra tính năng tự động gia hạn (Dry-run) qua: `sudo certbot renew --dry-run`.
-

@@ -87,4 +87,3 @@ CREATE TABLE users (
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng SQLAlchemy ORM để tự động chèn điều kiện lọc `filter(Invoice.tenant_id == current_user.tenant_id)` cho tất cả các câu truy vấn cơ sở dữ liệu.
   - Viết mã kiểm thử để giả lập hành vi hack đổi `tenant_id` trong request và bảo đảm hệ thống chặn đứng hành vi này.
-

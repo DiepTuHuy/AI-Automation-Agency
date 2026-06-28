@@ -137,4 +137,3 @@ if __name__ == "__main__":
   1. Tạo bảng `user_memories` trong SQLite gồm các trường: `key`, `value`.
   2. Viết prompt yêu cầu AI phân tích đoạn chat để trích xuất thông tin quan trọng dưới dạng cặp key-value.
   3. Tự động chèn/cập nhật thông tin vào DB và nạp lên làm System Instruction ở đầu phiên chat mới.
-

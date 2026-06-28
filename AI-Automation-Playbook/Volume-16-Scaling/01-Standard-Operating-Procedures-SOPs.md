@@ -100,4 +100,3 @@ Cung cấp mẫu tài liệu SOP kỹ thuật hoàn chỉnh hướng dẫn cài 
 * **Gợi ý triển khai (Workflow Hints)**:
   - Phân chia nhiệm vụ rõ ràng: Ai là người tiếp nhận thông tin lỗi, ai thực hiện debug kỹ thuật.
   - Viết chi tiết các câu lệnh kiểm tra log hệ thống nhanh (ví dụ: `docker logs web_service` hoặc `journalctl -u api_service`).
-

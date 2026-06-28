@@ -102,4 +102,3 @@ if __name__ == "__main__":
   1. Khai báo danh sách danh ngôn sức khỏe mẫu làm cơ sở dữ liệu trong bộ nhớ.
   2. Sử dụng thư viện `random` để lấy phần tử ngẫu nhiên khi người dùng gửi request `GET`.
   3. Sử dụng mô hình Pydantic đơn giản để nhận dữ liệu đầu vào cho yêu cầu `POST`.
-

@@ -85,4 +85,3 @@ sudo ss -tunlp
   - Sử dụng lệnh `sudo ufw allow 22/tcp` để cho phép SSH (Quan trọng: Không làm mất kết nối hiện tại).
   - Sử dụng `sudo ufw allow 80` và `sudo ufw allow 443`.
   - Kích hoạt tường lửa bằng lệnh `sudo ufw enable` và kiểm tra trạng thái qua `sudo ufw status`.
-

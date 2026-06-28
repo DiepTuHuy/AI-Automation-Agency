@@ -73,4 +73,3 @@ Xây dựng hệ thống n8n kết nối FastAPI OCR:
 * **Gợi ý triển khai (Workflow Hints)**:
   - Yêu cầu chức năng: AI tự động đọc file PDF vận đơn, trích xuất dữ liệu ra bảng Excel.
   - Yêu cầu phi chức năng: Thời gian xử lý của mô hình dưới 5 giây/hóa đơn, tỷ lệ chính xác trích xuất tối thiểu đạt 98%.
-

@@ -112,4 +112,3 @@ if __name__ == "__main__":
   1. Sử dụng kết quả truy vấn của ChromaDB để lấy danh sách tài liệu thô.
   2. Chạy hàm đánh giá điểm số tương đồng qua LLM cho top 5.
   3. Lọc lấy 2 tài liệu điểm cao nhất, ghép vào prompt RAG để sinh câu trả lời.
-

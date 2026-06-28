@@ -152,4 +152,3 @@ if __name__ == "__main__":
   1. Sử dụng thư viện `time` để lưu vết thời gian của các lượt gọi gần nhất trong một danh sách.
   2. Trước mỗi cuộc gọi, lọc bỏ các mốc thời gian đã quá thời hạn `period`.
   3. Kiểm tra độ dài danh sách còn lại để quyết định cho phép gọi tiếp hay chặn đứng.
-

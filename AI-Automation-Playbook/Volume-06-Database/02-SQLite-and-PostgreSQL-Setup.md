@@ -113,4 +113,3 @@ if __name__ == "__main__":
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng thư viện `psycopg2.pool.SimpleConnectionPool` để mở pool kết nối tối thiểu là 1 và tối đa là 10.
   2. Sử dụng cấu trúc `try-except-finally` để lấy kết nối ra từ pool và trả lại pool sau khi thực thi thành công.
-

@@ -112,4 +112,3 @@ if __name__ == "__main__":
   1. Sử dụng `json.load()` để đọc tệp từ đĩa cứng.
   2. Duyệt qua mảng sản phẩm bằng vòng lặp và cập nhật điều kiện.
   3. Ghi lại dữ liệu bằng `json.dump(data, f, indent=4)` để lưu đè thay đổi.
-

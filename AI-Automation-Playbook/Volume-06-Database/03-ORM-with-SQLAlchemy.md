@@ -129,4 +129,3 @@ if __name__ == "__main__":
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Thêm khóa ngoại `product_id = Column(Integer, ForeignKey('products.id'))` trong class `Order`.
   2. Sử dụng SQLAlchemy `session.query(Order).join(Product).filter(Product.price > 100).all()` để lọc dữ liệu.
-

@@ -24,7 +24,7 @@ Cung cấp mẫu nội dung bài viết chào mừng (Hunter Statement) hoàn ch
 
 ### Nội dung mẫu kịch bản
 ```markdown
-Chào cộng đồng Product Hunt! 😸
+Chào cộng đồng Product Hunt! 
 
 Tôi là Huy Điệp, người sáng lập Antigravity AI. 
 
@@ -33,7 +33,7 @@ Chúng tôi tự hào ra mắt **AI Invoice Reader** ngày hôm nay - Công cụ
 ### ❓ Vấn đề chúng tôi giải quyết
 Hầu hết các kế toán tại doanh nghiệp SMBs đang mất hơn 2 tiếng mỗi ngày chỉ để tải file hóa đơn PDF từ email, gõ thủ công từng dòng thông tin vào Excel để lưu kho. Quy trình này chậm chạp, tẻ nhạt và rất dễ gõ sai số tiền.
 
-### ✨ AI Invoice Reader giúp gì cho bạn?
+### AI Invoice Reader giúp gì cho bạn?
 - **Trích xuất trong 3 giây**: Tải file lên và nhận ngay file Excel sạch sẽ thông tin hóa đơn.
 - **Độ chính xác 99%**: Sử dụng bộ xử lý Pydantic validation đảm bảo các trường mã số thuế, tổng tiền luôn đúng định dạng.
 - **Kết nối thông suốt**: Đồng bộ dữ liệu trực tiếp với Google Sheets và phần mềm kế toán của bạn qua n8n webhook.
@@ -72,4 +72,3 @@ Chúc các bạn một ngày tuyệt vời!
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng các phần mềm quay màn hình miễn phí như OBS Studio, Loom hoặc GIPHY Capture.
   - Sử dụng công cụ chuyển đổi hoặc trang web Ezgif để tối ưu hóa màu sắc, giảm tốc độ khung hình (FPS xuống 10-12) nhằm nén dung lượng ảnh động.
-

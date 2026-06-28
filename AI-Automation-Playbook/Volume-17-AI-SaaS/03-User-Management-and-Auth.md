@@ -170,4 +170,3 @@ if __name__ == "__main__":
   1. Sử dụng thư viện `FastAPI` Depend `OAuth2PasswordBearer(tokenUrl="login")`.
   2. Giải mã token bằng `jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])`.
   3. Bắt lỗi `jwt.ExpiredSignatureError` and `jwt.JWTError`.
-

@@ -73,4 +73,3 @@ graph LR
   - Sử dụng từ khóa `sequenceDiagram` trong Mermaid.
   - Sử dụng cấu trúc `participant` để định nghĩa rõ các thực thể trong hệ thống.
   - Vẽ mũi tên có hướng `Actor->>Target: Thông điệp` thể hiện đúng trình tự tương tác từ trên xuống dưới.
-

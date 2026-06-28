@@ -112,4 +112,3 @@ paths:
   1. Định nghĩa endpoint lồng nhau cho sản phẩm và tồn kho, ví dụ: `/api/v1/products/{product_id}/inventory`.
   2. Xác định các HTTP Method phù hợp: `GET` để truy vấn, `PATCH` hoặc `PUT` để cập nhật số lượng tồn kho.
   3. Lựa chọn các mã lỗi chuẩn như `404 Not Found` khi sản phẩm không tồn tại, hoặc `400 Bad Request` khi cập nhật số lượng âm.
-

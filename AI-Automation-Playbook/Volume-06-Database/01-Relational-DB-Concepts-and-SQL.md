@@ -97,4 +97,3 @@ GROUP BY c.id;
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng cấu trúc `GROUP BY` kết hợp với mệnh đề `HAVING` để lọc dữ liệu sau khi nhóm (Ví dụ: `HAVING SUM(o.total_amount) > 10000000`).
   - Sử dụng `ORDER BY total_spent DESC` để sắp xếp dữ liệu chi tiêu lớn nhất lên đầu.
-

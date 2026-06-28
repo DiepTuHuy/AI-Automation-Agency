@@ -80,4 +80,3 @@ Xây dựng một file Markdown phân tích chi tiết hiệu quả kinh tế gi
 * **Gợi ý triển khai (Workflow Hints)**:
   - Thiết lập mức phí bảo trì định kỳ hợp lý (thường từ 10% - 20% giá trị dự án gốc mỗi tháng).
   - Định nghĩa rõ điều khoản SLA (thời gian phản hồi khi gặp sự cố, ví dụ: trong vòng 4 giờ làm việc).
-

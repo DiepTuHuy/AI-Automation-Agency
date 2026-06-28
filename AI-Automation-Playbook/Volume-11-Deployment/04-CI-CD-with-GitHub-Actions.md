@@ -99,4 +99,3 @@ jobs:
   - Cấu hình điều kiện trigger: `on.push.tags = ["v*"]`.
   - Sử dụng các Action có sẵn: `docker/login-action` và `docker/build-push-action`.
   - Đăng ký và sử dụng tài khoản mật khẩu Docker Hub qua `secrets.DOCKER_HUB_USERNAME` và `secrets.DOCKER_HUB_TOKEN`.
-

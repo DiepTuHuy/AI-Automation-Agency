@@ -123,4 +123,3 @@ graph TD
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng cú pháp sơ đồ Mermaid dạng `flowchart TD` hoặc `sequenceDiagram`.
   - Phân tách rõ các bước thực thi công cụ (Tool Execution) và các bước ra quyết định của mô hình LLM.
-

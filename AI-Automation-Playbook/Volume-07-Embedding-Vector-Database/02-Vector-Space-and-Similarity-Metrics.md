@@ -7,7 +7,8 @@ Khi đã biểu diễn văn bản dưới dạng các vector tọa độ, làm t
 ### 1. Cosine Similarity (Độ tương đồng Cosine)
 Đo góc giữa hai vector trong không gian nhiều chiều, bất kể độ dài của vector.
 - **Công thức**:
-  $$	ext{Cosine Similarity} = rac{A \cdot B}{\|A\| \|B\|}$$
+  $$	ext{Cosine Similarity} = 
+rac{A \cdot B}{\|A\| \|B\|}$$
 - **Giá trị**: Từ -1 đến 1. Trong so sánh văn bản, giá trị thường từ 0 (không liên quan) đến 1 (trùng lặp ý nghĩa).
 - *Tại sao được ưa chuộng*: Phù hợp nhất cho văn bản vì nó không bị ảnh hưởng bởi độ dài ngắn của đoạn văn (độ dài vector).
 
@@ -98,4 +99,3 @@ if __name__ == "__main__":
   - Tạo danh sách chứa các bộ vector tài liệu.
   - Sử dụng vòng lặp để tính điểm tương đồng cho từng cặp.
   - Sử dụng hàm `sorted()` của Python với tham số `key=lambda x: x['score']` và `reverse=True` để thực hiện xếp hạng.
-

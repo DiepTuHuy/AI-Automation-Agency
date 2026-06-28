@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 import google.generativeai as genai
+from MiniProject.memmory_manager import ChatMemoryManager
 
 load_dotenv()
 

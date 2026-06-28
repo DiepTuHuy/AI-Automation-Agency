@@ -94,4 +94,3 @@ if __name__ == "__main__":
   1. Tạo class Pydantic `OrderItem` đại diện cho sản phẩm với thuộc tính `gt=0` (greater than 0) cho số lượng và đơn giá.
   2. Tạo class `Order` chứa trường `items: List[OrderItem]`.
   3. Định nghĩa endpoint `POST /orders` nhận tham số body là class `Order`.
-

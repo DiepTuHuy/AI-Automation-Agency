@@ -105,4 +105,3 @@ if __name__ == "__main__":
   1. Sử dụng URL API thời tiết mở: `https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&current_weather=true`.
   2. Tạo một webhook URL trên server Discord của bạn.
   3. Gửi request dạng `POST` bằng `requests.post()` chứa payload JSON `{"content": "Thông điệp thời tiết..."}` lên webhook đó.
-

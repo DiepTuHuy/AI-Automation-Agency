@@ -89,4 +89,3 @@ dependencies = [
   - Định nghĩa trường `method` là `tools/call`.
   - Đóng gói các tham số yêu cầu bên trong `params.arguments`.
   - Phản hồi chứa thông tin trạng thái thành công kèm theo ID của reminder vừa tạo.
-

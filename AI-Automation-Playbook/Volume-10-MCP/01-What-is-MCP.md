@@ -96,4 +96,3 @@ Hiểu rõ cấu trúc tin nhắn JSON-RPC 2.0 truyền qua lại giữa Client 
 * **Gợi ý triển khai (Workflow Hints)**:
   - Cài đặt server `@modelcontextprotocol/server-filesystem` vào cấu hình server của Claude Desktop.
   - Chỉ định thư mục làm việc an toàn thông qua đối số truyền vào (ví dụ: `/Users/username/safe_folder`).
-

@@ -113,4 +113,3 @@ if __name__ == "__main__":
   1. Tạo danh sách các từ cấm (Blacklist) trong một file txt hoặc mảng Python.
   2. Viết hàm kiểm tra đầu vào trước khi thực thi gọi API.
   3. Cấu hình tham số "safety_settings" của Gemini API để tăng cường bộ lọc phía máy chủ.
-

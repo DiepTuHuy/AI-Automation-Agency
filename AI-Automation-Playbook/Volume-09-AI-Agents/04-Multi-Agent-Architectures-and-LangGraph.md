@@ -159,4 +159,3 @@ if __name__ == "__main__":
   - Thiết kế vòng lặp giao tiếp giữa Agent 1 và Agent 2.
   - Thiết lập điều kiện dừng: Nếu Agent 2 đánh giá bài viết đạt từ 8/10 điểm trở lên, kết thúc vòng lặp và in ra kết quả.
   - Cấu hình `temperature = 0.5` cho Agent viết để tăng tính sáng tạo từ vựng.
-

@@ -55,4 +55,3 @@ Cung cấp kịch bản chi tiết (Storyboard) từng giây giúp bạn tự ti
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng các phần mềm quay màn hình miễn phí như OBS Studio, Loom hoặc GIPHY Capture.
   - Sử dụng công cụ chuyển đổi hoặc trang web Ezgif để tối ưu hóa màu sắc, giảm tốc độ khung hình (FPS xuống 10-12) nhằm nén dung lượng ảnh động.
-

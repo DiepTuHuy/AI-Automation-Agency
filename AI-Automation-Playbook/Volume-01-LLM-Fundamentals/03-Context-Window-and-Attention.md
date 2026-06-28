@@ -109,4 +109,3 @@ if __name__ == "__main__":
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng vòng lặp phân đoạn văn bản và gọi prompt trích xuất số liệu: "Liệt kê các số liệu doanh thu trong đoạn dưới đây dưới dạng: Năm - Số tiền".
   2. Gộp tất cả các kết quả trích xuất trung gian thành một prompt tổng hợp cấu trúc JSON đầu ra sử dụng `response_mime_type="application/json"`.
-

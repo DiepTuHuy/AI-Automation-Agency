@@ -41,13 +41,13 @@ llm-demo/
 ### Chi tiết tệp phụ thuộc & cấu hình
 Để bài học chạy ổn định, hãy chuẩn bị các tệp cấu hình sau:
 
-#### 📄 `requirements.txt`
+#### `requirements.txt`
 ```text
 google-generativeai
 python-dotenv
 ```
 
-#### 📄 `.env`
+#### `.env`
 ```env
 GEMINI_API_KEY=AIzaSy... # Điền API Key của bạn lấy từ Google AI Studio
 ```
@@ -127,4 +127,3 @@ if __name__ == "__main__":
   1. Sử dụng `model.start_chat(history=[])` để khởi tạo phiên chat có nhớ ngữ cảnh.
   2. Sử dụng vòng lặp `while True` để nhận câu hỏi từ hàm `input()`.
   3. Gửi tin nhắn qua `chat.send_message(user_input)` để bảo toàn lịch sử trò chuyện.
-

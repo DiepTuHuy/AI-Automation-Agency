@@ -95,4 +95,3 @@ if __name__ == "__main__":
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng phương thức `text.split(". ")` để lấy danh sách các câu hoàn chỉnh.
   2. Duyệt qua các câu, gộp chúng lại vào một chunk cho đến khi tổng số ký tự đạt ngưỡng giới hạn, sau đó mới tạo chunk mới.
-

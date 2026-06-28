@@ -120,4 +120,3 @@ services:
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng image `postgres:15` cho dịch vụ `db`.
   - Sử dụng cơ chế `depends_on` với điều kiện `service_healthy` trong docker-compose để đồng bộ thứ tự khởi chạy.
-

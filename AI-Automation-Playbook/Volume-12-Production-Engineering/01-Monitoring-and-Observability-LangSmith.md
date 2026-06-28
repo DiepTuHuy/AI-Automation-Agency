@@ -113,4 +113,3 @@ if __name__ == "__main__":
   1. Sử dụng thư viện `pandas` hoặc đọc file dòng-bằng-dòng để phân tích log.
   2. Trích xuất thời gian chạy (Latency) từ chuỗi log bằng Regular Expression (Regex).
   3. Tính toán các chỉ số trung bình và in báo cáo dạng bảng trực quan.
-

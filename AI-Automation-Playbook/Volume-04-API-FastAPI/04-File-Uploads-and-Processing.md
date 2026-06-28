@@ -105,4 +105,3 @@ if __name__ == "__main__":
   1. Đọc nội dung file CSV trực tiếp bằng `io.StringIO` từ tệp UploadFile mà không cần lưu xuống đĩa.
   2. Sử dụng `pd.read_csv()` để nạp dữ liệu vào DataFrame.
   3. Tính tổng cột lương và trả kết quả tổng quan về cho khách hàng.
-

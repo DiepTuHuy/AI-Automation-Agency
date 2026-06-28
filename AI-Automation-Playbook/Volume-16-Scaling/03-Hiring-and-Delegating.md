@@ -64,4 +64,3 @@ Hãy viết một script Python hoàn chỉnh thực hiện các yêu cầu sau:
 * **Gợi ý triển khai (Workflow Hints)**:
   - Đề bài đề xuất: Viết script Python trích xuất thông tin thực thể từ đoạn văn bản thô sử dụng Structured Outputs.
   - Thiết lập các tiêu chuẩn đánh giá code: Khả năng bắt lỗi (Error Handling), cấu trúc thư mục sạch sẽ, tốc độ xử lý của code và cách viết tài liệu hướng dẫn chạy.
-

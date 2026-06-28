@@ -104,4 +104,3 @@ if __name__ == "__main__":
   1. Sử dụng `pd.read_csv()` để nạp tệp dữ liệu.
   2. Sử dụng `df.groupby("Category")["Revenue"].sum()` để tổng hợp dữ liệu.
   3. Ghi dữ liệu ra file Excel bằng hàm `to_excel()`.
-

@@ -92,4 +92,3 @@ if __name__ == "__main__":
   1. Đọc nội dung file văn bản bằng `Path("document.txt").read_text()`.
   2. Gọi `model.count_tokens(text)` để nhận số lượng token chính xác từ server Google.
   3. Áp dụng đơn giá thực tế của Gemini 2.5 Flash để in ra bảng chi phí chi tiết.
-

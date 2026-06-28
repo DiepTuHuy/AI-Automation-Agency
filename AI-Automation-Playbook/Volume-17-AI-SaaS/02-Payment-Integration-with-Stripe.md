@@ -126,4 +126,3 @@ if __name__ == "__main__":
   1. Sử dụng `stripe.Webhook.construct_event` để xác thực chữ ký bảo mật gửi từ Stripe.
   2. Bắt sự kiện `event['type'] == 'checkout.session.completed'`.
   3. Đọc thông tin khách hàng từ metadata của session và thực hiện câu lệnh cập nhật DB.
-

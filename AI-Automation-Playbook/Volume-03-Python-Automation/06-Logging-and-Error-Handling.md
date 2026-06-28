@@ -117,4 +117,3 @@ if __name__ == "__main__":
   1. Sử dụng thư viện `watchdog` hoặc vòng lặp `while True` quét danh sách tệp qua `pathlib`.
   2. Đóng gói mã quét thư mục trong khối `try-except PermissionError`.
   3. Sử dụng `logger.critical()` để ghi lại lỗi hệ thống nghiêm trọng.
-

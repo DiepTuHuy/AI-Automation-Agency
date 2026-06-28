@@ -75,4 +75,3 @@ Các tính năng sau KHÔNG nằm trong hợp đồng này (sẽ tính phí bổ
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng ngôn ngữ pháp lý rõ ràng, mạch lạc của hợp đồng thương mại.
   - Quy định rõ trách nhiệm bồi thường thiệt hại nếu một trong hai bên làm rò rỉ mã nguồn hoặc dữ liệu khách hàng lên các nền tảng AI công cộng.
-

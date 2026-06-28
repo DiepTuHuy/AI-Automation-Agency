@@ -58,4 +58,3 @@ Thiết lập n8n HTTP Request node để gọi endpoint FastAPI cục bộ (đa
   - Sử dụng Node `Schedule Trigger` đặt thời gian chạy định kỳ.
   - Sử dụng Node `HTTP Request` lấy tỷ giá từ API hối đoái.
   - Sử dụng Node `IF` để so sánh tỷ giá với con số `25400`.
-

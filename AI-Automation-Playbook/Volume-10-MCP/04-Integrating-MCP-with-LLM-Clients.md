@@ -67,4 +67,3 @@ Cấu hình thành công Claude Desktop để sử dụng máy chủ MCP đọc 
 * **Gợi ý triển khai (Workflow Hints)**:
   - Cấu hình trường `command` trong file config thành đường dẫn trực tiếp tới thư mục chạy của môi trường ảo (ví dụ: `/path/to/venv/bin/python`).
   - Đảm bảo môi trường ảo đó đã được cài đặt đầy đủ gói `mcp` SDK.
-

@@ -119,4 +119,3 @@ if __name__ == "__main__":
   1. Sử dụng thư viện `PyJWT` (hoặc `jose`) để mã hóa và giải mã token.
   2. Tạo hàm dependency giải mã token, trích xuất thông tin người dùng và vai trò.
   3. Báo lỗi `401 Unauthorized` nếu token hết hạn, và `403 Forbidden` nếu người dùng không phải admin.
-

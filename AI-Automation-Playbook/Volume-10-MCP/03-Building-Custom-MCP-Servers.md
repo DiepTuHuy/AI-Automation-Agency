@@ -93,4 +93,3 @@ if __name__ == "__main__":
   1. Import thư viện `sqlite3` trong file custom MCP server.
   2. Viết hàm Python kết nối tới file `.db` và thực hiện câu lệnh `SELECT` để tìm sản phẩm.
   3. Đăng ký hàm đó bằng decorator `@mcp.tool()` để AI Client có thể gọi trực tiếp.
-

@@ -80,4 +80,3 @@ Cấu hình và sử dụng Alembic để thêm cột mới `phone` vào bảng 
   - Tạo thêm 1 migration mới bằng lệnh: `alembic revision --autogenerate -m "add phone column"`.
   - Thực thi nâng cấp: `alembic upgrade head`.
   - Để rollback (hạ cấp) về phiên bản ngay trước đó, sử dụng câu lệnh: `alembic downgrade -1`.
-

@@ -82,4 +82,3 @@ Biên bản được lập thành hai (02) bản có giá trị pháp lý tươn
   - Nêu rõ tên dự án, ngày thực hiện ký kết biên bản nghiệm thu.
   - Liệt kê đầy đủ các kết quả bàn giao (mã nguồn GitHub, tài liệu hướng dẫn, VPS hosting).
   - Định nghĩa rõ các điều khoản hỗ trợ kỹ thuật miễn phí sau bàn giao (ví dụ: hỗ trợ sửa lỗi phát sinh trong vòng 30 ngày).
-

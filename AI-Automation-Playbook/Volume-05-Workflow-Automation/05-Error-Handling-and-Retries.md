@@ -28,7 +28,7 @@ Xây dựng một workflow lắng nghe mọi lỗi phát sinh trong hệ thống
 3. Kết nối node này với một node **HTTP Request** để gửi tin nhắn Telegram.
 4. Cấu hình nội dung tin nhắn gửi đi sử dụng các biến lỗi động của n8n:
    ```markdown
-   🚨 *CẢNH BÁO LỖI HỆ THỐNG n8n* 🚨
+    *CẢNH BÁO LỖI HỆ THỐNG n8n* 
    
    - *Workflow:* {{ $json.workflow.name }} (ID: {{ $json.workflow.id }})
    - *Node gây lỗi:* {{ $json.execution.error.node.name }}
@@ -63,4 +63,3 @@ Xây dựng một workflow lắng nghe mọi lỗi phát sinh trong hệ thống
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng tính năng **Error Trigger** Node để bắt mọi lỗi xảy ra trong Workflows của hệ thống n8n.
   - Đọc thông tin lỗi từ payload của Error Trigger Node để tạo nội dung cảnh báo chi tiết.
-
