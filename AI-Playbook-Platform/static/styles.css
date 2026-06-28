@@ -949,17 +949,17 @@ body.quiz-open .drawer-backdrop {
 
   .sidebar {
     position: fixed;
-    left: -320px;
+    left: -280px;
     top: 0;
     width: 280px;
     height: 100vh;
     z-index: 102;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05);
   }
 
   body.sidebar-open .sidebar {
-    transform: translateX(320px);
+    left: 0;
   }
 
   /* When sidebar is open, show the backdrop */

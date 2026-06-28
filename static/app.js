@@ -71,15 +71,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   closeQuizBtn.addEventListener('click', closeQuizDrawer);
-  drawerBackdrop.addEventListener('click', closeQuizDrawer);
-
   // Mobile Sidebar Toggle button
   const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
   if (sidebarToggleBtn) {
-    sidebarToggleBtn.addEventListener('click', () => {
+    const handleToggle = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       document.body.classList.toggle('sidebar-open');
-    });
+    };
+    sidebarToggleBtn.addEventListener('click', handleToggle);
+    sidebarToggleBtn.addEventListener('touchstart', handleToggle, { passive: false });
   }
+
+  // Enhanced backdrop click for mobile instant response
+  const handleBackdropClose = (e) => {
+    e.preventDefault();
+    closeQuizDrawer();
+  };
+  drawerBackdrop.addEventListener('click', handleBackdropClose);
+  drawerBackdrop.addEventListener('touchstart', handleBackdropClose, { passive: false });
 
   // Close drawer on Escape key
   document.addEventListener('keydown', (e) => {
