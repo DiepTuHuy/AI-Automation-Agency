@@ -10,6 +10,8 @@
 
 **Bộ giáo trình thực chiến đào tạo kỹ sư tự động hóa AI và Nền tảng học tập nội bộ chuẩn doanh nghiệp.**
 
+🚀 **Trải nghiệm trực tuyến (GitHub Pages)**: [https://dieptuhuy.github.io/AI-Automation-Agency/](https://dieptuhuy.github.io/AI-Automation-Agency/)
+
 [Tổng quan](#-tổng-quan) • [Tính năng nổi bật](#-tính-năng-nổi-bật) • [Cấu trúc giáo trình](#-cấu-trúc-giáo-trình) • [Kiến trúc hệ thống](#-kiến-trúc-hệ-thống) • [Hướng dẫn cài đặt](#-hướng-dẫn-cài-đặt) • [Giao diện học tập](#-giao-diện-học-tập)
 
 </div>
