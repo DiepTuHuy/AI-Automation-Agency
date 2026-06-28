@@ -87,22 +87,49 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mobile Sidebar Toggle button
   const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
   if (sidebarToggleBtn) {
-    const handleToggle = (e) => {
+    let toggleTouched = false;
+    const performToggle = (e) => {
       e.preventDefault();
       e.stopPropagation();
       document.body.classList.toggle('sidebar-open');
     };
-    sidebarToggleBtn.addEventListener('click', handleToggle);
-    sidebarToggleBtn.addEventListener('touchstart', handleToggle, { passive: false });
+    
+    sidebarToggleBtn.addEventListener('touchstart', (e) => {
+      toggleTouched = true;
+      performToggle(e);
+    }, { passive: false });
+    
+    sidebarToggleBtn.addEventListener('click', (e) => {
+      if (toggleTouched) {
+        toggleTouched = false;
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      performToggle(e);
+    });
   }
 
-  // Enhanced backdrop click for mobile instant response
-  const handleBackdropClose = (e) => {
+  // Enhanced backdrop click with touched flag to prevent ghost double-clicks
+  let backdropTouched = false;
+  const performBackdropClose = (e) => {
     e.preventDefault();
     closeQuizDrawer();
   };
-  drawerBackdrop.addEventListener('click', handleBackdropClose);
-  drawerBackdrop.addEventListener('touchstart', handleBackdropClose, { passive: false });
+  
+  drawerBackdrop.addEventListener('touchstart', (e) => {
+    backdropTouched = true;
+    performBackdropClose(e);
+  }, { passive: false });
+  
+  drawerBackdrop.addEventListener('click', (e) => {
+    if (backdropTouched) {
+      backdropTouched = false;
+      e.preventDefault();
+      return;
+    }
+    performBackdropClose(e);
+  });
 
   // Close drawer on Escape key
   document.addEventListener('keydown', (e) => {
