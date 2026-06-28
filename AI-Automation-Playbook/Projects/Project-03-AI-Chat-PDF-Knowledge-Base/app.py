@@ -3,11 +3,17 @@ import streamlit as st
 from pathlib import Path
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import chromadb
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    # Central config loading
+    load_dotenv(Path(__file__).resolve().parents[3] / "AI-Playbook-Platform" / ".env")
+    api_key = os.getenv("GEMINI_API_KEY")
+
+genai.configure(api_key=api_key)
 
 # Khởi tạo thư mục DB
 DB_PATH = Path("./chroma_knowledge_db")
@@ -36,7 +42,6 @@ with st.sidebar:
         ids = [f"chunk_{i}" for i in range(len(chunks))]
         
         # Để đơn giản, ta dùng mô hình nhúng mặc định offline của ChromaDB
-        # Nếu muốn chính xác hơn, có thể khai báo nhúng bằng OpenAI API
         collection.add(
             documents=chunks,
             ids=ids
@@ -69,27 +74,32 @@ if user_query := st.chat_input("Nhập câu hỏi của bạn về tài liệu..
         context = ""
         st.warning(f"Không có tài liệu nào được nạp hoặc lỗi truy vấn: {e}")
 
-    # 4. SINH CÂU TRẢ LỜI (Generation)
-    system_prompt = f"""Bạn là trợ lý AI chuyên nghiệp giải đáp thắc mắc tài liệu.
-Hãy trả lời câu hỏi dựa trên phần tài liệu được cấp dưới đây. Nếu tài liệu không chứa câu trả lời, hãy báo là bạn không biết, không được bịa đặt.
+    # 4. SINH CÂU TRẢ LỜI (Generation) sử dụng Gemini
+    prompt = f"""Bạn là trợ lý AI chuyên nghiệp giải đáp thắc mắc tài liệu.
+Hãy trả lời câu hỏi của người dùng dựa trên phần tài liệu được cấp dưới đây. Nếu tài liệu không chứa câu trả lời, hãy báo là bạn không biết, không được tự ý bịa đặt câu trả lời.
 
 Tài liệu tham khảo:
 {context}
-"""
 
-    # Gộp lịch sử chat để gửi cùng ngữ cảnh
-    api_messages = [{"role": "system", "content": system_prompt}]
-    for msg in st.session_state.messages[-5:]: # Chỉ lấy 5 lượt chat gần nhất để tránh tràn context
-        api_messages.append({"role": msg["role"], "content": msg["content"]})
-        
+Lịch sử trò chuyện:
+"""
+    # Gộp lịch sử chat gần nhất để tránh trôi context
+    for msg in st.session_state.messages[-6:-1]: # Không lấy câu hỏi hiện tại vừa append
+        role_name = "Người dùng" if msg["role"] == "user" else "Trợ lý"
+        prompt += f"\n- {role_name}: {msg['content']}"
+
+    prompt += f"\n- Câu hỏi hiện tại của Người dùng: {user_query}\n\nTrợ lý:"
+
     with st.chat_message("assistant"):
         with st.spinner("Đang suy nghĩ..."):
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=api_messages,
-                temperature=0.2
+            model = genai.GenerativeModel("gemini-2.5-flash")
+            response = model.generate_content(
+                prompt,
+                generation_config={
+                    "temperature": 0.2
+                }
             )
-            answer = response.choices[0].message.content
+            answer = response.text
             st.write(answer)
             
     st.session_state.messages.append({"role": "assistant", "content": answer})

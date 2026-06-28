@@ -45,7 +45,7 @@ pip install -r requirements.txt
 ### Bước 2: Cấu hình biến môi trường
 Sao chép `.env.example` thành `.env` và điền đầy đủ các khóa:
 ```env
-OPENAI_API_KEY=sk-proj-xxxxxx
+GEMINI_API_KEY=your_gemini_api_key_here
 STRIPE_SECRET_KEY=sk_test_xxxxxx
 STRIPE_WEBHOOK_SECRET=whsec_xxxxxx
 JWT_SECRET=super_secret_signing_key_123

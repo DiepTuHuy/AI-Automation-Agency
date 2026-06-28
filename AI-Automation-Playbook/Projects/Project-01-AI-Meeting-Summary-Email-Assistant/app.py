@@ -3,12 +3,18 @@ import json
 from typing import List
 from pathlib import Path
 from pydantic import BaseModel, Field
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 # Tải biến môi trường
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    # Fallback to loading from the central platform .env if running from this context
+    load_dotenv(Path(__file__).resolve().parents[3] / "AI-Playbook-Platform" / ".env")
+    api_key = os.getenv("GEMINI_API_KEY")
+
+genai.configure(api_key=api_key)
 
 # Định nghĩa Pydantic Schema cho kết quả tóm tắt cuộc họp
 class ActionItem(BaseModel):
@@ -27,20 +33,25 @@ def analyze_meeting(transcript_path: Path) -> MeetingSummary:
 
     transcript = transcript_path.read_text(encoding="utf-8")
 
-    print("[Step 1] Đang gửi biên bản cuộc họp tới OpenAI để phân tích cấu trúc...")
-    completion = client.beta.chat.completions.parse(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system", 
-                "content": "Bạn là thư ký ảo chuyên nghiệp. Hãy đọc biên bản cuộc họp sau và trích xuất tóm tắt chính xác theo định dạng yêu cầu."
-            },
-            {"role": "user", "content": transcript}
-        ],
-        response_format=MeetingSummary,
-        temperature=0
+    print("[Step 1] Đang gửi biên bản cuộc họp tới Gemini để phân tích cấu trúc...")
+    
+    # Sử dụng gemini-2.5-flash cho tác vụ xử lý thông tin nhanh
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    
+    prompt = f"""Bạn là thư ký ảo chuyên nghiệp. Hãy đọc biên bản cuộc họp sau và trích xuất tóm tắt chính xác theo định dạng yêu cầu.
+Biên bản cuộc họp:
+{transcript}"""
+
+    response = model.generate_content(
+        prompt,
+        generation_config={
+            "response_mime_type": "application/json",
+            "response_schema": MeetingSummary,
+            "temperature": 0.0
+        }
     )
-    return completion.choices[0].message.parsed
+    
+    return MeetingSummary.model_validate_json(response.text)
 
 def generate_email_draft(summary: MeetingSummary) -> str:
     print("[Step 2] Đang tự động viết bản thảo email dựa trên kết quả phân tích...")
@@ -60,15 +71,18 @@ Dữ liệu cuộc họp:
 {summary_json}
 """
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "Bạn là CEO viết email truyền cảm hứng và rõ ràng cho nhân viên."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.7
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction="Bạn là CEO viết email truyền cảm hứng và rõ ràng cho nhân viên."
     )
-    return response.choices[0].message.content
+    
+    response = model.generate_content(
+        prompt,
+        generation_config={
+            "temperature": 0.7
+        }
+    )
+    return response.text
 
 if __name__ == "__main__":
     current_dir = Path(__file__).parent

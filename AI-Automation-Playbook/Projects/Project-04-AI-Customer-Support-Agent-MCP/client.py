@@ -1,86 +1,45 @@
 import os
 import sys
 import asyncio
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 # Tải biến môi trường
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    # Central config load
+    from pathlib import Path
+    load_dotenv(Path(__file__).resolve().parents[3] / "AI-Playbook-Platform" / ".env")
+    api_key = os.getenv("GEMINI_API_KEY")
 
-# Mock Client kết nối đơn giản qua STDIO
-# Trong thực tế, bạn sẽ dùng mcp.client để kết nối trực tiếp với server.py
-# Để chạy demo này đơn giản nhất, ta định nghĩa cấu trúc tool schema của MCP Server
-# và gọi hàm trực tiếp khi AI yêu cầu.
+genai.configure(api_key=api_key)
 
 from server import get_order_status
+
+# Định nghĩa hàm wrapper để ghi log trực quan cho học sinh theo dõi
+def get_order_status_wrapper(order_id: str) -> str:
+    """Kiểm tra trạng thái của một đơn hàng cụ thể dựa trên Mã đơn hàng (Ví dụ: 'OR-111')."""
+    print(f"[Client -> MCP Server Tool] Yêu cầu gọi: get_order_status('{order_id}')")
+    result = get_order_status(order_id)
+    print(f"[MCP Server -> Client] Phản hồi từ database: {result}\n")
+    return result
 
 def ask_agent(query: str):
     print(f"Khách hàng: {query}\n")
     
-    # 1. Định nghĩa công cụ tương ứng với MCP Server Tools
-    tools = [
-        {
-            "type": "function",
-            "function": {
-                "name": "get_order_status",
-                "description": "Kiểm tra trạng thái đơn hàng bằng mã đơn hàng (Ví dụ: 'OR-111').",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "order_id": {"type": "string", "description": "Mã đơn hàng cần tra cứu."}
-                    },
-                    "required": ["order_id"]
-                }
-            }
-        }
-    ]
-    
-    messages = [
-        {"role": "system", "content": "Bạn là trợ lý chăm sóc khách hàng. Hãy tra cứu thông tin bằng công cụ trước khi trả lời."},
-        {"role": "user", "content": query}
-    ]
-    
-    # Lượt 1: AI suy nghĩ và chọn gọi Tool của MCP Server
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=messages,
-        tools=tools,
-        temperature=0
+    # Khởi tạo mô hình với đăng ký công cụ tự động
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        tools=[get_order_status_wrapper],
+        system_instruction="Bạn là trợ lý chăm sóc khách hàng. Hãy luôn tra cứu thông tin bằng công cụ trước khi đưa ra câu trả lời cuối cùng cho khách hàng."
     )
     
-    msg = response.choices[0].message
-    tool_calls = msg.tool_calls
+    # Sử dụng tính năng gọi hàm tự động (automatic function calling) cực kỳ mạnh mẽ của Gemini
+    chat = model.start_chat(enable_automatic_function_calling=True)
+    response = chat.send_message(query)
     
-    if tool_calls:
-        for tool_call in tool_calls:
-            if tool_call.function.name == "get_order_status":
-                import json
-                args = json.loads(tool_call.function.arguments)
-                order_id = args["order_id"]
-                
-                print(f"[Client -> MCP Server] Yêu cầu gọi: get_order_status('{order_id}')")
-                
-                # Gọi trực tiếp logic của MCP Server
-                result = get_order_status(order_id)
-                print(f"[MCP Server -> Client] Phản hồi: {result}\n")
-                
-                # Gửi kết quả ngược lại cho AI
-                messages.append(msg)
-                messages.append({
-                    "role": "tool",
-                    "tool_call_id": tool_call.id,
-                    "name": "get_order_status",
-                    "content": result
-                })
-                
-                final_response = client.chat.completions.create(
-                    model="gpt-4o-mini",
-                    messages=messages
-                )
-                print(f"Trợ lý AI: {final_response.choices[0].message.content}")
-    else:
-        print(f"Trợ lý AI: {msg.content}")
+    print(f"Trợ lý AI: {response.text}")
 
 if __name__ == "__main__":
     # Đảm bảo database đã được tạo trước

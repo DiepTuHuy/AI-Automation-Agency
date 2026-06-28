@@ -22,11 +22,12 @@ Yêu cầu cài đặt: `pip install pydantic openai`
 import os
 from typing import List, Optional
 from pydantic import BaseModel, Field
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
 
 # Định nghĩa cấu trúc dữ liệu mong muốn bằng Pydantic
 class ContractSchema(BaseModel):
@@ -45,15 +46,18 @@ Phương thức thanh toán được chia làm 2 đợt:
 """
 
 def parse_contract(text: str) -> ContractSchema:
-    completion = client.beta.chat.completions.parse(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "Bạn là chuyên gia phân tích tài liệu pháp lý. Hãy trích xuất thông tin hợp đồng chính xác."},
-            {"role": "user", "content": text}
-        ],
-        response_format=ContractSchema # Ép buộc mô hình trả về đúng cấu trúc Pydantic
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction="Bạn là chuyên gia phân tích tài liệu pháp lý. Hãy trích xuất thông tin hợp đồng chính xác."
     )
-    return completion.choices[0].message.parsed
+    response = model.generate_content(
+        text,
+        generation_config={
+            "response_mime_type": "application/json",
+            "response_schema": ContractSchema # Ép buộc mô hình trả về đúng cấu trúc Pydantic
+        }
+    )
+    return ContractSchema.model_validate_json(response.text)
 
 if __name__ == "__main__":
     print("Đang xử lý tài liệu hợp đồng...")

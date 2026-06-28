@@ -13,12 +13,12 @@ Dự án này kết hợp kiến thức từ Volume 07 (Embedding & Vector DB), 
                            [Cắt nhỏ bằng RecursiveCharacterTextSplitter]
                                             │
                                             ▼
-                           [Tạo Vector nhúng (OpenAI Embeddings)]
+                            [Tạo Vector nhúng (ChromaDB Default Embeddings)]
                                             │
                                             ▼
                            [Lưu vào Vector DB (ChromaDB cục bộ)]
 
-[Người dùng chat hỏi] ───────> [AI Agent (ReAct Loop + Memory)]
+[Người dùng chat hỏi] ───────> [AI Agent (Memory)]
                                             │
                                             ├─(Công cụ: Lục tìm tài liệu tương đồng trong ChromaDB)
                                             │
@@ -52,7 +52,7 @@ pip install -r requirements.txt
 ### Bước 2: Cấu hình biến môi trường
 Sao chép `.env.example` thành `.env` và điền:
 ```env
-OPENAI_API_KEY=sk-proj-xxxxxx
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 ### Bước 3: Chạy ứng dụng giao diện trực quan

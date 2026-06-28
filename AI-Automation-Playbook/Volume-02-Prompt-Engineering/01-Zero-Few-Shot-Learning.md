@@ -28,11 +28,12 @@ Phân loại các phản hồi phức tạp của khách hàng về sản phẩm
 ### Mã nguồn (`shot_comparison.py`)
 ```python
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
 
 # Email khách hàng phức tạp cần phân loại
 complex_feedback = "Sản phẩm dùng rất mượt khi mới mua, tuy nhiên sau khi cập nhật hệ điều hành mới thì máy rất nhanh nóng và sập nguồn liên tục. Tôi muốn đổi trả!"
@@ -41,12 +42,12 @@ def run_zero_shot(text: str) -> str:
     prompt = f"""Phân loại phản hồi sau vào 1 trong các nhóm: [Lỗi phần cứng], [Lỗi phần mềm], [Giao hàng], [Tư vấn bán hàng].
 Phản hồi: "{text}"
 Kết quả:"""
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content(
+        prompt,
+        generation_config={"temperature": 0.0}
     )
-    return response.choices[0].message.content.strip()
+    return response.text.strip()
 
 def run_few_shot(text: str) -> str:
     prompt = f"""Bạn là bộ lọc phân loại phản hồi khách hàng chuyên nghiệp. Hãy phân loại chính xác dựa trên các ví dụ sau:
@@ -70,12 +71,12 @@ Tác vụ thực tế cần phân loại:
 Phản hồi: "{text}"
 Phân tích:
 Kết quả:"""
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content(
+        prompt,
+        generation_config={"temperature": 0.0}
     )
-    return response.choices[0].message.content.strip()
+    return response.text.strip()
 
 if __name__ == "__main__":
     print("--- Chạy Zero-shot ---")

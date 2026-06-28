@@ -28,21 +28,22 @@ Chạy một câu hỏi với các mức cấu hình `temperature` khác nhau (0
 ### Mã nguồn (`temp_comparison.py`)
 ```python
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
 
 def generate_slogan(temp: float) -> str:
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "user", "content": "Viết 1 câu slogan ngắn gọn cho thương hiệu cà phê thông minh tự pha bằng robot."}
-        ],
-        temperature=temp
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content(
+        "Viết 1 câu slogan ngắn gọn cho thương hiệu cà phê thông minh tự pha bằng robot.",
+        generation_config={
+            "temperature": temp
+        }
     )
-    return response.choices[0].message.content
+    return response.text
 
 if __name__ == "__main__":
     print("--- Thử nghiệm Temperature = 0.0 (Tính nhất quán cao) ---")
@@ -53,10 +54,10 @@ if __name__ == "__main__":
     for i in range(3):
         print(f"Lượt {i+1}: {generate_slogan(0.8)}")
 
-    print("\n--- Thử nghiệm Temperature = 1.5 (Cực kỳ hỗn loạn) ---")
+    print("\n--- Thử nghiệm Temperature = 1.8 (Cực kỳ hỗn loạn) ---")
     for i in range(3):
         try:
-            print(f"Lượt {i+1}: {generate_slogan(1.5)}")
+            print(f"Lượt {i+1}: {generate_slogan(1.8)}")
         except Exception as e:
             print(f"Lỗi: {e} (Mức độ ngẫu nhiên quá cao có thể gây lỗi sinh token không hợp lệ)")
 ```

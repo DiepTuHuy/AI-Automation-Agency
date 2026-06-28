@@ -17,7 +17,7 @@ Dự án này kết hợp kiến thức từ Volume 04 (FastAPI), Volume 05 (n8n
            ▼
     [FastAPI Server]
            │
-           ├─(Gọi LLM gpt-4o-mini đánh giá chất lượng lead dựa trên budget & mô tả)
+           ├─(Gọi LLM gemini-2.5-flash đánh giá chất lượng lead dựa trên budget & mô tả)
            │
            ├─(SQLAlchemy ORM) ──> [Lưu DB SQLite/PostgreSQL]
            │
@@ -64,7 +64,7 @@ Project-02-AI-CRM-Automation-Lead-Qualification/
    ```
 2. Điền các khóa bảo mật cần thiết vào file `.env`:
    ```env
-   OPENAI_API_KEY=sk-proj-xxxxxxx
+   GEMINI_API_KEY=your_gemini_api_key_here
    SYSTEM_API_KEY=crm_secret_key_123
    DATABASE_URL=sqlite:///crm_leads.db
    ```

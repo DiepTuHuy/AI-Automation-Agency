@@ -26,19 +26,21 @@ Gửi chuỗi văn bản lên OpenAI Embedding API, kiểm tra cấu trúc mản
 ### Mã nguồn (`get_embedding.py`)
 ```python
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
 
-def get_text_embedding(text: str, model: str = "text-embedding-3-small") -> list:
-    response = client.embeddings.create(
-        input=[text],
-        model=model
+def get_text_embedding(text: str, model: str = "models/text-embedding-004") -> list:
+    response = genai.embed_content(
+        model=model,
+        contents=[text],
+        task_type="retrieval_document"
     )
     # Trích xuất mảng vector số thực từ JSON kết quả
-    return response.data[0].embedding
+    return response['embedding'][0]
 
 if __name__ == "__main__":
     text_sample = "Xây dựng AI Agent tự động hóa quy trình nghiệp vụ."

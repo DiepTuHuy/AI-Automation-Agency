@@ -32,11 +32,12 @@ Xây dựng một chương trình RAG đơn giản sử dụng một database nh
 ### Mã nguồn (`simple_rag.py`)
 ```python
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
 
 # Kho dữ liệu nội bộ giả lập của công ty (Knowledge Base)
 kb_documents = {
@@ -46,13 +47,10 @@ kb_documents = {
 }
 
 def retrieve_context(query: str) -> str:
-    # Thuật toán tìm kiếm từ khóa thô sơ giả lập bước Retrieval
-    # (Trong dự án thực tế, bước này sẽ dùng tìm kiếm Vector trong ChromaDB)
     query_lower = query.lower()
     matched_chunks = []
     
     for doc_id, content in kb_documents.items():
-        # Nếu câu hỏi chứa từ khóa của tài liệu, coi như tài liệu đó liên quan
         keywords = ["gửi xe", "giờ làm", "thai sản", "mấy giờ", "xe máy"]
         for kw in keywords:
             if kw in query_lower and kw in content.lower():
@@ -62,8 +60,7 @@ def retrieve_context(query: str) -> str:
     return "\n".join(matched_chunks)
 
 def generate_answer(query: str, context: str) -> str:
-    # Bước Generation: Tạo prompt chứa ngữ cảnh làm phao thi
-    system_prompt = """Bạn là trợ lý giải đáp thắc mắc nội bộ của công ty.
+    system_prompt = f"""Bạn là trợ lý giải đáp thắc mắc nội bộ của công ty.
 Hãy trả lời câu hỏi của người dùng một cách chính xác dựa trên phần Ngữ cảnh được cung cấp dưới đây.
 Quy tắc bắt buộc:
 1. Nếu câu hỏi không thể trả lời dựa trên Ngữ cảnh, hãy trả lời 'Tôi không tìm thấy thông tin này trong tài liệu hướng dẫn nội bộ.'
@@ -73,15 +70,15 @@ Ngữ cảnh:
 {context}
 """
     
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": system_prompt.format(context=context)},
-            {"role": "user", "content": query}
-        ],
-        temperature=0
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction=system_prompt
     )
-    return response.choices[0].message.content
+    response = model.generate_content(
+        query,
+        generation_config={"temperature": 0.0}
+    )
+    return response.text
 
 if __name__ == "__main__":
     query_user = "Tôi có được miễn phí gửi xe máy không và gửi ở đâu?"

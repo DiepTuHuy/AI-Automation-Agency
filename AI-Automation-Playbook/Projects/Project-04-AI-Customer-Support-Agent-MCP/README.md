@@ -56,7 +56,7 @@ Thực thi client:
 ```bash
 python3 client.py
 ```
-*Client sẽ tự động khởi chạy server.py ngầm làm MCP subprocess qua STDIO, kết nối với OpenAI, giải quyết câu hỏi kiểm tra đơn hàng và in kết quả ra terminal*.
+*Client sẽ tự động khởi chạy server.py ngầm làm MCP subprocess qua STDIO, kết nối với Gemini, giải quyết câu hỏi kiểm tra đơn hàng và in kết quả ra terminal*.
 
 ---
 

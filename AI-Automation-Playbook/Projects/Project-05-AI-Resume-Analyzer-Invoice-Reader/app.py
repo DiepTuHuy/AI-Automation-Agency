@@ -2,11 +2,18 @@ import os
 import streamlit as st
 import pandas as pd
 from pydantic import BaseModel, Field
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    # Central config load
+    from pathlib import Path
+    load_dotenv(Path(__file__).resolve().parents[3] / "AI-Playbook-Platform" / ".env")
+    api_key = os.getenv("GEMINI_API_KEY")
+
+genai.configure(api_key=api_key)
 
 # 1. Định nghĩa Schema cho Hóa Đơn
 class InvoiceData(BaseModel):
@@ -39,16 +46,19 @@ with tab1:
         if st.button("Phân tích Hóa Đơn"):
             with st.spinner("AI đang xử lý..."):
                 try:
-                    completion = client.beta.chat.completions.parse(
-                        model="gpt-4o-mini",
-                        messages=[
-                            {"role": "system", "content": "Bạn là kế toán ảo chuyên nghiệp. Hãy trích xuất dữ liệu hóa đơn chính xác."},
-                            {"role": "user", "content": raw_text}
-                        ],
-                        response_format=InvoiceData,
-                        temperature=0
+                    model = genai.GenerativeModel(
+                        "gemini-2.5-flash",
+                        system_instruction="Bạn là kế toán ảo chuyên nghiệp. Hãy trích xuất dữ liệu hóa đơn chính xác."
                     )
-                    data = completion.choices[0].message.parsed
+                    response = model.generate_content(
+                        raw_text,
+                        generation_config={
+                            "response_mime_type": "application/json",
+                            "response_schema": InvoiceData,
+                            "temperature": 0.0
+                        }
+                    )
+                    data = InvoiceData.model_validate_json(response.text)
                     
                     st.success("Trích xuất thành công!")
                     st.write(f"**Số hóa đơn:** {data.invoice_number}")
@@ -70,16 +80,19 @@ with tab2:
         if st.button("Phân tích CV"):
             with st.spinner("AI đang phân tích..."):
                 try:
-                    completion = client.beta.chat.completions.parse(
-                        model="gpt-4o-mini",
-                        messages=[
-                            {"role": "system", "content": "Bạn là chuyên viên nhân sự AI chuyên sàng lọc CV ứng viên."},
-                            {"role": "user", "content": raw_resume}
-                        ],
-                        response_format=ResumeData,
-                        temperature=0
+                    model = genai.GenerativeModel(
+                        "gemini-2.5-flash",
+                        system_instruction="Bạn là chuyên viên nhân sự AI chuyên sàng lọc CV ứng viên."
                     )
-                    data = completion.choices[0].message.parsed
+                    response = model.generate_content(
+                        raw_resume,
+                        generation_config={
+                            "response_mime_type": "application/json",
+                            "response_schema": ResumeData,
+                            "temperature": 0.0
+                        }
+                    )
+                    data = ResumeData.model_validate_json(response.text)
                     
                     st.success("Phân tích CV thành công!")
                     st.write(f"**Họ và tên:** {data.candidate_name}")

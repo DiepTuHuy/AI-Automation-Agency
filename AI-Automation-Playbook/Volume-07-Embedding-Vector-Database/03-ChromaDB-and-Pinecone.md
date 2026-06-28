@@ -70,4 +70,4 @@ if __name__ == "__main__":
 ---
 
 ## 3. Mini Project
-Hãy sửa đổi file demo trên để sử dụng mô hình nhúng của OpenAI (`text-embedding-3-small`) khi nạp và truy vấn dữ liệu trong ChromaDB (Tham khảo hướng dẫn tích hợp OpenAI trong tài liệu của ChromaDB).
+Hãy sửa đổi file demo trên để sử dụng mô hình nhúng của Gemini (`models/text-embedding-004`) khi nạp và truy vấn dữ liệu trong ChromaDB (Tham khảo hướng dẫn tích hợp Gemini API bằng cách tự tính vector nhúng thông qua hàm `genai.embed_content` trước khi thêm vào ChromaDB qua tham số `embeddings`).

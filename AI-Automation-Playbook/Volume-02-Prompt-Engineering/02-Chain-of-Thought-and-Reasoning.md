@@ -23,11 +23,12 @@ Giải quyết bài toán chia dự án cho các lập trình viên dựa trên 
 ### Mã nguồn (`cot_demo.py`)
 ```python
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
 
 puzzle = """Công ty có 3 dự án: Dự án A (yêu cầu Python), Dự án B (yêu cầu JavaScript), Dự án C (yêu cầu Go).
 Có 3 lập trình viên: Huy (biết Python, JS, có 10h rảnh/tuần), Nam (biết JS, Go, có 20h rảnh/tuần), An (biết Python, Go, có 5h rảnh/tuần).
@@ -35,26 +36,26 @@ Dự án A cần tối thiểu 12h Python. Dự án B cần tối thiểu 15h JS
 Lập kế hoạch phân bổ nhân sự tối ưu nhất để hoàn thành tối đa số lượng dự án."""
 
 def solve_without_cot(text: str) -> str:
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "Bạn là chuyên gia quản lý dự án. Hãy trả lời đáp án trực tiếp, ngắn gọn nhất."},
-            {"role": "user", "content": text}
-        ],
-        temperature=0
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction="Bạn là chuyên gia quản lý dự án. Hãy trả lời đáp án trực tiếp, ngắn gọn nhất."
     )
-    return response.choices[0].message.content
+    response = model.generate_content(
+        text,
+        generation_config={"temperature": 0.0}
+    )
+    return response.text
 
 def solve_with_cot(text: str) -> str:
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "Bạn là chuyên gia quản lý dự án. Hãy phân tích từng bước chi tiết trước khi đưa ra kết luận phân bổ."},
-            {"role": "user", "content": f"{text}\n\nãy phân tích từng bước chi tiết."}
-        ],
-        temperature=0
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction="Bạn là chuyên gia quản lý dự án. Hãy phân tích từng bước chi tiết trước khi đưa ra kết luận phân bổ."
     )
-    return response.choices[0].message.content
+    response = model.generate_content(
+        f"{text}\n\nHãy phân tích từng bước chi tiết.",
+        generation_config={"temperature": 0.0}
+    )
+    return response.text
 
 if __name__ == "__main__":
     print("=== GIẢI KHÔNG CÓ COT (TRẢ LỜI NGAY) ===")

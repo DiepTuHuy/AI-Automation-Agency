@@ -23,11 +23,12 @@ Thiết kế một trợ lý tư vấn tài chính nội bộ, chỉ được ph
 ### Mã nguồn (`secure_agent.py`)
 ```python
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
 
 SYSTEM_PROMPT = """
 <role>
@@ -43,15 +44,15 @@ Bạn là Trợ lý Tài chính Nội bộ chỉ cung cấp thông tin liên qua
 """
 
 def run_agent(user_input: str) -> str:
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_input}
-        ],
-        temperature=0
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction=SYSTEM_PROMPT
     )
-    return response.choices[0].message.content
+    response = model.generate_content(
+        user_input,
+        generation_config={"temperature": 0.0}
+    )
+    return response.text
 
 if __name__ == "__main__":
     # Test case 1: Câu hỏi hợp lệ

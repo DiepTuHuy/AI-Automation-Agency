@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI, Depends, HTTPException, status, Header
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field, EmailStr
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 from db import engine, Base, get_db
@@ -11,7 +11,14 @@ from models import Lead
 # Tải cấu hình
 load_dotenv()
 SYSTEM_API_KEY = os.getenv("SYSTEM_API_KEY", "crm_secret_key_123")
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    # Fallback central config load
+    from pathlib import Path
+    load_dotenv(Path(__file__).resolve().parents[3] / "AI-Playbook-Platform" / ".env")
+    api_key = os.getenv("GEMINI_API_KEY")
+
+genai.configure(api_key=api_key)
 
 # Khởi tạo bảng dữ liệu
 Base.metadata.create_all(bind=engine)
@@ -52,16 +59,20 @@ Tiêu chí đánh giá:
 3. ai_reasoning: Giải thích ngắn gọn lý do vì sao cho điểm như vậy.
 """
     
-    completion = client.beta.chat.completions.parse(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "Bạn là chuyên gia thẩm định dự án và chấm điểm khách hàng tiềm năng."},
-            {"role": "user", "content": prompt}
-        ],
-        response_format=AIQualificationSchema,
-        temperature=0
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash",
+        system_instruction="Bạn là chuyên gia thẩm định dự án và chấm điểm khách hàng tiềm năng."
     )
-    return completion.choices[0].message.parsed
+    
+    response = model.generate_content(
+        prompt,
+        generation_config={
+            "response_mime_type": "application/json",
+            "response_schema": AIQualificationSchema,
+            "temperature": 0.0
+        }
+    )
+    return AIQualificationSchema.model_validate_json(response.text)
 
 @app.post("/api/v1/leads", dependencies=[Depends(verify_api_key)], response_model=dict)
 async def create_and_qualify_lead(payload: LeadCreateSchema, db: Session = Depends(get_db)):
