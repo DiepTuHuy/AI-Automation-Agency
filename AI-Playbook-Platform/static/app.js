@@ -354,12 +354,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (diffEl) lastSelectedDifficulty = diffEl.value;
     if (limitEl) lastSelectedLimit = parseInt(limitEl.value, 10);
 
+    const friendlyDiff = lastSelectedDifficulty === 'easy' ? 'Dễ' : lastSelectedDifficulty === 'hard' ? 'Khó' : 'Trung bình';
+
     quizArea.innerHTML = `
-      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; height: 100%; min-height: 200px;">
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; height: 100%; min-height: 200px; padding: 0 10px; width: 100%;">
         <div class="loading-spinner"></div>
-        <span style="color: var(--text-secondary); font-size: 12.5px; text-align: center; line-height: 1.5;">Gemini đang phân tích bài giảng và biên soạn ${lastSelectedLimit} câu hỏi trắc nghiệm (${lastSelectedDifficulty === 'easy' ? 'Dễ' : lastSelectedDifficulty === 'hard' ? 'Khó' : 'Trung bình'})...</span>
+        <span style="color: var(--text-secondary); font-size: 12.5px; text-align: center; line-height: 1.5;">
+          Gemini đang phân tích bài giảng và biên soạn ${lastSelectedLimit} câu hỏi trắc nghiệm (${friendlyDiff})...
+        </span>
+        <div style="width: 100%; height: 6px; background: #e7e7e4; border-radius: 4px; overflow: hidden; margin-top: 8px; position: relative;">
+          <div id="quiz-progress-bar" style="width: 0%; height: 100%; background: var(--color-accent); border-radius: 4px; transition: width 0.2s ease-out;"></div>
+        </div>
+        <span id="quiz-progress-text" style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Đang khởi tạo kết nối... 0%</span>
       </div>
     `;
+
+    // Start progress simulation based on selected limit
+    let progress = 0;
+    const estimatedDuration = 2000 + lastSelectedLimit * 500; // time depends on question count
+    const intervalTime = 100;
+    const increment = 95 / (estimatedDuration / intervalTime);
+
+    const progressInterval = setInterval(() => {
+      progress = Math.min(95, progress + increment);
+      const progressBar = document.getElementById('quiz-progress-bar');
+      const progressText = document.getElementById('quiz-progress-text');
+      if (progressBar) progressBar.style.width = `${Math.round(progress)}%`;
+      if (progressText) {
+        if (progress < 25) {
+          progressText.textContent = `Đang đọc nội dung bài học... ${Math.round(progress)}%`;
+        } else if (progress < 60) {
+          progressText.textContent = `Gemini đang biên soạn đề thi... ${Math.round(progress)}%`;
+        } else if (progress < 85) {
+          progressText.textContent = `Đang tối ưu cấu trúc đáp án... ${Math.round(progress)}%`;
+        } else {
+          progressText.textContent = `Đang đóng gói dữ liệu phản hồi... ${Math.round(progress)}%`;
+        }
+      }
+    }, intervalTime);
 
     fetch(`/api/quiz?path=${encodeURIComponent(currentFilePath)}&difficulty=${lastSelectedDifficulty}&limit=${lastSelectedLimit}`)
       .then(res => {
@@ -369,9 +401,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return res.json();
       })
       .then(data => {
-        renderQuiz(data.questions);
+        clearInterval(progressInterval);
+        
+        // Show 100% completed state before rendering questions
+        const progressBar = document.getElementById('quiz-progress-bar');
+        const progressText = document.getElementById('quiz-progress-text');
+        if (progressBar) progressBar.style.width = '100%';
+        if (progressText) progressText.textContent = 'Hoàn tất biên soạn! 100%';
+
+        setTimeout(() => {
+          try {
+            renderQuiz(data.questions);
+          } catch (parseErr) {
+            throw new Error('Lỗi hiển thị câu hỏi trắc nghiệm: ' + parseErr.message);
+          }
+        }, 200);
       })
       .catch(err => {
+        clearInterval(progressInterval);
         quizArea.innerHTML = `
           <div style="color: var(--color-error); text-align: center; padding: 20px;">
             <p>Lỗi tạo trắc nghiệm: ${err.message}</p>
