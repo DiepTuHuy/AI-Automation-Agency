@@ -451,13 +451,10 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     
     const btnGroup = document.createElement('div');
-    btnGroup.style.display = 'flex';
-    btnGroup.style.gap = '6px';
+    btnGroup.className = 'quiz-btn-group';
 
     const changeConfigBtn = document.createElement('button');
-    changeConfigBtn.className = 'btn-secondary';
-    changeConfigBtn.style.fontSize = '11px';
-    changeConfigBtn.style.padding = '4px 10px';
+    changeConfigBtn.className = 'quiz-btn-outline';
     changeConfigBtn.textContent = '⚙️ Đổi đề';
     changeConfigBtn.addEventListener('click', () => {
       resetQuizArea();
@@ -466,9 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnGroup.appendChild(changeConfigBtn);
     
     const regenBtn = document.createElement('button');
-    regenBtn.className = 'btn-secondary';
-    regenBtn.style.fontSize = '11px';
-    regenBtn.style.padding = '4px 10px';
+    regenBtn.className = 'quiz-btn-solid';
     regenBtn.textContent = '🔄 Tạo lại';
     regenBtn.addEventListener('click', generateQuiz);
     btnGroup.appendChild(regenBtn);
