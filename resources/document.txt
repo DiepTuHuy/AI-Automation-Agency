@@ -1,0 +1,16 @@
+HỌC VIỆN ĐÀO TẠO AI AUTOMATION ACADEMY
+Tài liệu thực hành kiểm thử Hệ thống RAG và Chatbot thông minh.
+
+Trí tuệ nhân tạo (AI) và Tự động hóa quy trình (Automation) đang thay đổi cách thức các doanh nghiệp vận hành. Trong kỷ nguyên số hóa, việc tối ưu hóa hiệu suất làm việc của nhân sự thông qua việc áp dụng các AI Agent tự hành là một chiến lược sống còn của mọi tập đoàn lớn.
+
+Học viện AI Automation cung cấp chương trình đào tạo thực chiến từ các nguyên lý cơ bản nhất (First Principles) cho đến các kỹ thuật triển khai tiên tiến (Production Engineering). Chương trình học tập giúp các kỹ sư xây dựng tư duy hệ thống vững chắc và làm chủ các công cụ hiện đại như FastAPI, n8n, ChromaDB, và MCP Servers.
+
+Cấu trúc cốt lõi của một quy trình tự động hóa AI (Agentic Workflow) bao gồm:
+1. Tiếp nhận dữ liệu nguồn: Có thể là tài liệu văn bản thô, file PDF hóa đơn, webhook từ WooCommerce, hoặc email khách hàng gửi đến.
+2. Bộ động cơ suy luận (LLM Reasoning Engine): Nhận prompt ngữ cảnh và thực hiện suy luận logic để trích xuất thông tin, đưa ra quyết định rẽ nhánh.
+3. Thực thi công cụ (Tool Execution): AI tự động gọi các API bên ngoài, thực hiện truy vấn cơ sở dữ liệu SQL/NoSQL, ghi nhận file cấu hình hoặc ghi chép báo cáo ra file Excel.
+4. Đầu ra chuẩn hóa (Structured Outputs): Trả về dữ liệu dạng JSON sạch để các hệ thống phần mềm khác dễ dàng kế thừa thông tin và tiếp tục xử lý tự động.
+
+Việc tối ưu chi phí sử dụng API luôn là bài toán quan trọng hàng đầu của một Solution Architect. Để làm được điều này, kỹ sư cần hiểu sâu về cơ chế phân tách Token (Tokenizer), quản lý chặt chẽ dung lượng cửa sổ ngữ cảnh (Context Window) và áp dụng các kỹ thuật như Prompt Caching hay SQLite Caching ở phía client.
+
+Chúc các học viên hoàn thành xuất sắc các bài tập thực hành trong giáo trình và tự tin triển khai các dự án thực tế cho doanh nghiệp!

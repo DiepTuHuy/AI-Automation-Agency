@@ -86,9 +86,9 @@ if __name__ == "__main__":
 ```
 
 ### Bài tập 2: Bộ đếm và tính toán chi phí token thời gian thực (Mức độ: Khó)
-* **Đề bài**: Viết một script Python nhận văn bản đầu vào từ file `document.txt`. Sử dụng thư viện gọi API Gemini để đếm chính xác số lượng token của tệp tin này bằng hàm `count_tokens()` của SDK, sau đó tự động tính toán chi phí gọi API thực tế của cả luồng Input và Output.
+* **Đề bài**: Viết một script Python nhận văn bản đầu vào từ file [document.txt](../../resources/document.txt). Sử dụng thư viện gọi API Gemini để đếm chính xác số lượng token của tệp tin này bằng hàm `count_tokens()` của SDK, sau đó tự động tính toán chi phí gọi API thực tế của cả luồng Input và Output.
 * **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
-  1. Đọc nội dung file văn bản bằng `Path("document.txt").read_text()`.
+  1. Đọc nội dung file văn bản bằng `Path("document.txt").read_text()` (Tải tệp tin [document.txt](../../resources/document.txt) về máy để làm tài liệu đầu vào).
   2. Gọi `model.count_tokens(text)` để nhận số lượng token chính xác từ server Google.
   3. Áp dụng đơn giá thực tế của Gemini 2.5 Flash để in ra bảng chi phí chi tiết.

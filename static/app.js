@@ -309,8 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return res.text();
       })
       .then(markdownText => {
-        // Render Markdown content
-        markdownSection.innerHTML = marked.parse(markdownText);
+        // Render Markdown content and rewrite resource relative links for the web app root context
+        let htmlContent = marked.parse(markdownText);
+        htmlContent = htmlContent.replace(/href="\.\.\/\.\.\/resources\//g, 'href="./resources/');
+        markdownSection.innerHTML = htmlContent;
         
         // Highlight code syntax
         markdownSection.querySelectorAll('pre code').forEach((block) => {

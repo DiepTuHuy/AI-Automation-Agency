@@ -1,0 +1,11 @@
+transaction_id,date,client_name,amount_usd,status,commission
+T1001,2026-06-20,Alpha Corp,1200.0,active,0.0
+T1002,2026-06-21,Beta Inc,450.0,active,0.0
+T1003,2026-06-22,Gamma LLC,800.0,inactive,0.0
+T1004,2026-06-23,Delta Ltd,2500.0,active,0.0
+T1005,2026-06-24,Epsilon Co,150.0,active,0.0
+T1006,2026-06-25,Zeta Partners,3500.0,active,0.0
+T1007,2026-06-26,Eta Global,620.0,inactive,0.0
+T1008,2026-06-27,Theta Corp,1800.0,active,0.0
+T1009,2026-06-28,Iota Systems,950.0,active,0.0
+T1010,2026-06-29,Kappa Tech,4100.0,active,0.0

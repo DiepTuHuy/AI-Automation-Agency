@@ -98,9 +98,9 @@ if __name__ == "__main__":
 ```
 
 ### Bài tập 2: Phân tích doanh thu và xuất báo cáo Excel (Mức độ: Khó)
-* **Đề bài**: Đọc một file dữ liệu CSV chứa lịch sử mua hàng của doanh nghiệp. Sử dụng Pandas để gom nhóm (`groupby`) theo nhóm hàng, tính tổng doanh thu của từng nhóm và lưu kết quả báo cáo sạch sẽ sang một file Excel (`report.xlsx`).
+* **Đề bài**: Đọc một file dữ liệu CSV chứa lịch sử mua hàng của doanh nghiệp (Tải tệp tin mẫu [transactions.csv](../../resources/transactions.csv) về máy). Sử dụng Pandas để gom nhóm (`groupby`) theo tên khách hàng (`client_name`), tính tổng chi tiêu của từng khách hàng và lưu kết quả báo cáo sạch sẽ sang một file Excel (`report.xlsx`).
 * **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
-  1. Sử dụng `pd.read_csv()` để nạp tệp dữ liệu.
-  2. Sử dụng `df.groupby("Category")["Revenue"].sum()` để tổng hợp dữ liệu.
+  1. Sử dụng `pd.read_csv()` để nạp tệp dữ liệu [transactions.csv](../../resources/transactions.csv).
+  2. Sử dụng `df.groupby("client_name")["amount_usd"].sum()` để tổng hợp dữ liệu.
   3. Ghi dữ liệu ra file Excel bằng hàm `to_excel()`.

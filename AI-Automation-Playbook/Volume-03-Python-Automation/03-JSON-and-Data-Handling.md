@@ -106,9 +106,9 @@ if __name__ == "__main__":
 ```
 
 ### Bài tập 2: Cập nhật tồn kho tự động trong file JSON lớn (Mức độ: Khó)
-* **Đề bài**: Viết một script đọc tệp cấu hình tồn kho dạng JSON. Nếu số lượng một mặt hàng giảm xuống dưới 10, tự động cập nhật trạng thái `restock_needed: true` và ghi đè dữ liệu mới cập nhật lại vào tệp JSON ban đầu.
+* **Đề bài**: Viết một script đọc tệp cấu hình tồn kho dạng [inventory.json](../../resources/inventory.json). Nếu số lượng một mặt hàng giảm xuống dưới 10, tự động cập nhật trạng thái `restock_needed: true` và ghi đè dữ liệu mới cập nhật lại vào tệp JSON ban đầu.
 * **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
-  1. Sử dụng `json.load()` để đọc tệp từ đĩa cứng.
+  1. Sử dụng `json.load()` để đọc tệp từ đĩa cứng (Tải tệp tin mẫu [inventory.json](../../resources/inventory.json) về máy để làm tài liệu đầu vào).
   2. Duyệt qua mảng sản phẩm bằng vòng lặp và cập nhật điều kiện.
   3. Ghi lại dữ liệu bằng `json.dump(data, f, indent=4)` để lưu đè thay đổi.

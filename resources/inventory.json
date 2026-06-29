@@ -1,0 +1,54 @@
+{
+    "store_name": "AI Academy Tech Warehouse",
+    "updated_at": "2026-06-29T12:00:00Z",
+    "items": [
+        {
+            "id": "item_01",
+            "name": "Bàn phím cơ Keychron Q1",
+            "category": "Hardware",
+            "stock": 15,
+            "price_usd": 180.0,
+            "restock_needed": false
+        },
+        {
+            "id": "item_02",
+            "name": "Chuột không dây Logitech MX Master 3S",
+            "category": "Hardware",
+            "stock": 8,
+            "price_usd": 99.0,
+            "restock_needed": false
+        },
+        {
+            "id": "item_03",
+            "name": "Tai nghe Sony WH-1000XM5",
+            "category": "Hardware",
+            "stock": 5,
+            "price_usd": 349.0,
+            "restock_needed": false
+        },
+        {
+            "id": "item_04",
+            "name": "Màn hình Dell UltraSharp 27 inch",
+            "category": "Hardware",
+            "stock": 12,
+            "price_usd": 450.0,
+            "restock_needed": false
+        },
+        {
+            "id": "item_05",
+            "name": "Cáp chuyển đổi USB-C sang HDMI",
+            "category": "Accessories",
+            "stock": 25,
+            "price_usd": 15.0,
+            "restock_needed": false
+        },
+        {
+            "id": "item_06",
+            "name": "Đế tản nhiệt Laptop",
+            "category": "Accessories",
+            "stock": 4,
+            "price_usd": 25.0,
+            "restock_needed": false
+        }
+    ]
+}
