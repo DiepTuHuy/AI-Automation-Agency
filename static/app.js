@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
             chapEl.setAttribute('data-path', fileFullPath);
 
             const cleanFileName = file.replace(/^\d+-/, '').replace(/-/g, ' ').replace('.md', '');
-            chapEl.textContent = cleanFileName === 'README' ? 'Giới thiệu Volume' : ` ${cleanFileName}`;
+            chapEl.textContent = cleanFileName === 'README' ? 'Giới thiệu Competency' : ` ${cleanFileName}`;
             
             chapEl.addEventListener('click', (e) => {
               e.stopPropagation();

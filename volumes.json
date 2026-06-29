@@ -7,7 +7,7 @@
     ]
   },
   {
-    "name": "Volume-00-Orientation",
+    "name": "Competency-00-Orientation",
     "path": "AI-Automation-Playbook/Volume-00-Orientation",
     "files": [
       "01-Introduction-to-AI-Automation.md",
@@ -17,7 +17,7 @@
     ]
   },
   {
-    "name": "Volume-01-LLM-Fundamentals",
+    "name": "Competency-01-LLM-Fundamentals",
     "path": "AI-Automation-Playbook/Volume-01-LLM-Fundamentals",
     "files": [
       "01-What-is-an-LLM.md",
@@ -28,7 +28,7 @@
     ]
   },
   {
-    "name": "Volume-02-Prompt-Engineering",
+    "name": "Competency-02-Prompt-Engineering",
     "path": "AI-Automation-Playbook/Volume-02-Prompt-Engineering",
     "files": [
       "01-Zero-Few-Shot-Learning.md",
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "name": "Volume-03-Python-Automation",
+    "name": "Competency-03-Python-Automation",
     "path": "AI-Automation-Playbook/Volume-03-Python-Automation",
     "files": [
       "01-Environment-Setup-and-Pathlib.md",
@@ -52,7 +52,7 @@
     ]
   },
   {
-    "name": "Volume-04-API-FastAPI",
+    "name": "Competency-04-API-FastAPI",
     "path": "AI-Automation-Playbook/Volume-04-API-FastAPI",
     "files": [
       "01-REST-API-Principles.md",
@@ -64,7 +64,7 @@
     ]
   },
   {
-    "name": "Volume-05-Workflow-Automation",
+    "name": "Competency-05-Workflow-Automation",
     "path": "AI-Automation-Playbook/Volume-05-Workflow-Automation",
     "files": [
       "01-Introduction-to-n8n.md",
@@ -76,7 +76,7 @@
     ]
   },
   {
-    "name": "Volume-06-Database",
+    "name": "Competency-06-Database",
     "path": "AI-Automation-Playbook/Volume-06-Database",
     "files": [
       "01-Relational-DB-Concepts-and-SQL.md",
@@ -87,7 +87,7 @@
     ]
   },
   {
-    "name": "Volume-07-Embedding-Vector-Database",
+    "name": "Competency-07-Embedding-Vector-Database",
     "path": "AI-Automation-Playbook/Volume-07-Embedding-Vector-Database",
     "files": [
       "01-What-are-Embeddings.md",
@@ -98,7 +98,7 @@
     ]
   },
   {
-    "name": "Volume-08-RAG",
+    "name": "Competency-08-RAG",
     "path": "AI-Automation-Playbook/Volume-08-RAG",
     "files": [
       "01-RAG-Architecture.md",
@@ -109,7 +109,7 @@
     ]
   },
   {
-    "name": "Volume-09-AI-Agents",
+    "name": "Competency-09-AI-Agents",
     "path": "AI-Automation-Playbook/Volume-09-AI-Agents",
     "files": [
       "01-Agentic-Workflows-vs-Linear-Pipelines.md",
@@ -120,7 +120,7 @@
     ]
   },
   {
-    "name": "Volume-10-MCP",
+    "name": "Competency-10-MCP",
     "path": "AI-Automation-Playbook/Volume-10-MCP",
     "files": [
       "01-What-is-MCP.md",
@@ -131,7 +131,7 @@
     ]
   },
   {
-    "name": "Volume-11-Deployment",
+    "name": "Competency-11-Deployment",
     "path": "AI-Automation-Playbook/Volume-11-Deployment",
     "files": [
       "01-Docker-and-Containerization.md",
@@ -142,7 +142,7 @@
     ]
   },
   {
-    "name": "Volume-12-Production-Engineering",
+    "name": "Competency-12-Production-Engineering",
     "path": "AI-Automation-Playbook/Volume-12-Production-Engineering",
     "files": [
       "01-Monitoring-and-Observability-LangSmith.md",
@@ -152,7 +152,7 @@
     ]
   },
   {
-    "name": "Volume-13-Portfolio",
+    "name": "Competency-13-Portfolio",
     "path": "AI-Automation-Playbook/Volume-13-Portfolio",
     "files": [
       "01-Building-Your-Professional-GitHub.md",
@@ -163,7 +163,7 @@
     ]
   },
   {
-    "name": "Volume-14-AI-Automation-Business",
+    "name": "Competency-14-AI-Automation-Business",
     "path": "AI-Automation-Playbook/Volume-14-AI-Automation-Business",
     "files": [
       "01-Finding-Your-Niche-and-Offers.md",
@@ -174,7 +174,7 @@
     ]
   },
   {
-    "name": "Volume-15-Client-Projects",
+    "name": "Competency-15-Client-Projects",
     "path": "AI-Automation-Playbook/Volume-15-Client-Projects",
     "files": [
       "01-Discovery-and-Scoping-Sessions.md",
@@ -184,7 +184,7 @@
     ]
   },
   {
-    "name": "Volume-16-Scaling",
+    "name": "Competency-16-Scaling",
     "path": "AI-Automation-Playbook/Volume-16-Scaling",
     "files": [
       "01-Standard-Operating-Procedures-SOPs.md",
@@ -194,7 +194,7 @@
     ]
   },
   {
-    "name": "Volume-17-AI-SaaS",
+    "name": "Competency-17-AI-SaaS",
     "path": "AI-Automation-Playbook/Volume-17-AI-SaaS",
     "files": [
       "01-SaaS-Architecture-and-Multi-Tenancy.md",
