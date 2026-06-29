@@ -319,61 +319,37 @@ document.addEventListener('DOMContentLoaded', () => {
           hljs.highlightElement(block);
         });
 
-        // Inject download buttons for Mini Project exercises
+        // Inject download buttons for exercises that have related resource files
         markdownSection.querySelectorAll('h3').forEach(h3 => {
           const headingText = h3.textContent;
-          if (headingText.includes('Bài tập 1:') || headingText.includes('Bài tập 1 :')) {
-            // Find filename from sibling list
-            let filenameEx1 = 'exercise_1.py';
-            const sibling = h3.nextElementSibling;
-            if (sibling && sibling.tagName === 'UL') {
-              sibling.querySelectorAll('li').forEach(li => {
-                const match = li.textContent.match(/(?:Mã nguồn mẫu|Tài liệu sườn mẫu)\s*\(([^)]+)\)/);
-                if (match) {
-                  filenameEx1 = match[1].trim();
-                }
-              });
-            }
-            const ext = filenameEx1.substring(filenameEx1.lastIndexOf('.'));
-            const chapFolder = currentChapter.replace('.md', '');
-            const downloadUrl = `./MiniProjects/${currentVolume}/${chapFolder}/${filenameEx1}`;
+          if (headingText.includes('Bài tập 1:') || headingText.includes('Bài tập 1 :') ||
+              headingText.includes('Bài tập 2:') || headingText.includes('Bài tập 2 :')) {
             
-            // Create button
-            const btn = document.createElement('a');
-            btn.href = downloadUrl;
-            btn.download = filenameEx1;
-            btn.className = 'download-starter-btn';
-            btn.textContent = 'Tải file mẫu';
-            h3.appendChild(btn);
-          } else if (headingText.includes('Bài tập 2:') || headingText.includes('Bài tập 2 :')) {
-            // Find extension from previous sibling or fallback
-            let ext = '.py';
-            let sibling = h3.previousElementSibling;
-            while (sibling) {
-              if (sibling.tagName === 'UL') {
-                sibling.querySelectorAll('li').forEach(li => {
-                  const match = li.textContent.match(/(?:Mã nguồn mẫu|Tài liệu sườn mẫu)\s*\(([^)]+)\)/);
-                  if (match) {
-                    const fn = match[1].trim();
-                    ext = fn.substring(fn.lastIndexOf('.'));
-                  }
-                });
+            // Search next siblings until the next h3 or h2 or end of section
+            let resourceLink = null;
+            let sibling = h3.nextElementSibling;
+            while (sibling && sibling.tagName !== 'H3' && sibling.tagName !== 'H2') {
+              // Find any link that points to ./resources/
+              const link = sibling.querySelector('a[href^="./resources/"], a[href^="../../resources/"]');
+              if (link) {
+                resourceLink = link;
                 break;
               }
-              sibling = sibling.previousElementSibling;
+              sibling = sibling.nextElementSibling;
             }
             
-            const filenameEx2 = `exercise_2${ext}`;
-            const chapFolder = currentChapter.replace('.md', '');
-            const downloadUrl = `./MiniProjects/${currentVolume}/${chapFolder}/${filenameEx2}`;
-            
-            // Create button
-            const btn = document.createElement('a');
-            btn.href = downloadUrl;
-            btn.download = filenameEx2;
-            btn.className = 'download-starter-btn';
-            btn.textContent = 'Tải file mẫu';
-            h3.appendChild(btn);
+            if (resourceLink) {
+              const href = resourceLink.getAttribute('href');
+              const filename = href.substring(href.lastIndexOf('/') + 1);
+              
+              // Create download button next to the H3
+              const btn = document.createElement('a');
+              btn.href = href;
+              btn.download = filename;
+              btn.className = 'download-starter-btn';
+              btn.textContent = 'Tải tài liệu';
+              h3.appendChild(btn);
+            }
           }
         });
 
