@@ -240,7 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const chaptersEl = document.createElement('div');
           chaptersEl.className = 'volume-chapters';
           
-          vol.files.sort().forEach(file => {
+          const sortedFiles = [...vol.files].sort((a, b) => {
+            if (a.toLowerCase() === 'readme.md') return -1;
+            if (b.toLowerCase() === 'readme.md') return 1;
+            return a.localeCompare(b);
+          });
+
+          sortedFiles.forEach(file => {
             const chapEl = document.createElement('div');
             chapEl.className = 'chapter-item';
             

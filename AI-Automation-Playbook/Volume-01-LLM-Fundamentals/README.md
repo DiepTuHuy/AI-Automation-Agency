@@ -69,7 +69,7 @@ LLM là trái tim của mọi hệ thống AI Agent và Workflow tự động. N
 
 ## 10. Engineering Mindset (Tư duy kỹ sư)
 Một Kỹ sư AI luôn tính toán chi phí trước khi code:
-$$	ext{Total Cost} = (	ext{Input Tokens} 	imes 	ext{Input Price}) + (	ext{Output Tokens} 	imes 	ext{Output Price})$$
+$$\\text{Total Cost} = (\\text{Input Tokens} \\times \\text{Input Price}) + (\\text{Output Tokens} \\times \\text{Output Price})$$
 Nếu hệ thống của bạn xử lý 10,000 khách hàng/ngày, việc tối ưu hóa 100 token/lượt gọi prompt sẽ giúp doanh nghiệp tiết kiệm hàng nghìn USD mỗi năm.
 
 ---

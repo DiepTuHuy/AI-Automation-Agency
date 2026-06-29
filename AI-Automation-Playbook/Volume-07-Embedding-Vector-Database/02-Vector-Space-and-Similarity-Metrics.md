@@ -7,8 +7,7 @@ Khi đã biểu diễn văn bản dưới dạng các vector tọa độ, làm t
 ### 1. Cosine Similarity (Độ tương đồng Cosine)
 Đo góc giữa hai vector trong không gian nhiều chiều, bất kể độ dài của vector.
 - **Công thức**:
-  $$	ext{Cosine Similarity} = 
-rac{A \cdot B}{\|A\| \|B\|}$$
+  $$\\text{Cosine Similarity} = \\frac{A \\cdot B}{\\|A\\| \\|B\\|}$$
 - **Giá trị**: Từ -1 đến 1. Trong so sánh văn bản, giá trị thường từ 0 (không liên quan) đến 1 (trùng lặp ý nghĩa).
 - *Tại sao được ưa chuộng*: Phù hợp nhất cho văn bản vì nó không bị ảnh hưởng bởi độ dài ngắn của đoạn văn (độ dài vector).
 
