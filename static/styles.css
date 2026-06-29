@@ -1098,4 +1098,28 @@ body.quiz-open .drawer-backdrop {
   }
 }
 
+/* Download Starter File Button */
+.download-starter-btn {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 15px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--color-accent);
+  text-decoration: none !important;
+  transition: var(--transition-smooth);
+  line-height: 1.2;
+}
+
+.download-starter-btn:hover {
+  background-color: var(--color-accent);
+  color: #ffffff !important;
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
 

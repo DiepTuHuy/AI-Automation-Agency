@@ -317,6 +317,64 @@ document.addEventListener('DOMContentLoaded', () => {
           hljs.highlightElement(block);
         });
 
+        // Inject download buttons for Mini Project exercises
+        markdownSection.querySelectorAll('h3').forEach(h3 => {
+          const headingText = h3.textContent;
+          if (headingText.includes('Bài tập 1:') || headingText.includes('Bài tập 1 :')) {
+            // Find filename from sibling list
+            let filenameEx1 = 'exercise_1.py';
+            const sibling = h3.nextElementSibling;
+            if (sibling && sibling.tagName === 'UL') {
+              sibling.querySelectorAll('li').forEach(li => {
+                const match = li.textContent.match(/(?:Mã nguồn mẫu|Tài liệu sườn mẫu)\s*\(([^)]+)\)/);
+                if (match) {
+                  filenameEx1 = match[1].trim();
+                }
+              });
+            }
+            const ext = filenameEx1.substring(filenameEx1.lastIndexOf('.'));
+            const chapFolder = currentChapter.replace('.md', '');
+            const downloadUrl = `./MiniProjects/${currentVolume}/${chapFolder}/${filenameEx1}`;
+            
+            // Create button
+            const btn = document.createElement('a');
+            btn.href = downloadUrl;
+            btn.download = filenameEx1;
+            btn.className = 'download-starter-btn';
+            btn.textContent = 'Tải file mẫu';
+            h3.appendChild(btn);
+          } else if (headingText.includes('Bài tập 2:') || headingText.includes('Bài tập 2 :')) {
+            // Find extension from previous sibling or fallback
+            let ext = '.py';
+            let sibling = h3.previousElementSibling;
+            while (sibling) {
+              if (sibling.tagName === 'UL') {
+                sibling.querySelectorAll('li').forEach(li => {
+                  const match = li.textContent.match(/(?:Mã nguồn mẫu|Tài liệu sườn mẫu)\s*\(([^)]+)\)/);
+                  if (match) {
+                    const fn = match[1].trim();
+                    ext = fn.substring(fn.lastIndexOf('.'));
+                  }
+                });
+                break;
+              }
+              sibling = sibling.previousElementSibling;
+            }
+            
+            const filenameEx2 = `exercise_2${ext}`;
+            const chapFolder = currentChapter.replace('.md', '');
+            const downloadUrl = `./MiniProjects/${currentVolume}/${chapFolder}/${filenameEx2}`;
+            
+            // Create button
+            const btn = document.createElement('a');
+            btn.href = downloadUrl;
+            btn.download = filenameEx2;
+            btn.className = 'download-starter-btn';
+            btn.textContent = 'Tải file mẫu';
+            h3.appendChild(btn);
+          }
+        });
+
         // Render LaTeX math formulas
         if (typeof renderMathInElement === 'function') {
           renderMathInElement(markdownSection, {
