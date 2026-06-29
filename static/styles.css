@@ -1122,4 +1122,28 @@ body.quiz-open .drawer-backdrop {
   transform: translateY(-1px);
 }
 
+/* Premium Academic-style Inline Document Links */
+.markdown-section a:not(.download-starter-btn) {
+  font-family: var(--font-body);
+  background: #ecece8;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--color-accent);
+  border: 1px solid #dcdcd8;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+.markdown-section a:not(.download-starter-btn):hover {
+  background: var(--color-accent);
+  color: #ffffff !important;
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
 
