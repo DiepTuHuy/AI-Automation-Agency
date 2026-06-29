@@ -121,7 +121,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Xây dựng Endpoint nhận Webhook xác nhận thanh toán (Mức độ: Khó)
 * **Đề bài**: Xây dựng một endpoint `/webhook` trong FastAPI sử dụng thư viện `stripe` để tiếp nhận các thông báo đẩy tự động từ Stripe (Stripe Webhooks). Khi nhận sự kiện thanh toán thành công `checkout.session.completed`, tự động cập nhật trạng thái gói cước của Tenant tương ứng trong cơ sở dữ liệu.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng `stripe.Webhook.construct_event` để xác thực chữ ký bảo mật gửi từ Stripe.
   2. Bắt sự kiện `event['type'] == 'checkout.session.completed'`.

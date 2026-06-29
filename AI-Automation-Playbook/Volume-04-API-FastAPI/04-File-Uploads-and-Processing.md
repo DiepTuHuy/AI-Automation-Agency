@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: API phân tích cấu trúc file CSV được tải lên (Mức độ: Khó)
 * **Đề bài**: Xây dựng API tiếp nhận tải lên một file CSV chứa bảng lương nhân viên. Script xử lý bất đồng bộ file CSV vừa tải lên, sử dụng thư viện `pandas` để tính tổng lương thực lĩnh của toàn bộ nhân viên và trả về kết quả phân tích thống kê dạng JSON.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Đọc nội dung file CSV trực tiếp bằng `io.StringIO` từ tệp UploadFile mà không cần lưu xuống đĩa.
   2. Sử dụng `pd.read_csv()` để nạp dữ liệu vào DataFrame.

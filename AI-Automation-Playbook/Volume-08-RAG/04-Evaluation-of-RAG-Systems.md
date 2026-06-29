@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Xây dựng bộ khung kiểm thử tự động hệ thống RAG (Mức độ: Khó)
 * **Đề bài**: Viết một script chạy kiểm thử tự động trên một bộ dữ liệu gồm 5 câu hỏi test (Test Set). Thực hiện gọi hệ thống RAG của bạn, lấy câu trả lời và tự động chấm điểm độ chính xác cho từng câu. Xuất báo cáo thống kê tỷ lệ % vượt qua kiểm thử (Pass Rate) ra file markdown.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Tạo danh sách các test cases gồm câu hỏi và context chuẩn.
   2. Viết vòng lặp gửi request kiểm tra và gọi hàm đánh giá `evaluate_faithfulness`.

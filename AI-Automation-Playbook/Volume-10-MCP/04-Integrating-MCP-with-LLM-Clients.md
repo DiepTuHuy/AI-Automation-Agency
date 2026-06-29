@@ -63,7 +63,7 @@ Cấu hình thành công Claude Desktop để sử dụng máy chủ MCP đọc 
 
 ### Bài tập 2: Tự động chạy Custom MCP Server qua môi trường ảo Pipenv (Mức độ: Khó)
 * **Đề bài**: Cấu hình tích hợp Custom MCP Server vào Claude Desktop sao cho server được chạy trong môi trường ảo độc lập (sử dụng `pipenv` hoặc `poetry` hoặc `venv`) nhằm quản lý các thư viện phụ thuộc một cách an toàn mà không ảnh hưởng tới Python hệ thống.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Cấu hình trường `command` trong file config thành đường dẫn trực tiếp tới thư mục chạy của môi trường ảo (ví dụ: `/path/to/venv/bin/python`).
   - Đảm bảo môi trường ảo đó đã được cài đặt đầy đủ gói `mcp` SDK.

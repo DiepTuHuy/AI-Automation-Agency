@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Quản lý kết nối PostgreSQL bằng Connection Pool (Mức độ: Khó)
 * **Đề bài**: Viết một script Python sử dụng thư viện `psycopg2` để kết nối đến một database PostgreSQL từ xa. Sử dụng `SimpleConnectionPool` để tối ưu quản lý kết nối khi có nhiều truy vấn xảy ra đồng thời.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng thư viện `psycopg2.pool.SimpleConnectionPool` để mở pool kết nối tối thiểu là 1 và tối đa là 10.
   2. Sử dụng cấu trúc `try-except-finally` để lấy kết nối ra từ pool và trả lại pool sau khi thực thi thành công.

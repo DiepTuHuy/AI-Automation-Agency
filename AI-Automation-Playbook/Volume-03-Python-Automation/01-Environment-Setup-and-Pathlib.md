@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Quét và lưu trữ log cũ theo thời gian (Mức độ: Khó)
 * **Đề bài**: Viết một script Python tự động tìm kiếm tất cả các tệp có đuôi `.log` trong một thư mục dự án. Kiểm tra ngày sửa đổi cuối cùng của tệp, nếu tệp đã được sửa đổi cách đây hơn 7 ngày, hãy nén tệp đó thành định dạng `.zip` và lưu vào thư mục `archive_logs`, sau đó xóa tệp `.log` gốc để tiết kiệm bộ nhớ.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng `Path.stat().st_mtime` để lấy thời gian sửa đổi cuối cùng của tệp.
   2. Sử dụng thư viện `zipfile` của Python để thực hiện nén tệp tin.

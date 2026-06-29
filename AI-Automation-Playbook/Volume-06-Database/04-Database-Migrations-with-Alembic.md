@@ -75,7 +75,7 @@ Cấu hình và sử dụng Alembic để thêm cột mới `phone` vào bảng 
 
 ### Bài tập 2: Thực hiện Rollback khi phát hiện lỗi thiết kế (Mức độ: Khó)
 * **Đề bài**: Thực hiện sửa đổi cấu trúc bảng `users` (thêm cột `phone`). Chạy migration để áp dụng lên DB. Sau đó giả lập phát hiện lỗi và thực hiện rollback phiên bản database quay trở lại trạng thái trước khi thêm cột `phone` một cách an toàn mà không làm mất dữ liệu cũ.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Tạo thêm 1 migration mới bằng lệnh: `alembic revision --autogenerate -m "add phone column"`.
   - Thực thi nâng cấp: `alembic upgrade head`.

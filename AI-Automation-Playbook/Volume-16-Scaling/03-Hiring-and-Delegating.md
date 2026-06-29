@@ -60,7 +60,7 @@ Hãy viết một script Python hoàn chỉnh thực hiện các yêu cầu sau:
 
 ### Bài tập 2: Quy trình Đánh giá bài test năng lực lập trình viên đầu vào (Mức độ: Khó)
 * **Đề bài**: Thiết kế một bài test năng lực thực hành (Technical Assessment Task) dài 4 giờ dành cho ứng viên lập trình viên AI ứng tuyển vào công ty của bạn. Bài test phải yêu cầu ứng viên xây dựng một script Python giải quyết một bài toán cụ thể và đánh giá chất lượng viết code của họ.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Đề bài đề xuất: Viết script Python trích xuất thông tin thực thể từ đoạn văn bản thô sử dụng Structured Outputs.
   - Thiết lập các tiêu chuẩn đánh giá code: Khả năng bắt lỗi (Error Handling), cấu trúc thư mục sạch sẽ, tốc độ xử lý của code và cách viết tài liệu hướng dẫn chạy.

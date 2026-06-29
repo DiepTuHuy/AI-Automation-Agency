@@ -73,7 +73,7 @@ Trân trọng,
 
 ### Bài tập 2: Thiết kế kịch bản cuộc gọi tư vấn (Cold Calling Script) (Mức độ: Khó)
 * **Đề bài**: Hãy soạn thảo kịch bản cuộc gọi tư vấn (Cold Call Script) dài 3 phút để tiếp cận các chủ doanh nghiệp sản xuất. Kịch bản phải thiết kế các phương án xử lý lời từ chối thường gặp (ví dụ: "Anh không có thời gian", "Bên anh không cần AI").
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Thiết kế cấu trúc cuộc gọi gồm: 15 giây đầu thu hút chú ý -> Đưa ra dẫn chứng thực tế -> Hỏi câu hỏi khơi gợi nhu cầu -> Chốt cuộc hẹn tư vấn sâu hơn.
   - Chuẩn bị sẵn 3 câu trả lời thông minh để hóa giải các lời từ chối phổ biến.

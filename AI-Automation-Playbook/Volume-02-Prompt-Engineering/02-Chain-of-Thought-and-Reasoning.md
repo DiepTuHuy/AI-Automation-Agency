@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Lập lịch phân công công việc thông minh (CoT) (Mức độ: Khó)
 * **Đề bài**: Viết một script Python giải quyết bài toán phân chia công việc cho một dự án phát triển phần mềm gồm 3 dự án nhỏ cho 4 lập trình viên dựa trên thời gian rảnh và kỹ năng chuyên môn của họ. Yêu cầu mô hình bắt buộc phải phân tích khả năng của từng người và thời hạn (CoT) trước khi đưa ra kết quả phân bổ cuối cùng để tránh bị quá tải nhân lực.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Thiết lập bài toán với thông tin chi tiết của 4 lập trình viên (Kỹ năng, số giờ rảnh) và 3 dự án (Thời gian hoàn thành cần thiết, công nghệ sử dụng).
   2. Prompt yêu cầu mô hình phân tích: Bước 1 (Liệt kê tổng cung giờ rảnh theo ngôn ngữ), Bước 2 (Phân phối dự án ưu tiên cao nhất), Bước 3 (Kiểm tra xem có ai bị quá tải không).

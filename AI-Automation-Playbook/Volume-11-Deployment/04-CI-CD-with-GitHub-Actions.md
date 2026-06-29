@@ -94,7 +94,7 @@ jobs:
 
 ### Bài tập 2: Cấu hình tự động build và push Docker Image lên Docker Hub (Mức độ: Khó)
 * **Đề bài**: Viết một tệp cấu hình CI/CD hoàn chỉnh trong GitHub Actions. Mỗi khi có thẻ phiên bản mới (`tag` dạng `v*`) được tạo, tự động thực hiện build Docker Image từ mã nguồn và đẩy trực tiếp lên Docker Hub sử dụng biến bí mật Secrets.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Cấu hình điều kiện trigger: `on.push.tags = ["v*"]`.
   - Sử dụng các Action có sẵn: `docker/login-action` và `docker/build-push-action`.

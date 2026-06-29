@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Hệ thống quét giá sản phẩm thời gian thực (Mức độ: Khó)
 * **Đề bài**: Xây dựng một script bất đồng bộ tải thông tin giá của 5 mã cổ phiếu hoặc 5 mặt hàng từ API giả lập. Giới hạn thời gian tối đa cho mỗi request là 3 giây (timeout). Nếu quá thời gian, hủy tác vụ đó và chuyển sang xử lý kết quả của các tác vụ hoàn thành khác để tránh treo hệ thống.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng `asyncio.wait_for()` để thiết lập timeout cho từng task bất đồng bộ.
   2. Bọc khối lệnh trong `try-except asyncio.TimeoutError`.

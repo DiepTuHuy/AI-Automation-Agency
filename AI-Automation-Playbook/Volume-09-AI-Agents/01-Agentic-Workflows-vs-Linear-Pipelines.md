@@ -119,7 +119,7 @@ graph TD
 
 ### Bài tập 2: Thiết kế sơ đồ Agentic kiểm duyệt hóa đơn tự động (Mức độ: Khó)
 * **Đề bài**: Thiết kế sơ đồ Mermaid mô phỏng quy trình xử lý của một AI Agent kiểm duyệt hóa đơn thanh toán. Agent cần thực hiện: Trích xuất thông tin hóa đơn -> Gọi API kiểm tra xem hóa đơn có bị trùng lặp ID không -> Nếu trùng lặp, chuyển trạng thái Cảnh báo; nếu không trùng lặp, tự động phê duyệt thanh toán.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng cú pháp sơ đồ Mermaid dạng `flowchart TD` hoặc `sequenceDiagram`.
   - Phân tách rõ các bước thực thi công cụ (Tool Execution) và các bước ra quyết định của mô hình LLM.

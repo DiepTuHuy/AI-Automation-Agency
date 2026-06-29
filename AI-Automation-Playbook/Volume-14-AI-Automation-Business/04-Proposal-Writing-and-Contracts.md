@@ -71,7 +71,7 @@ Các tính năng sau KHÔNG nằm trong hợp đồng này (sẽ tính phí bổ
 
 ### Bài tập 2: Thiết kế điều khoản bảo mật dữ liệu trong hợp đồng (NDA Clause) (Mức độ: Khó)
 * **Đề bài**: Soạn thảo điều khoản bảo mật thông tin và sở hữu trí tuệ (Data Privacy & IP Ownership Clause) để đưa vào hợp đồng dịch vụ AI. Điều khoản cần nêu rõ: Toàn bộ dữ liệu huấn luyện của khách hàng là bảo mật tuyệt đối, AI Agent sau khi bàn giao sẽ thuộc quyền sở hữu của bên mua.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng ngôn ngữ pháp lý rõ ràng, mạch lạc của hợp đồng thương mại.
   - Quy định rõ trách nhiệm bồi thường thiệt hại nếu một trong hai bên làm rò rỉ mã nguồn hoặc dữ liệu khách hàng lên các nền tảng AI công cộng.

@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Thiết kế hệ thống bộ nhớ dài hạn lưu trữ SQLite (Mức độ: Khó)
 * **Đề bài**: Nâng cấp Chatbot ở Bài tập 1 thành hệ thống có bộ nhớ dài hạn (Long-term Memory). Mỗi khi kết thúc phiên trò chuyện, AI tự động trích xuất các sự kiện quan trọng về người dùng (ví dụ: tên, sở thích, dự án) và lưu trữ trực tiếp vào cơ sở dữ liệu SQLite để nạp lại ở phiên chat tiếp theo.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Tạo bảng `user_memories` trong SQLite gồm các trường: `key`, `value`.
   2. Viết prompt yêu cầu AI phân tích đoạn chat để trích xuất thông tin quan trọng dưới dạng cặp key-value.

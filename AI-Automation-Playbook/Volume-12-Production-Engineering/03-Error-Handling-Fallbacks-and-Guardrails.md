@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Bộ lọc từ ngữ nhạy cảm (Content Guardrails) (Mức độ: Khó)
 * **Đề bài**: Viết một script Python làm nhiệm vụ kiểm duyệt nội dung đầu vào. Trước khi gửi câu hỏi lên LLM, script sẽ quét các từ cấm trong file [blacklist.txt](../../resources/blacklist.txt) (Tải tệp tin mẫu về máy). Nếu phát hiện từ cấm, lập tức chặn cuộc gọi và báo lỗi. Sau khi nhận kết quả từ LLM, tiếp tục quét xem nội dung đầu ra có vi phạm chính sách an toàn không trước khi trả về cho khách hàng.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Tạo danh sách các từ cấm (Blacklist) đọc từ file [blacklist.txt](../../resources/blacklist.txt).
   2. Viết hàm kiểm tra đầu vào trước khi thực thi gọi API.

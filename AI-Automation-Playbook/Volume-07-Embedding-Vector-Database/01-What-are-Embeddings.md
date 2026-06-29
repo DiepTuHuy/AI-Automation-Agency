@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Tính toán độ tương đồng Cosine (Cosine Similarity) (Mức độ: Khó)
 * **Đề bài**: Viết một script Python đọc file `embeddings.json` đã lưu từ Bài tập 1. Nhận một câu truy vấn thô từ người dùng (ví dụ: "Tôi thích ăn bánh mì kẹp"), tiến hành sinh vector embedding cho câu truy vấn đó, và tính toán điểm Cosine Similarity với 5 câu có sẵn trong file JSON để tìm ra câu có nghĩa tương đồng nhất.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng thư viện `numpy` (hoặc viết hàm thuần Python) để tính Cosine Similarity:
      $$\text{Cosine Similarity} = \frac{A \cdot B}{\|A\| \|B\|}$$

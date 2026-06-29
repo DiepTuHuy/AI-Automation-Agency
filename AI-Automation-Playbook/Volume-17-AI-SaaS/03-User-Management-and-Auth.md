@@ -165,7 +165,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Middleware kiểm tra hạn sử dụng Token trên mọi Request (Mức độ: Khó)
 * **Đề bài**: Viết một hàm bảo mật dependency trong FastAPI giải mã token gửi lên từ client. Nếu token hết hạn hoặc chữ ký bị sai lệch, ngay lập tức ném ra lỗi `401 Unauthorized`. Nếu hợp lệ, trả về thông tin user đã đăng nhập.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng thư viện `FastAPI` Depend `OAuth2PasswordBearer(tokenUrl="login")`.
   2. Giải mã token bằng `jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])`.

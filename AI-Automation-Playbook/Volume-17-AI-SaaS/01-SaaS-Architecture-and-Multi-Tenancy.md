@@ -83,7 +83,7 @@ CREATE TABLE users (
 
 ### Bài tập 2: Cấu hình phân tách dữ liệu Tenant trong truy vấn API (Mức độ: Khó)
 * **Đề bài**: Viết mã nguồn Python mô phỏng (hoặc viết đặc tả logic) cách thức một API Endpoint của hệ thống SaaS thực hiện lọc dữ liệu: Khi một người dùng gửi request lấy danh sách hóa đơn, API phải bắt buộc kiểm tra trường `tenant_id` của người dùng đó và chỉ trả về các hóa đơn thuộc về doanh nghiệp của họ, tuyệt đối không làm lộ dữ liệu của doanh nghiệp khác.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng SQLAlchemy ORM để tự động chèn điều kiện lọc `filter(Invoice.tenant_id == current_user.tenant_id)` cho tất cả các câu truy vấn cơ sở dữ liệu.
   - Viết mã kiểm thử để giả lập hành vi hack đổi `tenant_id` trong request và bảo đảm hệ thống chặn đứng hành vi này.

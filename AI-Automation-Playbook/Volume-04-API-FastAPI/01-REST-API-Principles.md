@@ -107,7 +107,7 @@ paths:
 
 ### Bài tập 2: Thiết kế hệ thống API quản lý kho hàng thương mại điện tử (Mức độ: Khó)
 * **Đề bài**: Hãy viết tài liệu đặc tả API thiết kế hệ thống quản lý kho (Inventory). Đặc tả phải bao gồm đầy đủ các API: Lấy thông tin tồn kho của một sản phẩm, Cập nhật số lượng kho hàng khi có đơn mới, Báo cáo các sản phẩm sắp hết hàng. Chú ý thiết kế các endpoint có cấu trúc lồng nhau hợp lệ (Nested Resources).
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Định nghĩa endpoint lồng nhau cho sản phẩm và tồn kho, ví dụ: `/api/v1/products/{product_id}/inventory`.
   2. Xác định các HTTP Method phù hợp: `GET` để truy vấn, `PATCH` hoặc `PUT` để cập nhật số lượng tồn kho.

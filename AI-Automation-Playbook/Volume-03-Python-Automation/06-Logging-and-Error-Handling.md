@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Hệ thống giám sát thư mục tự động có ghi Log cảnh báo (Mức độ: Khó)
 * **Đề bài**: Viết một script giám sát một thư mục cụ thể. Khi có bất kỳ tệp tin mới nào được thêm vào thư mục đó, ghi log lại tên file mới. Nếu gặp lỗi phân quyền truy cập thư mục, bắt lỗi chi tiết và ghi log ở mức `CRITICAL`.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng thư viện `watchdog` hoặc vòng lặp `while True` quét danh sách tệp qua `pathlib`.
   2. Đóng gói mã quét thư mục trong khối `try-except PermissionError`.

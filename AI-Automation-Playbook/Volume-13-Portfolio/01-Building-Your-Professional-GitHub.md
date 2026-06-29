@@ -76,7 +76,7 @@ my-ai-agent-project/
 
 ### Bài tập 2: Cấu hình quy trình Git Workflow bảo vệ nhánh chính (Mức độ: Khó)
 * **Đề bài**: Tạo repository trên GitHub. Thực hiện thiết lập luật bảo vệ nhánh chính (Branch Protection Rules): Chặn việc push trực tiếp lên nhánh `main`, bắt buộc toàn bộ code mới phải đi qua nhánh phụ và thực hiện Pull Request (PR) kèm theo xét duyệt của ít nhất 1 thành viên khác trước khi merge.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Truy cập vào mục Settings -> Branches trên trang GitHub Repository của bạn.
   - Chọn "Add branch protection rule" và nhập tên nhánh `main`.

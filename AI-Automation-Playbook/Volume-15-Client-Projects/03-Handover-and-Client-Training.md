@@ -77,7 +77,7 @@ Biên bản được lập thành hai (02) bản có giá trị pháp lý tươn
 
 ### Bài tập 2: Xây dựng Biên bản nghiệm thu và bàn giao dự án (Sign-off Document) (Mức độ: Khó)
 * **Đề bài**: Soạn thảo một biên bản nghiệm thu và bàn giao dự án (Project Sign-off & Handover Document) chính thức. Biên bản cần bao gồm: Danh sách các hạng mục đã hoàn thành, Ý kiến đánh giá của khách hàng, và Chữ ký xác nhận nghiệm thu của cả hai bên để chính thức kết thúc dự án và kích hoạt điều khoản bảo hành.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Nêu rõ tên dự án, ngày thực hiện ký kết biên bản nghiệm thu.
   - Liệt kê đầy đủ các kết quả bàn giao (mã nguồn GitHub, tài liệu hướng dẫn, VPS hosting).

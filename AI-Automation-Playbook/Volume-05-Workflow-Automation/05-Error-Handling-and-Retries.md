@@ -59,7 +59,7 @@ Xây dựng một workflow lắng nghe mọi lỗi phát sinh trong hệ thống
 
 ### Bài tập 2: Tự động gửi cảnh báo Slack khi lỗi sập hệ thống (Mức độ: Khó)
 * **Đề bài**: Thiết kế một workflow tổng đài xử lý lỗi. Khi bất kỳ node nào trong workflow chính bị lỗi, tự động chuyển hướng luồng xử lý sang một Sub-workflow riêng chuyên gửi cảnh báo lỗi chi tiết (gồm tên Node lỗi, mã lỗi) sang Telegram hoặc Email.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng tính năng **Error Trigger** Node để bắt mọi lỗi xảy ra trong Workflows của hệ thống n8n.
   - Đọc thông tin lỗi từ payload của Error Trigger Node để tạo nội dung cảnh báo chi tiết.

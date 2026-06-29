@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Bộ cắt văn bản thông minh theo đoạn văn (Recursive Text Splitter) (Mức độ: Khó)
 * **Đề bài**: Viết một script Python chia nhỏ văn bản dài một cách thông minh: Thay vì cắt ở giữa từ gây mất nghĩa, script sẽ ưu tiên cắt tại các dấu kết thúc câu (dấu chấm `.`, dấu xuống dòng `\n`) để đảm bảo tính toàn vẹn ngữ nghĩa của mỗi đoạn.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng phương thức `text.split(". ")` để lấy danh sách các câu hoàn chỉnh.
   2. Duyệt qua các câu, gộp chúng lại vào một chunk cho đến khi tổng số ký tự đạt ngưỡng giới hạn, sau đó mới tạo chunk mới.

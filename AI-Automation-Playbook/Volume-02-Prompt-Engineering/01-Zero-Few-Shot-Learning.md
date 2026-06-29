@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Phân tích ý định khách hàng (Intent Classification) bằng Few-shot (Mức độ: Khó)
 * **Đề bài**: Viết một script Python phân loại tin nhắn chat của khách hàng vào các nhóm ý định: [Hỏi giá], [Báo lỗi sản phẩm], [Yêu cầu đổi trả], [Tư vấn chung]. Cung cấp ít nhất 4 ví dụ few-shot chi tiết trong prompt để mô hình có thể nhận diện chính xác các câu hỏi có ý định mơ hồ.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Xây dựng prompt few-shot có các ví dụ mô phỏng hội thoại thực tế của khách hàng (ví dụ: "Máy này bao nhiêu tiền vậy em?" -> [Hỏi giá]).
   2. Viết hàm Python nhận input là tin nhắn thô, ghép vào prompt few-shot và gửi tới Gemini API.

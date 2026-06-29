@@ -92,7 +92,7 @@ Hiểu rõ cấu trúc tin nhắn JSON-RPC 2.0 truyền qua lại giữa Client 
 
 ### Bài tập 2: Tích hợp MCP Server đọc ghi dữ liệu từ tệp tin cục bộ (Mức độ: Khó)
 * **Đề bài**: Cấu hình thêm MCP Server filesystem cho phép Claude Desktop có thể trực tiếp đọc, viết và sửa đổi các tệp tin trong một thư mục cụ thể trên máy tính của bạn thông qua câu lệnh chat tự nhiên.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Cài đặt server `@modelcontextprotocol/server-filesystem` vào cấu hình server của Claude Desktop.
   - Chỉ định thư mục làm việc an toàn thông qua đối số truyền vào (ví dụ: `/Users/username/safe_folder`).

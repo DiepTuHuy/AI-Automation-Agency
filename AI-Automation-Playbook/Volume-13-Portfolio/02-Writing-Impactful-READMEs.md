@@ -102,7 +102,7 @@ python main.py
 
 ### Bài tập 2: Thiết kế tài liệu hướng dẫn vận hành API hoàn chỉnh (Mức độ: Khó)
 * **Đề bài**: Bổ dung vào tệp README của bạn phần hướng dẫn gọi API (API Documentation) chi tiết, mô tả cấu trúc JSON request và response cho endpoint `/api/v1/chat`, kèm theo mã lỗi thường gặp (như 401, 400) để lập trình viên khác dễ dàng tích hợp.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng các khối code có định dạng syntax highlighting của markdown (ví dụ: ` ```json `).
   - Mô tả rõ ý nghĩa của từng trường thông tin trong payload đầu vào và đầu ra.

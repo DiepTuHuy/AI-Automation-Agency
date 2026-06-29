@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Custom MCP Server truy vấn dữ liệu từ SQLite (Mức độ: Khó)
 * **Đề bài**: Viết một Custom MCP Server bằng Python kết nối với cơ sở dữ liệu SQLite của công ty. Server cung cấp một công cụ `search_inventory` cho phép mô hình ngôn ngữ lớn có thể truy vấn số lượng tồn kho của sản phẩm bằng cách truyền tên sản phẩm.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Import thư viện `sqlite3` trong file custom MCP server.
   2. Viết hàm Python kết nối tới file `.db` và thực hiện câu lệnh `SELECT` để tìm sản phẩm.

@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Công cụ sắp xếp thứ tự tài liệu tương đồng (Search Ranking) (Mức độ: Khó)
 * **Đề bài**: Cho trước 1 vector truy vấn và danh sách 5 vector tài liệu trong cơ sở dữ liệu. Hãy viết script Python sử dụng Numpy để tính toán Cosine Similarity của vector truy vấn với toàn bộ danh sách, sắp xếp thứ tự các tài liệu từ tương đồng cao nhất đến thấp nhất và in ra màn hình.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Tạo danh sách chứa các bộ vector tài liệu.
   - Sử dụng vòng lặp để tính điểm tương đồng cho từng cặp.

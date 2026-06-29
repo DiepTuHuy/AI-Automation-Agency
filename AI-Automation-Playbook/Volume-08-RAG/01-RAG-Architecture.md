@@ -153,7 +153,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Hệ thống RAG chẩn đoán triệu chứng thiết bị (Mức độ: Khó)
 * **Đề bài**: Xây dựng hệ thống RAG chẩn đoán lỗi phần cứng máy tính. Cơ sở dữ liệu chứa 3 chỉ dẫn chẩn đoán lỗi (ví dụ: máy kêu tít tít, máy màn hình xanh chữ trắng, máy không nhận ổ cứng). Khi người dùng nhập mô tả lỗi, hệ thống truy xuất chỉ dẫn đúng và hiển thị cách sửa. Nếu người dùng nhập lỗi lạ không có trong database, AI phải báo không chẩn đoán được và đề xuất đem máy ra trung tâm bảo hành gần nhất.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Tạo dictionary chứa 3 lỗi và cách khắc phục tương ứng.
   2. Viết hàm chẩn đoán nhận câu hỏi, thực hiện tìm kiếm từ khóa chẩn đoán thô (hoặc dùng ChromaDB nếu đã học ở chương trước).

@@ -74,7 +74,7 @@ server {
 
 ### Bài tập 2: Cấu hình tự động cài đặt chứng chỉ SSL Let's Encrypt (Mức độ: Khó)
 * **Đề bài**: Hãy viết hướng dẫn các bước sử dụng công cụ `certbot` để xin chứng chỉ bảo mật SSL Let's Encrypt miễn phí và cấu hình tự động gia hạn chứng chỉ cho máy chủ Nginx.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Cài đặt Certbot thông qua câu lệnh: `sudo apt install certbot python3-certbot-nginx -y`.
   - Xin chứng chỉ SSL bằng lệnh: `sudo certbot --nginx -d example.com`.

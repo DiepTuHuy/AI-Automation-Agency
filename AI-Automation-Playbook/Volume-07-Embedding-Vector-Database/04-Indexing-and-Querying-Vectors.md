@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Quản lý vòng đời bộ sưu tập dữ liệu chỉ mục (Mức độ: Khó)
 * **Đề bài**: Viết một script Python thực thi đầy đủ vòng đời (CRUD) của dữ liệu trong Vector DB: Tạo collection, nạp dữ liệu, thực hiện cập nhật nội dung của một tài liệu đã có qua ID, thực hiện xóa một tài liệu và kiểm thử lại kết quả truy vấn sau khi xóa.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng hàm `collection.update(ids=["..."], documents=["Nội dung mới"])` để cập nhật dữ liệu.
   2. Sử dụng `collection.delete(ids=["..."])` để xóa bản ghi.

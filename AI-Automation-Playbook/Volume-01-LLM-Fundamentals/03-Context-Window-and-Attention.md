@@ -105,7 +105,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Hệ thống hỏi đáp tài liệu dài tích hợp phân đoạn thông minh (Mức độ: Khó)
 * **Đề bài**: Viết một script nhận một file tài liệu tài chính dài. Thay vì tóm tắt đơn thuần, hãy viết code phân đoạn tài liệu, sau đó sử dụng prompt yêu cầu AI trích xuất tất cả các số liệu về doanh thu xuất hiện trong từng phân đoạn. Cuối cùng, tổng hợp danh sách số liệu này thành một bảng JSON chuẩn.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng vòng lặp phân đoạn văn bản và gọi prompt trích xuất số liệu: "Liệt kê các số liệu doanh thu trong đoạn dưới đây dưới dạng: Năm - Số tiền".
   2. Gộp tất cả các kết quả trích xuất trung gian thành một prompt tổng hợp cấu trúc JSON đầu ra sử dụng `response_mime_type="application/json"`.

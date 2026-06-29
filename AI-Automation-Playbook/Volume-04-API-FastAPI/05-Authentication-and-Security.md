@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Xác thực phân quyền Người dùng với JWT Token (Mức độ: Khó)
 * **Đề bài**: Xây dựng hệ thống đăng nhập trả về JSON Web Token (JWT) trong FastAPI. Tạo hai endpoint: `/api/v1/profile` (yêu cầu token hợp lệ của mọi user) và `/api/v1/admin/settings` (chỉ chấp nhận token của những người dùng có trường vai trò `role` là `admin`).
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng thư viện `PyJWT` (hoặc `jose`) để mã hóa và giải mã token.
   2. Tạo hàm dependency giải mã token, trích xuất thông tin người dùng và vai trò.

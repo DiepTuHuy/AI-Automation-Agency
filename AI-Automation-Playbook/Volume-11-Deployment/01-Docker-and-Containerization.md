@@ -116,7 +116,7 @@ services:
 
 ### Bài tập 2: Container hóa ứng dụng FastAPI kết nối Database Postgres (Mức độ: Khó)
 * **Đề bài**: Hãy viết file `docker-compose.yml` hoàn chỉnh để khởi chạy đồng thời hai dịch vụ: Ứng dụng FastAPI (`web`) và Cơ sở dữ liệu PostgreSQL (`db`). Yêu cầu dịch vụ `web` chỉ khởi động sau khi dịch vụ `db` đã sẵn sàng hoạt động.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng image `postgres:15` cho dịch vụ `db`.
   - Sử dụng cơ chế `depends_on` với điều kiện `service_healthy` trong docker-compose để đồng bộ thứ tự khởi chạy.

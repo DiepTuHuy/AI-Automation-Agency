@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Xác thực hóa đơn mua hàng có cấu trúc lồng nhau (Mức độ: Khó)
 * **Đề bài**: Xây dựng API nhận thông tin một đơn đặt hàng trực tuyến. Sử dụng Pydantic để xác thực một đơn hàng lồng nhau chứa: thông tin khách hàng, danh sách các sản phẩm (mỗi sản phẩm gồm ID, số lượng > 0, đơn giá > 0), và mã giảm giá (tùy chọn).
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Tạo class Pydantic `OrderItem` đại diện cho sản phẩm với thuộc tính `gt=0` (greater than 0) cho số lượng và đơn giá.
   2. Tạo class `Order` chứa trường `items: List[OrderItem]`.

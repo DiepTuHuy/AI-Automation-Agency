@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Tự động thống kê hiệu năng vận hành API hàng tuần (Mức độ: Khó)
 * **Đề bài**: Viết một script Python đọc file [api_metrics.log](../../resources/api_metrics.log) (Tải tệp tin mẫu về máy). Phân tích toàn bộ dữ liệu log thu thập được để tính toán các chỉ số: Tỷ lệ thành công (Success Rate), Thời gian phản hồi trung bình (Average Latency) và in báo cáo tổng quan.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng thư viện `pandas` hoặc đọc file dòng-bằng-dòng để phân tích tệp [api_metrics.log](../../resources/api_metrics.log).
   2. Trích xuất thời gian chạy (Latency) từ chuỗi log bằng Regular Expression (Regex).

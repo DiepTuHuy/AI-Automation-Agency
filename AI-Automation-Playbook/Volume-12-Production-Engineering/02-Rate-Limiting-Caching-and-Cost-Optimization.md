@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Bộ kiểm soát tần suất truy cập API (Rate Limiter) (Mức độ: Khó)
 * **Đề bài**: Viết một decorator Python `@rate_limit(max_calls=3, period=60)` để bọc quanh hàm gọi API. Nếu người dùng gọi hàm quá 3 lần trong vòng 60 giây, decorator sẽ ném ra ngoại lệ và bắt người dùng phải đợi đến khi chu kỳ mới bắt đầu.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng thư viện `time` để lưu vết thời gian của các lượt gọi gần nhất trong một danh sách.
   2. Trước mỗi cuộc gọi, lọc bỏ các mốc thời gian đã quá thời hạn `period`.

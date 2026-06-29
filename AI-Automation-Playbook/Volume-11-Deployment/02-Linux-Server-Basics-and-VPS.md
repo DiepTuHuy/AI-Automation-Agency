@@ -80,7 +80,7 @@ sudo ss -tunlp
 
 ### Bài tập 2: Thiết lập tường lửa bảo mật UFW cho VPS (Mức độ: Khó)
 * **Đề bài**: Hãy viết hướng dẫn cấu hình tường lửa UFW (Uncomplicated Firewall) trên máy chủ VPS. Yêu cầu chỉ cho phép truy cập cổng SSH (`22`), HTTP (`80`), HTTPS (`443`) và chặn toàn bộ các cổng mạng không được cấu hình khác để ngăn chặn tấn công mạng.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng lệnh `sudo ufw allow 22/tcp` để cho phép SSH (Quan trọng: Không làm mất kết nối hiện tại).
   - Sử dụng `sudo ufw allow 80` và `sudo ufw allow 443`.

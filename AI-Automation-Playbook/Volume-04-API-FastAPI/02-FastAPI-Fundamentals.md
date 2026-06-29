@@ -97,7 +97,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: API Quản lý danh sách lời khuyên sức khỏe hàng ngày (Mức độ: Khó)
 * **Đề bài**: Xây dựng một ứng dụng FastAPI quản lý danh sách lời khuyên sức khỏe (Tips) trong bộ nhớ (Memory List). API cần hỗ trợ: Lấy ngẫu nhiên 1 lời khuyên (`GET`), và Thêm một lời khuyên mới vào danh sách (`POST`).
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Khai báo danh sách danh ngôn sức khỏe mẫu làm cơ sở dữ liệu trong bộ nhớ.
   2. Sử dụng thư viện `random` để lấy phần tử ngẫu nhiên khi người dùng gửi request `GET`.

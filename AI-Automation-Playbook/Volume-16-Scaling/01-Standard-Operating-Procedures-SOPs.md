@@ -96,7 +96,7 @@ Cung cấp mẫu tài liệu SOP kỹ thuật hoàn chỉnh hướng dẫn cài 
 
 ### Bài tập 2: SOP Xử lý Khắc phục sự cố khẩn cấp khi hệ thống AI bị lỗi (Mức độ: Khó)
 * **Đề bài**: Thiết lập tài liệu SOP hướng dẫn xử lý sự cố khẩn cấp (Incident Response SOP) khi khách hàng báo lỗi hệ thống AI ngừng phản hồi. SOP phải bao gồm các bước kiểm tra log nhanh, khởi động lại dịch vụ và liên hệ hỗ trợ khẩn cấp.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Phân chia nhiệm vụ rõ ràng: Ai là người tiếp nhận thông tin lỗi, ai thực hiện debug kỹ thuật.
   - Viết chi tiết các câu lệnh kiểm tra log hệ thống nhanh (ví dụ: `docker logs web_service` hoặc `journalctl -u api_service`).

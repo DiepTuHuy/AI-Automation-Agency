@@ -139,7 +139,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Trích xuất hóa đơn thanh toán lồng nhau (Mức độ: Khó)
 * **Đề bài**: Viết một script Python nhận đoạn văn bản hóa đơn phức tạp. Sử dụng Pydantic để định nghĩa cấu trúc dữ liệu lồng nhau (Nested JSON) bao gồm: Thông tin hóa đơn (Số hóa đơn, Ngày), Thông tin bên bán, và Danh sách các mặt hàng mua (tên mặt hàng, đơn giá, số lượng, thuế suất VAT). Yêu cầu mô hình trích xuất chính xác cấu trúc dữ liệu này.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Khai báo hai Pydantic model: `InvoiceItem` đại diện cho từng dòng hàng và `InvoiceDetail` đại diện cho toàn bộ hóa đơn (chứa trường `items: List[InvoiceItem]`).
   2. Truyền `InvoiceDetail` vào thuộc tính `response_schema` của cấu hình generation.

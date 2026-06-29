@@ -93,7 +93,7 @@ GROUP BY c.id;
 
 ### Bài tập 2: Truy vấn phân tích khách hàng mua nhiều nhất (Mức độ: Khó)
 * **Đề bài**: Viết câu lệnh SQL nâng cao để lấy ra danh sách các khách hàng có tổng số tiền mua sắm vượt quá 10,000,000 VND và sắp xếp kết quả theo thứ tự chi tiêu giảm dần.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng cấu trúc `GROUP BY` kết hợp với mệnh đề `HAVING` để lọc dữ liệu sau khi nhóm (Ví dụ: `HAVING SUM(o.total_amount) > 10000000`).
   - Sử dụng `ORDER BY total_spent DESC` để sắp xếp dữ liệu chi tiêu lớn nhất lên đầu.

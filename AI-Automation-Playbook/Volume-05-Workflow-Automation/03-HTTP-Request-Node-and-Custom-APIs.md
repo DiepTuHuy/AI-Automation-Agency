@@ -53,7 +53,7 @@ Thiết lập n8n HTTP Request node để gọi endpoint FastAPI cục bộ (đa
 
 ### Bài tập 2: Quét thông tin tỷ giá ngoại tệ và cảnh báo biến động (Mức độ: Khó)
 * **Đề bài**: Thiết kế workflow tự động chạy mỗi sáng (cron trigger). Gọi API tỷ giá USD/VND, nếu tỷ giá vượt ngưỡng 25,400 VND, tự động gửi email thông báo khẩn cấp tới phòng kế toán.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng Node `Schedule Trigger` đặt thời gian chạy định kỳ.
   - Sử dụng Node `HTTP Request` lấy tỷ giá từ API hối đoái.

@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Trợ lý giao dịch ví cá nhân an toàn (Mức độ: Khó)
 * **Đề bài**: Định nghĩa 2 công cụ Python mô phỏng: `get_wallet_balance(user_id: str) -> float` và `send_money(user_id: str, recipient: str, amount: float) -> str`. Xây dựng một Gemini Agent hỗ trợ chuyển tiền. Yêu cầu AI trước khi chuyển tiền bắt buộc phải gọi tool `get_wallet_balance` kiểm tra số dư. Nếu số dư đủ mới thực hiện chuyển tiền qua `send_money`, ngược lại báo lỗi từ chối giao dịch.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Định nghĩa rõ docstring cho 2 hàm để Gemini hiểu tham số đầu vào.
   2. Bật tính năng gọi hàm tự động trong cuộc hội thoại chat của Gemini SDK.

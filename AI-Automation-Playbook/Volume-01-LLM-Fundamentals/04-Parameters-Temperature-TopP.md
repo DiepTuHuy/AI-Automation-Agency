@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Sinh biến thể quảng cáo sáng tạo (Mức độ: Khó)
 * **Đề bài**: Viết một script Python tự động tạo ra 3 biến thể slogan quảng cáo cho sản phẩm "Giày chạy bộ thông minh". Để đảm bảo các slogan có tính sáng tạo cao và không bị lặp lại, hãy cấu hình tham số `temperature` và `top_p` phù hợp.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng `temperature = 1.0` (hoặc cao hơn) để khuyến khích mô hình tư duy sáng tạo từ vựng mới.
   2. Cấu hình `top_p = 0.9` (Nucleus Sampling) để giới hạn mô hình chỉ chọn các từ trong nhóm 90% từ có độ phổ biến cao, tránh sinh ra các từ vô nghĩa.

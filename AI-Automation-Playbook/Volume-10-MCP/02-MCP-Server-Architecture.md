@@ -84,7 +84,7 @@ dependencies = [
 
 ### Bài tập 2: Thiết kế đặc tả gói tin cho một MCP Server quản lý nhắc nhở (Mức độ: Khó)
 * **Đề bài**: Thiết kế bản tin JSON-RPC chuẩn MCP cho một kịch bản: Client yêu cầu Server tạo một lời nhắc công việc mới với các tham số: `task_name`, `due_date`, và `priority`. Hãy viết chi tiết cấu trúc Request và Response tương ứng.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Định nghĩa trường `method` là `tools/call`.
   - Đóng gói các tham số yêu cầu bên trong `params.arguments`.

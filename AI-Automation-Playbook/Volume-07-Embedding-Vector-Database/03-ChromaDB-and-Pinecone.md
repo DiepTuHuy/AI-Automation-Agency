@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Bộ tìm kiếm nội quy nhân sự tích hợp bộ lọc Metadata (Mức độ: Khó)
 * **Đề bài**: Nâng cấp script ở Bài tập 1 để hỗ trợ bộ lọc metadata khi truy vấn. Khi người dùng nhập một câu hỏi về "máy tính", hãy cấu hình truy vấn ChromaDB để chỉ tìm kiếm trong danh sách các tài liệu thuộc nhóm Công nghệ thông tin (`category` là `IT`).
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng tham số `where` trong câu lệnh `collection.query`.
   2. Cấu hình điều kiện lọc dạng: `where={"category": "IT"}`.

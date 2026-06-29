@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Script chatbot đa tương tác trong Terminal (Mức độ: Khó)
 * **Đề bài**: Nâng cấp script ở Bài tập 1 thành một chương trình Chatbot tương tác liên tục trong Terminal. Người dùng có thể nhập câu hỏi liên tục và AI sẽ trả lời dựa trên ngữ cảnh lịch sử hội thoại trước đó (sử dụng tính năng Chat Session của Gemini). Nhập 'exit' để thoát chương trình.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng `model.start_chat(history=[])` để khởi tạo phiên chat có nhớ ngữ cảnh.
   2. Sử dụng vòng lặp `while True` để nhận câu hỏi từ hàm `input()`.

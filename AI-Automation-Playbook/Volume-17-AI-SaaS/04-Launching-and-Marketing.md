@@ -68,7 +68,7 @@ Chúc các bạn một ngày tuyệt vời!
 
 ### Bài tập 2: Thiết kế ảnh động GIF tương tác sản phẩm cho README (Mức độ: Khó)
 * **Đề bài**: Hãy thực hiện quay lại màn hình thao tác sử dụng công cụ AI của bạn (dưới 15 giây), sau đó chuyển đổi video đó sang định dạng ảnh động `.gif` chất lượng cao, tối ưu dung lượng dưới 5MB để nhúng thẳng vào đầu trang README dự án.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng các phần mềm quay màn hình miễn phí như OBS Studio, Loom hoặc GIPHY Capture.
   - Sử dụng công cụ chuyển đổi hoặc trang web Ezgif để tối ưu hóa màu sắc, giảm tốc độ khung hình (FPS xuống 10-12) nhằm nén dung lượng ảnh động.

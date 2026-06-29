@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Tự động gửi thông tin thời tiết qua Discord/Telegram Webhook (Mức độ: Khó)
 * **Đề bài**: Viết một script Python tích hợp: Đầu tiên gọi API thời tiết công cộng để lấy nhiệt độ hiện tại của Hà Nội, sau đó gửi một tin nhắn được định dạng đẹp mắt (Markdown) thông báo thời tiết đó đến một kênh Discord hoặc Telegram thông qua cơ chế Webhook.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng URL API thời tiết mở: `https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&current_weather=true`.
   2. Tạo một webhook URL trên server Discord của bạn.

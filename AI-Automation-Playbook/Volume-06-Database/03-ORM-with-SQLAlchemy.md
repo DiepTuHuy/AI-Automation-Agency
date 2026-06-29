@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Truy vấn sản phẩm bán chạy với quan hệ một-nhiều (Mức độ: Khó)
 * **Đề bài**: Thiết kế thêm model `Order` liên kết với `Product` qua khóa ngoại. Viết truy vấn sử dụng SQLAlchemy ORM để tìm tất cả các đơn hàng chứa sản phẩm có đơn giá lớn hơn 100 USD.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Thêm khóa ngoại `product_id = Column(Integer, ForeignKey('products.id'))` trong class `Order`.
   2. Sử dụng SQLAlchemy `session.query(Order).join(Product).filter(Product.price > 100).all()` để lọc dữ liệu.

@@ -76,7 +76,7 @@ Xây dựng một file Markdown phân tích chi tiết hiệu quả kinh tế gi
 
 ### Bài tập 2: Thiết kế gói bảo trì định kỳ (Retainer Agreement) (Mức độ: Khó)
 * **Đề bài**: Thiết kế một gói dịch vụ bảo trì định kỳ hàng tháng (Monthly Retainer) cho dự án ở Bài tập 1. Gói bảo trì phải nêu rõ: Số giờ hỗ trợ kỹ thuật tối đa trong tháng, phí duy trì hạ tầng API, và dịch vụ cập nhật dữ liệu tri thức mới hàng tuần cho AI.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Thiết lập mức phí bảo trì định kỳ hợp lý (thường từ 10% - 20% giá trị dự án gốc mỗi tháng).
   - Định nghĩa rõ điều khoản SLA (thời gian phản hồi khi gặp sự cố, ví dụ: trong vòng 4 giờ làm việc).

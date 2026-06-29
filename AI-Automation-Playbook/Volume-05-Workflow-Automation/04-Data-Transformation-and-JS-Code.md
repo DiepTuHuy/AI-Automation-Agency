@@ -88,7 +88,7 @@ return $input.all();
 
 ### Bài tập 2: Tính tổng doanh thu và chia sẻ hoa hồng tự động (Mức độ: Khó)
 * **Đề bài**: Viết một đoạn code JS trong Code Node để xử lý danh sách 10 giao dịch của đại lý. Tính tổng doanh thu và tự động phân chia 10% hoa hồng cho từng đại lý tương ứng dưới dạng danh sách đối tượng mới.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng vòng lặp `for...of` duyệt qua danh sách các items của `$input.all()`.
   - Tính toán trường dữ liệu mới: `item.json.commission = item.json.amount * 0.1`.

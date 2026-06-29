@@ -154,7 +154,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Hệ thống phản hồi đa tác nhân có vòng phản hồi (Feedback Loop) (Mức độ: Khó)
 * **Đề bài**: Xây dựng kiến trúc Multi-Agent có vòng kiểm duyệt chéo: Agent 1 viết bài đăng quảng cáo sản phẩm. Agent 2 (Reviewer) đọc bài viết và đưa ra nhận xét sửa đổi. Agent 1 nhận phản hồi từ Agent 2, tự động sửa đổi bài đăng và xuất ra phiên bản hoàn thiện cuối cùng.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Thiết kế vòng lặp giao tiếp giữa Agent 1 và Agent 2.
   - Thiết lập điều kiện dừng: Nếu Agent 2 đánh giá bài viết đạt từ 8/10 điểm trở lên, kết thúc vòng lặp và in ra kết quả.

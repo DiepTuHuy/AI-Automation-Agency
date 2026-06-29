@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
 ### Bài tập 2: Hệ thống RAG hai giai đoạn (Retrieve & Rerank) (Mức độ: Khó)
 * **Đề bài**: Xây dựng hệ thống RAG đầy đủ: Giai đoạn 1 truy xuất ra top 5 tài liệu tương đồng nhất từ ChromaDB. Giai đoạn 2 sử dụng mô hình LLM làm Reranker để chọn ra đúng 2 tài liệu có điểm số cao nhất làm ngữ cảnh đưa vào câu trả lời cuối cùng.
-* **Yêu cầu**: Học viên tự hoàn thành không có code mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có code mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   1. Sử dụng kết quả truy vấn của ChromaDB để lấy danh sách tài liệu thô.
   2. Chạy hàm đánh giá điểm số tương đồng qua LLM cho top 5.

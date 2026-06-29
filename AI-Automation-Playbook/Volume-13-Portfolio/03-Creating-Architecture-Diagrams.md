@@ -68,7 +68,7 @@ graph LR
 
 ### Bài tập 2: Thiết kế sơ đồ kiến trúc hệ thống Multi-Agent phức tạp (Mức độ: Khó)
 * **Đề bài**: Vẽ sơ đồ kiến trúc dạng Sequence Diagram bằng Mermaid mô tả luồng giao tiếp tương tác giữa 3 thực thể: Client App, Gateway API, và 2 Sub-Agents chạy nền (Agent Viết nội dung và Agent Phê duyệt). Thể hiện rõ các mốc thời gian gọi công cụ ngoài.
-* **Yêu cầu**: Học viên tự hoàn thành không có tài liệu mẫu.
+* **Yêu cầu**: Bạn hãy tự hoàn thành không có tài liệu mẫu.
 * **Gợi ý triển khai (Workflow Hints)**:
   - Sử dụng từ khóa `sequenceDiagram` trong Mermaid.
   - Sử dụng cấu trúc `participant` để định nghĩa rõ các thực thể trong hệ thống.
