@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load sidebar data (fetch volumes.json from the repository root)
   function loadSidebar() {
-    fetch('./volumes.json')
+    fetch(`./volumes.json?t=${Date.now()}`)
       .then(res => {
         if (!res.ok) throw new Error('Không thể đọc file volumes.json');
         return res.json();
@@ -302,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     resetQuizArea();
 
-    // Fetch markdown file directly using relative path
-    fetch(`./${fullPath}`)
+    // Fetch markdown file directly using relative path with cache buster
+    fetch(`./${fullPath}?t=${Date.now()}`)
       .then(res => {
         if (!res.ok) throw new Error('Không thể tải bài giảng');
         return res.text();
@@ -444,8 +444,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, intervalTime);
 
-    // Fetch the raw text of the markdown file to send in the prompt
-    fetch(`./${currentFilePath}`)
+    // Fetch the raw text of the markdown file with cache buster to send in the prompt
+    fetch(`./${currentFilePath}?t=${Date.now()}`)
       .then(res => {
         if (!res.ok) throw new Error('Không thể đọc bài giảng để gửi prompt');
         return res.text();
